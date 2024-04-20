@@ -1,0 +1,9 @@
+# Ignore global git configuration
+/.gitconfig
+# General
+.vs/
+bin/
+obj/
+
+# Visual Studio Code
+.vscode/
