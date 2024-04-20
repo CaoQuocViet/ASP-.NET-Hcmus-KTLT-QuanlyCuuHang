@@ -1,0 +1,115 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = _22810218
+build_property.RootNamespace = _22810218
+build_property.ProjectDir = C:\Users\vietc\Downloads\LTHDT\22810218\22810218\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\vietc\Downloads\LTHDT\22810218\22810218
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/DonHangNhap/MH_DonHangNhap_ChiTiet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9uSGFuZ05oYXBcTUhfRG9uSGFuZ05oYXBfQ2hpVGlldC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/DonHangNhap/MH_DonHangNhap_DanhSach.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9uSGFuZ05oYXBcTUhfRG9uSGFuZ05oYXBfRGFuaFNhY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/DonHangNhap/MH_DonHangNhap_Sua.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9uSGFuZ05oYXBcTUhfRG9uSGFuZ05oYXBfU3VhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/DonHangNhap/MH_DonHangNhap_Them.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9uSGFuZ05oYXBcTUhfRG9uSGFuZ05oYXBfVGhlbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/DonHangXuat/MH_DonHangXuat_ChiTiet.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9uSGFuZ1h1YXRcTUhfRG9uSGFuZ1h1YXRfQ2hpVGlldC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/DonHangXuat/MH_DonHangXuat_DanhSach.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9uSGFuZ1h1YXRcTUhfRG9uSGFuZ1h1YXRfRGFuaFNhY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/DonHangXuat/MH_DonHangXuat_Sua.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9uSGFuZ1h1YXRcTUhfRG9uSGFuZ1h1YXRfU3VhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/DonHangXuat/MH_DonHangXuat_Them.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRG9uSGFuZ1h1YXRcTUhfRG9uSGFuZ1h1YXRfVGhlbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/KhoHang/ChiTietKhoHang.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcS2hvSGFuZ1xDaGlUaWV0S2hvSGFuZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/LienHe/MH_LienHe.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGllbkhlXE1IX0xpZW5IZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/LoaiHang/MH_LoaiHang_DanhSach.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9haUhhbmdcTUhfTG9haUhhbmdfRGFuaFNhY2guY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/LoaiHang/MH_LoaiHang_Sua.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9haUhhbmdcTUhfTG9haUhhbmdfU3VhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/LoaiHang/MH_LoaiHang_Them.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9haUhhbmdcTUhfTG9haUhhbmdfVGhlbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/LoaiHang/MH_LoaiHang_Xoa.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTG9haUhhbmdcTUhfTG9haUhhbmdfWG9hLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/MatHang/MH_MatHang_DanhSach.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWF0SGFuZ1xNSF9NYXRIYW5nX0RhbmhTYWNoLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/MatHang/MH_MatHang_Sua.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWF0SGFuZ1xNSF9NYXRIYW5nX1N1YS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/MatHang/MH_MatHang_Them.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWF0SGFuZ1xNSF9NYXRIYW5nX1RoZW0uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/MatHang/MH_MatHang_Xoa.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWF0SGFuZ1xNSF9NYXRIYW5nX1hvYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/ThongKe/MH_ThongKe_HetHan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGhvbmdLZVxNSF9UaG9uZ0tlX0hldEhhbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/ThongKe/MH_ThongKe_TonKho.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVGhvbmdLZVxNSF9UaG9uZ0tlX1Rvbktoby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vietc/Downloads/LTHDT/22810218/22810218/Pages/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-g07aypd75u

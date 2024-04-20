@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "3EbEAC0YsYXM/tVa2Ot1RiaIywLd6BwdE/pqlnIXMCKPIglnJ4rF818WRxGac0ysCQUDnWxf8Eyb7mpZmcNP7A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\vietc\\Downloads\\LTHDT\\22810218\\Service\\Service.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\vietc\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

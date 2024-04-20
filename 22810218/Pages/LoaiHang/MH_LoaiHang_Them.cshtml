@@ -1,0 +1,35 @@
+﻿@page
+@model Pages.MH_LoaiHang_ThemModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+}
+
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="col-sm-6 text-start fw-bold">Thêm loại hàng</p>
+        @if (Model.BFlag)
+        {
+            if (string.IsNullOrEmpty(Model.SInfo))
+            {
+                <p class="col-sm-6 text-end text-success fw-bold">Added loaihang successfully</p>
+            }
+            else
+            {
+                <p class="col-sm-6 text-end text-danger fw-bold">@Model.SInfo</p>
+            }
+        }
+    </div>
+    <form class="row g-3 mb-2" method="post">
+        <div class="col-sm-4">
+            <label for="id" class="form-label">Mã loại hàng</label>
+            <input class="form-control" type="text" id="id" name="id" value="@Model.LoaiHang?.MaSo" maxlength="30" required>
+        </div>
+        <div class="col-sm-5">
+            <label for="name" class="form-label">Tên loại hàng</label>
+            <input class="form-control" type="text" id="name" name="name" value="@Model.LoaiHang?.Ten" maxlength="30" required>
+        </div>
+        <div class="col-sm-3 d-sm-flex align-items-end justify-content-end pb-1">
+            <input class="btn btn-sm btn-success text-light" type="submit" value="Thêm">
+        </div>
+    </form>
+</div>

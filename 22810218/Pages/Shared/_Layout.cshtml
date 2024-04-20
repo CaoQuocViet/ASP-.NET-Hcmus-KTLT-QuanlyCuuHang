@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/styles.css" rel="stylesheet" asp-append-version="true">
+    <link href="~/icon.ico" rel="icon" type="image/gif" sizes="32x32">
+    <link href="~/css/site.css" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3 navbar-header" href="#" style="background-color: green">
+            <span data-feather="box" class="mr-2"></span> Quản lý cửa hàng
+        </a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap navbar-header">
+                <a class="nav-link text-light" href="#">MSSV: 22810218</a>
+            </li>
+        </ul>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Menu Sidebar -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mb-1 text-muted">
+                        <span>Quản lý chung</span>
+                    </h6>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/MatHang/MH_MatHang_DanhSach">
+                                <span data-feather="shopping-cart"></span>
+                                Mặt hàng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/LoaiHang/MH_LoaiHang_DanhSach">
+                                <span data-feather="grid"></span>
+                                Loại hàng
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/DonHangXuat/MH_DonHangXuat_DanhSach">
+                                <span data-feather="file"></span>
+                                Hóa đơn bán
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/DonHangNhap/MH_DonHangNhap_DanhSach">
+                                <span data-feather="file"></span>
+                                Hóa đơn nhập
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h6 class ="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Thống kê</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ThongKe/MH_ThongKe_TonKho">
+                                <span data-feather="file-text"></span>
+                                Hàng tồn kho
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/ThongKe/MH_ThongKe_HetHan">
+                                <span data-feather="file-text"></span>
+                                Hàng hết hạn
+                            </a>
+                        </li>
+                    </ul>
+
+                    <h6 class ="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                        <span>Liên hệ</span>
+                    </h6>
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/LienHe/MH_LienHe">
+                                <span data-feather="user"></span>
+                                Tác giả
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main role="main" class="col-md-9 ms-sm-auto col-lg-10 px-4"><br>
+                @RenderBody()
+            </main>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.24.1/feather.min.js" integrity="sha384-EbSscX4STvYAC/DxHse8z5gEDaNiKAIGW+EpfzYTfQrgIlHywXXrM9SUIZ0BlyfF" crossorigin="anonymous"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,41 @@
+﻿@page
+@model Pages.MH_MatHang_ThemModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+}
+
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="col-sm-6 text-start fw-bold">Thông tin mặt hàng</p>
+        @if (!string.IsNullOrEmpty(Model.SInfo))
+        {
+            <p class="col-sm-6 text-end text-@(string.IsNullOrEmpty(Model.SInfo) ? "success" : "danger") fw-bold">@Model.SInfo</p>
+        }
+    </div>
+
+    <form class="row g-3 mb-2" method="post">
+        <div class="col-md-2">
+            <label for="id" class="form-label">Mã mặt hàng</label>
+            <input class="form-control" type="text" id="id" name="id" value="@Model.Mathang?.MaSo" maxlength="30" required>
+        </div>
+        <div class="col-md-2">
+            <label for="name" class="form-label">Tên mặt hàng</label>
+            <input class="form-control" type="text" id="name" name="name" value="@Model.Mathang?.Ten" maxlength="30" required>
+        </div>
+        <div class="col-md-2">
+            <label for="loaihang" class="form-label">Loại hàng</label>
+            <input class="form-control" type="text" id="loaihang" name="loaihang" value="@Model.Mathang?.LoaiHang" maxlength="30" required>
+        </div>
+        <div class="col-md-2">
+            <label for="brand" class="form-label">Thương Hiệu</label>
+            <input class="form-control" type="text" id="brand" name="brand" value="@Model.Mathang?.ThuongHieu" maxlength="30" required>
+        </div>
+        <div class="col-md-2">
+            <label for="price" class="form-label">Giá</label>
+            <input class="form-control" type="number" id="price" name="price" value="@Model.Mathang?.Gia" min="1" required>
+        </div>
+        <div class="col-md-2 d-sm-flex align-items-end justify-content-end pb-1">
+            <input class="btn btn-sm btn-success text-light" type="submit" value="Thêm">
+        </div>
+    </form>
+</div>

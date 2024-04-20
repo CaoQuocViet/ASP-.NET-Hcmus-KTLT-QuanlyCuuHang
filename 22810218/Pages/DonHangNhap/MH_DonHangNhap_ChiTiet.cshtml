@@ -1,0 +1,72 @@
+﻿@page
+@model Pages.MH_DonHangNhap_ChiTietModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+}
+
+<div>
+    @if(Model.Import != null)
+    {
+        <div class="row table_header mb-2">
+            <p class="col-auto mb-2 text-start fw-bold">Hóa đơn nhập: MaSo = @Model.Import.MaSo</p>
+        </div>
+        <div class="text-center table_section mb-2">
+            <table class="table table-bordered table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Mã đơn nhập</th>
+                        <th>Ngày nhập đơn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.Import.MaSo</td>
+                        <td>@Model.Import.Ngay</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center table_section mb-2">
+            <table class="table table-bordered table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên Mặt Hàng</th>
+                        <th>Số Lượng</th>
+                        <th>Ngày Sản Xuất</th>
+                        <th>Hạn Sử Dụng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Import.Kho.Length > 0)
+                    {
+                        int i = 1;
+                        for (int j = 0; j < Model.Import.Kho.Length; j++)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@Model.Import.Kho[j].TenMatHang</td>
+                                <td>@Model.Import.Kho[j].SoLuong</td>
+                                <td>@Model.Import.Kho[j].NgaySanXuat</td>
+                                <td>@Model.Import.Kho[j].HanDung</td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center fw-bold">Không có dữ liệu</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="row table_header mb-2">
+            <p class="col-auto mb-2 text-start text-danger fw-bold">Đơn nhập với MaSo = "@Model.ImportMaSo" không được tìm thấy</p>
+        </div>
+    }
+</div>
