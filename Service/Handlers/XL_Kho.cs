@@ -9,12 +9,15 @@ namespace Service
     {
         private ILT_Kho _luuTruKho = new LT_Kho();
 
+        // Hàm để đọc danh sách kho dựa trên từ khóa và bộ lọc
         public Kho[] DocDanhSach(string sKeyword, int Filter)
         {
             Kho[] DSkho = _luuTruKho.DocDanhSach(sKeyword);
 
+            // Lọc danh sách kho theo hạn dùng chưa hết
             if (1 == Filter)
             {
+                // Lấy ngày hiện tại
                 DateOnly dateNow = DateOnly.FromDateTime(DateTime.Now);
                 int count = 0;
                 for (int i = 0; i < DSkho.Length; i++)
@@ -39,8 +42,10 @@ namespace Service
                 return unexpiryList;
             }
 
+            // Lọc danh sách kho theo hạn dùng đã hết
             if (2 == Filter)
             {
+                // Lấy ngày hiện tại
                 DateOnly dateNow = DateOnly.FromDateTime(DateTime.Now);
                 int count = 0;
                 for (int i = 0; i < DSkho.Length; i++)
@@ -68,16 +73,18 @@ namespace Service
             return DSkho;
         }
 
+        // Hàm để cập nhật danh sách kho
         public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
         {
             _luuTruKho.CapNhatDS(mathangOld, mathangNew);
         }
 
+        // Hàm để xác minh thông tin nhập kho
         public string XacMinhNhapKho(string sTenMatHang, string sSoLuong, string sNgaySanXuat, string sHanDung, ref Kho kho)
         {
             kho.TenMatHang = sTenMatHang;
-            XL_MatHang xlMatHang = new XL_MatHang();  
-            MatHang[] DSmathang = xlMatHang.DocDanhSach("");  
+            XL_MatHang xlMatHang = new XL_MatHang();
+            MatHang[] DSmathang = xlMatHang.DocDanhSach("");
             bool isValid = false;
             for (int i = 0; i < DSmathang.Length; i++)
             {
@@ -115,11 +122,12 @@ namespace Service
             return string.Empty;
         }
 
+        // Hàm để xác minh thông tin xuất kho
         public string XacMinhXuatKho(string sTenMatHang, string sSoLuong, string sNgaySanXuat, string sHanDung, ref Kho kho)
         {
             kho.TenMatHang = sTenMatHang;
-            XL_MatHang xlMatHang = new XL_MatHang();  
-            MatHang[] DSmathang = xlMatHang.DocDanhSach("");  
+            XL_MatHang xlMatHang = new XL_MatHang();
+            MatHang[] DSmathang = xlMatHang.DocDanhSach("");
             bool isValid = false;
             for (int i = 0; i < DSmathang.Length; i++)
             {
@@ -180,6 +188,7 @@ namespace Service
             return string.Empty;
         }
 
+        // Hàm để thêm một kho vào danh sách kho
         public string ThemVaoDS(Kho kho, ref Kho[] DSkho)
         {
             bool addFlag = false;
@@ -208,6 +217,7 @@ namespace Service
             return string.Empty;
         }
 
+        // Hàm để kiểm tra sự tồn tại của hàng hóa trong danh sách kho
         public void KiemTraHangHoaTonTai(string sKhoList, ref Kho[] DSkho)
         {
             StringReader reader = new StringReader(sKhoList);
@@ -235,6 +245,7 @@ namespace Service
             reader.Close();
         }
 
+        // Hàm để tạo danh sách hàng hóa từ danh sách kho
         public string TaoDanhSachHangHoa(Kho[] DSkho)
         {
             StringWriter writer = new StringWriter();

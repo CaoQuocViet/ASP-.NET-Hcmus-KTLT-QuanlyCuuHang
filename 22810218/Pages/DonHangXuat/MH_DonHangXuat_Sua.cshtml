@@ -22,11 +22,11 @@
     <form class="row g-3 mb-2" method="post">
         <div class="col-md-3">
             <label for="id" class="form-label"> Mã đơn xuất</label>
-            <input class="form-control" type="text" id="id" name="id" value="@Model.donxuat.MaSo" maxlength="30" required>
+            <input class="form-control" type="text" id="id" name="id" value="@Model.donxuat?.MaSo" maxlength="30" required>
         </div>
         <div class="col-md-3">
             <label for="date" class="form-label">Ngày Đơn Xuất</label>
-            <input class="form-control" type="date" id="date" name="date" value="@Model.donxuat.Ngay" required>
+            <input class="form-control" type="date" id="date" name="date" value="@Model.donxuat?.Ngay" required>
         </div>
         <div class="col-md-3 d-sm-flex align-items-end justify-content-end pb-1">
             <input class="btn btn-sm btn-warning text-light" type="submit" value="Sửa">
@@ -48,8 +48,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>@Model.donxuat.MaSo</td>
-                    <td>@Model.donxuat.Ngay</td>
+                    <td>@Model.donxuat?.MaSo</td>
+                    <td>@Model.donxuat?.Ngay</td>
                 </tr>
             </tbody>
         </table>

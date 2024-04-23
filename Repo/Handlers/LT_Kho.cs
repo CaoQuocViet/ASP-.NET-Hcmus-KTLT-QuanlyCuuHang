@@ -7,6 +7,7 @@ namespace Repo
     {
         private const string _khoFile = "Data/Kho.json";
 
+        // Đọc danh sách các mặt hàng trong kho
         public Kho[] DocDanhSach(string sKeyword)
         {
             StreamReader reader = new StreamReader(_khoFile);
@@ -56,6 +57,7 @@ namespace Repo
             return searchList;
         }
 
+        // Cập nhật danh sách mặt hàng trong kho
         public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
         {
             Kho[] DSkho = DocDanhSach("");
@@ -71,6 +73,7 @@ namespace Repo
             LuuDanhSach(DSkho);
         }
 
+        // Thêm đơn nhập vào kho
         public void DonNhap(DonNhap donnhap)
         {
             Kho[] DSkho = DocDanhSach("");
@@ -134,6 +137,7 @@ namespace Repo
             LuuDanhSach(DSkho);
         }
 
+        // Thêm đơn xuất khỏi kho
         public void DonXuat(DonXuat donxuat)
         {
             Kho[] DSkho = DocDanhSach("");
@@ -180,6 +184,7 @@ namespace Repo
             LuuDanhSach(DSkho);
         }
 
+        // Lưu danh sách mặt hàng trong kho vào file
         public void LuuDanhSach(Kho[] DSkho)
         {
             StreamWriter writer = new StreamWriter(_khoFile);

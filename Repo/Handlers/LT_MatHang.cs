@@ -7,6 +7,7 @@ namespace Repo
     {
         private const string _mathangFile = "Data/MatHang.json";
 
+        // Đọc danh sách mặt hàng từ file và tìm kiếm theo từ khóa
         public MatHang[] DocDanhSach(string sKeyword)
         {
             StreamReader reader = new StreamReader(_mathangFile);
@@ -60,6 +61,7 @@ namespace Repo
             return searchList;
         }
 
+        // Lưu danh sách mặt hàng vào file
         public void LuuDanhSach(MatHang[] DSmathang)
         {
             StreamWriter writer = new StreamWriter(_mathangFile);
@@ -71,6 +73,7 @@ namespace Repo
             writer.Close();
         }
 
+        // Thêm một mặt hàng mới vào danh sách
         public string Them(MatHang mathang)
         {
             MatHang[] DSmathang = DocDanhSach("");
@@ -100,6 +103,7 @@ namespace Repo
             return string.Empty;
         }
 
+        // Sửa thông tin một mặt hàng trong danh sách
         public string Sua(MatHang mathangOld, MatHang mathangNew)
         {
             MatHang[] DSmathang = DocDanhSach("");
@@ -144,6 +148,7 @@ namespace Repo
             return string.Empty;
         }
 
+        // Xóa một mặt hàng khỏi danh sách
         public string Xoa(MatHang mathang)
         {
             MatHang[] DSmathang = DocDanhSach("");
@@ -178,6 +183,7 @@ namespace Repo
             return string.Empty;
         }
 
+        // Đọc thông tin một mặt hàng dựa trên mã số
         public MatHang? ReadInfo(string sMatHangMaSo)
         {
             MatHang[] DSmathang = DocDanhSach("");
@@ -193,6 +199,7 @@ namespace Repo
             return null;
         }
 
+        // Cập nhật loại hàng của mặt hàng
         public void CapNhatLoaiHang(LoaiHang loaihangOld, LoaiHang loaihangNew)
         {
             MatHang[] DSmathang = DocDanhSach("");

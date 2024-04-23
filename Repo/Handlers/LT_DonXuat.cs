@@ -7,6 +7,7 @@ namespace Repo
     {
         private const string _donxuatFile = "Data/DonXuat.json";
 
+        // Đọc danh sách Đơn Xuất từ file và tìm kiếm theo từ khóa
         public DonXuat[] DocDanhSach(string sKeyword)
         {
             StreamReader reader = new StreamReader(_donxuatFile);
@@ -56,6 +57,7 @@ namespace Repo
             return searchList;
         }
 
+        // Cập nhật danh sách Đơn Xuất với thông tin mới
         public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
         {
             DonXuat[] DSdonxuat = DocDanhSach("");
@@ -74,6 +76,7 @@ namespace Repo
             LuuDanhSach(DSdonxuat);
         }
 
+        // Lưu danh sách Đơn Xuất vào file
         public void LuuDanhSach(DonXuat[] DSdonxuat)
         {
             StreamWriter writer = new StreamWriter(_donxuatFile);
@@ -85,6 +88,7 @@ namespace Repo
             writer.Close();
         }
 
+        // Thêm Đơn Xuất mới vào danh sách
         public string Them(DonXuat donxuat)
         {
             DonXuat[] DSdonxuat = DocDanhSach("");
@@ -110,6 +114,7 @@ namespace Repo
             return string.Empty;
         }
 
+        // Sửa thông tin Đơn Xuất trong danh sách
         public string Sua(DonXuat donxuatOld, DonXuat donxuatNew)
         {
             DonXuat[] DSdonxuat = DocDanhSach("");
@@ -143,6 +148,7 @@ namespace Repo
             return string.Empty;
         }
 
+        // Xóa Đơn Xuất khỏi danh sách
         public string Xoa(DonXuat donxuat)
         {
             DonXuat[] DSdonxuat = DocDanhSach("");
@@ -177,6 +183,7 @@ namespace Repo
             return string.Empty;
         }
 
+        // Đọc thông tin Đơn Xuất dựa trên mã số
         public DonXuat? ReadInfo(string donxuatCode)
         {
             DonXuat[] DSdonxuat = DocDanhSach("");

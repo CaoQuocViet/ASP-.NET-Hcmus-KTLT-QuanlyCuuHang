@@ -7,16 +7,20 @@ namespace Service
     public class XL_DonXuat : IXL_DonXuat
     {
         private ILT_DonXuat luuTruDonXuat = new LT_DonXuat();
+
+        // Đọc danh sách Đơn xuất dựa trên từ khóa tìm kiếm
         public DonXuat[] DocDanhSach(string sKeyword)
         {
             return luuTruDonXuat.DocDanhSach(sKeyword);
         }
 
+        // Cập nhật danh sách Mặt hàng trong Đơn xuất
         public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
         {
             luuTruDonXuat.CapNhatDS(mathangOld, mathangNew);
         }
 
+        // Kiểm tra xem Mặt hàng đã tồn tại trong danh sách Đơn xuất chưa
         public string MatHangTonTai(MatHang mathang)
         {
             DonXuat[] DSdonxuat = DocDanhSach("");
@@ -34,10 +38,11 @@ namespace Service
             return "Mặt hàng không tồn tại";
         }
 
+        // Thêm Đơn xuất mới
         public string Them(string sMaSo, string sNgay, Kho[] DSkho, ref DonXuat donxuat)
         {
             donxuat.MaSo = sMaSo;
-            int MaSoMaxLength = 10;  
+            int MaSoMaxLength = 10;
 
             donxuat.Kho = DSkho;
 
@@ -62,10 +67,11 @@ namespace Service
             return string.Empty;
         }
 
+        // Sửa thông tin Đơn xuất
         public string Sua(string sMaSo, string sNgay, ref DonXuat donxuatOld)
         {
             DonXuat donxuat = new DonXuat(sMaSo, default, new Kho[0]);
-            int MaSoMaxLength = 10;  
+            int MaSoMaxLength = 10;
 
             if (donxuat.MaSo.Length == 0 || donxuat.MaSo.Length > MaSoMaxLength)
             {
@@ -88,6 +94,7 @@ namespace Service
             return sInfo;
         }
 
+        // Đọc thông tin Đơn xuất dựa trên mã số
         public DonXuat? ReadInfo(string donxuatMaSo)
         {
             return luuTruDonXuat.ReadInfo(donxuatMaSo);

@@ -9,16 +9,20 @@ namespace Service
     public class XL_DonNhap : IXL_DonNhap
     {
         private ILT_DonNhap _luuTruDonNhap = new LT_DonNhap();
+
+        // Hàm để đọc danh sách Đơn nhập dựa trên từ khóa tìm kiếm
         public DonNhap[] DocDanhSach(string sKeyword)
         {
             return _luuTruDonNhap.DocDanhSach(sKeyword);
         }
 
+        // Hàm để cập nhật danh sách Mặt hàng trong Đơn nhập
         public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
         {
             _luuTruDonNhap.CapNhatDS(mathangOld, mathangNew);
         }
 
+        // Hàm để kiểm tra xem Mặt hàng đã tồn tại trong Đơn nhập hay chưa
         public string MatHangTonTai(MatHang mathang)
         {
             DonNhap[] DSdonnhap = DocDanhSach("");
@@ -36,6 +40,7 @@ namespace Service
             return "Mặt hàng không tồn tại";
         }
 
+        // Hàm để thêm Đơn nhập mới
         public string Them(string sMaSo, string sNgay, Kho[] DSkho, ref DonNhap donnhap)
         {
             donnhap.MaSo = sMaSo;
@@ -55,20 +60,21 @@ namespace Service
 
             donnhap.Ngay = parsedDate;
 
-            string sInfo = _luuTruDonNhap.Them(donnhap);  
+            string sInfo = _luuTruDonNhap.Them(donnhap);
             if (string.IsNullOrEmpty(sInfo))
             {
-                XL_Kho kho = new XL_Kho();  
-                kho.DonNhap(donnhap);  
+                XL_Kho kho = new XL_Kho();
+                kho.DonNhap(donnhap);
             }
 
             return string.Empty;
         }
 
+        // Hàm để sửa thông tin Đơn nhập
         public string Sua(string sMaSo, string sNgay, ref DonNhap donnhapOld)
         {
             DonNhap donnhap = new DonNhap();
-            int MaSoMaxLength = 10; 
+            int MaSoMaxLength = 10;
             donnhap.MaSo = sMaSo;
 
             if (donnhap.MaSo.Length == 0 || donnhap.MaSo.Length > MaSoMaxLength)
@@ -84,7 +90,7 @@ namespace Service
 
             donnhap.Ngay = parsedDate;
 
-            string sInfo = _luuTruDonNhap.Sua(donnhapOld, donnhap);  
+            string sInfo = _luuTruDonNhap.Sua(donnhapOld, donnhap);
             if (string.IsNullOrEmpty(sInfo))
             {
                 donnhapOld = donnhap;
@@ -93,9 +99,10 @@ namespace Service
             return sInfo;
         }
 
+        // Hàm để đọc thông tin Đơn nhập dựa trên mã số Đơn nhập
         public DonNhap? ReadInfo(string donnhapMaSo)
         {
-            return _luuTruDonNhap.ReadInfo(donnhapMaSo);  
+            return _luuTruDonNhap.ReadInfo(donnhapMaSo);
         }
     }
 }

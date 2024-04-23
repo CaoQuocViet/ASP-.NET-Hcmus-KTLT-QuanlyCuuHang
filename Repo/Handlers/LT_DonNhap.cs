@@ -7,6 +7,7 @@ namespace Repo
     {
         private const string _donnhapFile = "Data/DonNhap.json";
 
+        // Đọc danh sách đơn nhập từ file và tìm kiếm theo từ khóa
         public DonNhap[] DocDanhSach(string sKeyword)
         {
             StreamReader reader = new StreamReader(_donnhapFile);
@@ -56,6 +57,7 @@ namespace Repo
             return searchList;
         }
 
+        // Cập nhật danh sách đơn nhập với thông tin mặt hàng mới
         public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
         {
             DonNhap[] DSdonnhap = DocDanhSach("");
@@ -74,6 +76,7 @@ namespace Repo
             LuuDanhSach(DSdonnhap);
         }
 
+        // Lưu danh sách đơn nhập vào file
         public void LuuDanhSach(DonNhap[] DSdonnhap)
         {
             StreamWriter writer = new StreamWriter(_donnhapFile);
@@ -85,6 +88,7 @@ namespace Repo
             writer.Close();
         }
 
+        // Thêm đơn nhập mới vào danh sách
         public string Them(DonNhap donnhap)
         {
             DonNhap[] DSdonnhap = DocDanhSach("");
@@ -110,6 +114,7 @@ namespace Repo
             return string.Empty;
         }
 
+        // Sửa thông tin đơn nhập trong danh sách
         public string Sua(DonNhap donnhapOld, DonNhap donnhapNew)
         {
             DonNhap[] DSdonnhap = DocDanhSach("");
@@ -143,6 +148,7 @@ namespace Repo
             return string.Empty;
         }
 
+        // Xóa đơn nhập khỏi danh sách
         public string Xoa(DonNhap donnhap)
         {
             DonNhap[] DSdonnhap = DocDanhSach("");
@@ -177,6 +183,7 @@ namespace Repo
             return string.Empty;
         }
 
+        // Đọc thông tin đơn nhập dựa trên mã số
         public DonNhap? ReadInfo(string donnhapMaSo)
         {
             DonNhap[] DSdonnhap = DocDanhSach("");
