@@ -1,4 +1,0 @@
-MH_LoaiHang_Sua
-
-MH_MatHang_Them.cshtml
-

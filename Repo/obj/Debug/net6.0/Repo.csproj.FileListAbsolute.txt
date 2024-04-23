@@ -13,3 +13,4 @@ C:\Users\vietc\Downloads\LTHDT\22810218\Repo\obj\Debug\net6.0\Repo.dll
 C:\Users\vietc\Downloads\LTHDT\22810218\Repo\obj\Debug\net6.0\refint\Repo.dll
 C:\Users\vietc\Downloads\LTHDT\22810218\Repo\obj\Debug\net6.0\Repo.pdb
 C:\Users\vietc\Downloads\LTHDT\22810218\Repo\obj\Debug\net6.0\ref\Repo.dll
+C:\Users\vietc\Downloads\LTHDT\22810218\Repo\obj\Debug\net6.0\Repo.sourcelink.json

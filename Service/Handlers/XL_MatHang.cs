@@ -6,7 +6,7 @@ namespace Service
     public class XL_MatHang : IXL_MatHang
     {
         private ILT_MatHang _luuTruMatHang = new LT_MatHang();
-        private const int MaSoMaxLength = 30;
+        private const int _maSoMaxLength = 30;
         public MatHang[] DocDanhSach(string sKeyword)
         {
             return _luuTruMatHang.DocDanhSach(sKeyword);  
@@ -23,7 +23,7 @@ namespace Service
             mathang.Ten = sTen;
             mathang.LoaiHang = sLoaiHang;
 
-            if (mathang.MaSo.Length == 0 || mathang.MaSo.Length > MaSoMaxLength)
+            if (mathang.MaSo.Length == 0 || mathang.MaSo.Length > _maSoMaxLength)
             {
                 return "Mã mặt hàng không hợp lệ";
             }
@@ -64,7 +64,7 @@ namespace Service
                 ThuongHieu = sThuongHieu
             };
 
-            if (mathang.MaSo.Length == 0 || mathang.MaSo.Length > MaSoMaxLength)
+            if (mathang.MaSo.Length == 0 || mathang.MaSo.Length > _maSoMaxLength)
             {
                 return "Mã mặt hàng không hợp lệ";
             }
@@ -116,7 +116,7 @@ namespace Service
                 ThuongHieu = sThuongHieu
             };
 
-            if (mathang.MaSo.Length == 0 || mathang.MaSo.Length > MaSoMaxLength)
+            if (mathang.MaSo.Length == 0 || mathang.MaSo.Length > _maSoMaxLength)
             {
                 return "Mã mặt hàng không hợp lệ";
             }

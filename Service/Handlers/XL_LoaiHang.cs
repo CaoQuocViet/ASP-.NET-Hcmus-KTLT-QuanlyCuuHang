@@ -8,8 +8,8 @@ namespace Service
     public class XL_LoaiHang : IXL_LoaiHang
     {
         private ILT_LoaiHang _luuTruLoaiHang = new LT_LoaiHang();
-        private const int MaSoMaxLength = 30;
-        private const int TenMaxLength = 50;
+        private const int _maSoMaxLength = 30;
+        private const int _tenMaxLength = 50;
         public LoaiHang Empty()
         {
             return new LoaiHang("", "");
@@ -22,11 +22,11 @@ namespace Service
 
         public string Them(LoaiHang loaihang)
         {
-            if (loaihang.MaSo.Length > MaSoMaxLength)
+            if (loaihang.MaSo.Length > _maSoMaxLength)
             {
                 return "Mã loại hàng không hợp lệ";
             }
-            if (loaihang.Ten.Length > TenMaxLength)
+            if (loaihang.Ten.Length > _tenMaxLength)
             {
                 return "Tên loại hàng không hợp lệ";
             }

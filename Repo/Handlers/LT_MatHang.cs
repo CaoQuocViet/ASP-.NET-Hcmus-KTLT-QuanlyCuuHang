@@ -5,11 +5,11 @@ namespace Repo
 {
     public class LT_MatHang : ILT_MatHang
     {
-        private const string mathangFile = "Data/MatHang.json";
+        private const string _mathangFile = "Data/MatHang.json";
 
         public MatHang[] DocDanhSach(string sKeyword)
         {
-            StreamReader reader = new StreamReader(mathangFile);
+            StreamReader reader = new StreamReader(_mathangFile);
             int count = 0;
             while (null != reader.ReadLine())
             {
@@ -18,7 +18,7 @@ namespace Repo
             reader.Close();
 
             MatHang[] DSmathang = new MatHang[count];
-            reader = new StreamReader(mathangFile);
+            reader = new StreamReader(_mathangFile);
             for (int i = 0; i < DSmathang.Length; i++)
             {
                 string? sData = reader.ReadLine();
@@ -62,7 +62,7 @@ namespace Repo
 
         public void LuuDanhSach(MatHang[] DSmathang)
         {
-            StreamWriter writer = new StreamWriter(mathangFile);
+            StreamWriter writer = new StreamWriter(_mathangFile);
             foreach (MatHang mathang in DSmathang)
             {
                 string sData = JsonConvert.SerializeObject(mathang);

@@ -5,11 +5,11 @@ namespace Repo
 {
     public class LT_LoaiHang : ILT_LoaiHang
     {
-        private const string loaihangFile = "Data/LoaiHang.json";
+        private const string _loaihangFile = "Data/LoaiHang.json";
 
         public LoaiHang[] DocDanhSach(string sKeyword)
         {
-            StreamReader reader = new StreamReader(loaihangFile);
+            StreamReader reader = new StreamReader(_loaihangFile);
             int count = 0;
             while (null != reader.ReadLine())
             {
@@ -18,7 +18,7 @@ namespace Repo
             reader.Close();
 
             LoaiHang[] DSloaihang = new LoaiHang[count];
-            reader = new StreamReader(loaihangFile);
+            reader = new StreamReader(_loaihangFile);
             for (int i = 0; i < DSloaihang.Length; i++)
             {
                 string? sData = reader.ReadLine();
@@ -60,7 +60,7 @@ namespace Repo
 
         public void LuuDanhSach(LoaiHang[] DSloaihang)
         {
-            StreamWriter writer = new StreamWriter(loaihangFile);
+            StreamWriter writer = new StreamWriter(_loaihangFile);
             foreach (LoaiHang loaihang in DSloaihang)
             {
                 string sData = JsonConvert.SerializeObject(loaihang);

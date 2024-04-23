@@ -22,11 +22,11 @@
     <form class="row g-3 mb-2" method="post">
         <div class="col-md-3">
             <label for="id" class="form-label">Mã đơn nhập</label>
-            <input class="form-control" type="text" id="id" name="id" value="@Model.import.MaSo" maxlength="30" required>
+            <input class="form-control" type="text" id="id" name="id" value="@Model.import?.MaSo" maxlength="30" required>
         </div>
         <div class="col-md-3">
             <label for="date" class="form-label">Ngày nhập đơn</label>
-            <input class="form-control" type="date" id="date" name="date" value="@Model.import.Ngay" required>
+            <input class="form-control" type="date" id="date" name="date" value="@Model.import?.Ngay" required>
         </div>
         <div class="col-md-3 d-sm-flex align-items-end justify-content-end pb-1">
             <input class="btn btn-sm btn-warning text-light" type="submit" value="Sửa">
@@ -47,8 +47,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>@Model.import.MaSo</td>
-                    <td>@Model.import.Ngay</td>
+                    <td>@Model.import?.MaSo</td>
+                    <td>@Model.import?.Ngay</td>
                 </tr>
             </tbody>
         </table>

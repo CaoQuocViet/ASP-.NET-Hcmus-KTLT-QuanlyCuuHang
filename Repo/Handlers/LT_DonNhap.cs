@@ -5,11 +5,11 @@ namespace Repo
 {
     public class LT_DonNhap : ILT_DonNhap
     {
-        private const string donnhapFile = "Data/DonNhap.json";
+        private const string _donnhapFile = "Data/DonNhap.json";
 
         public DonNhap[] DocDanhSach(string sKeyword)
         {
-            StreamReader reader = new StreamReader(donnhapFile);
+            StreamReader reader = new StreamReader(_donnhapFile);
             int count = 0;
             while (null != reader.ReadLine())
             {
@@ -18,7 +18,7 @@ namespace Repo
             reader.Close();
 
             DonNhap[] DSdonnhap = new DonNhap[count];
-            reader = new StreamReader(donnhapFile);
+            reader = new StreamReader(_donnhapFile);
             for (int i = 0; i < DSdonnhap.Length; i++)
             {
                 string? sData = reader.ReadLine();
@@ -76,7 +76,7 @@ namespace Repo
 
         public void LuuDanhSach(DonNhap[] DSdonnhap)
         {
-            StreamWriter writer = new StreamWriter(donnhapFile);
+            StreamWriter writer = new StreamWriter(_donnhapFile);
             foreach (DonNhap donnhap in DSdonnhap)
             {
                 string sData = JsonConvert.SerializeObject(donnhap);

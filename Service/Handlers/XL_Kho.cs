@@ -7,11 +7,11 @@ namespace Service
 {
     public class XL_Kho : IXL_Kho
     {
-        private ILT_Kho luuTruKho = new LT_Kho();
+        private ILT_Kho _luuTruKho = new LT_Kho();
 
         public Kho[] DocDanhSach(string sKeyword, int Filter)
         {
-            Kho[] DSkho = luuTruKho.DocDanhSach(sKeyword);
+            Kho[] DSkho = _luuTruKho.DocDanhSach(sKeyword);
 
             if (1 == Filter)
             {
@@ -70,7 +70,7 @@ namespace Service
 
         public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
         {
-            luuTruKho.CapNhatDS(mathangOld, mathangNew);
+            _luuTruKho.CapNhatDS(mathangOld, mathangNew);
         }
 
         public string XacMinhNhapKho(string sTenMatHang, string sSoLuong, string sNgaySanXuat, string sHanDung, ref Kho kho)

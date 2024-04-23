@@ -30,7 +30,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model.ImportList.Length > 0)
+                @if (Model.ImportList != null && Model.ImportList.Length > 0)
                 {
                     int j = Model.NoStart - 1;
                     for (int i = Model.NoStart; i <= Model.NoEnd; i++)
@@ -57,7 +57,7 @@
         </table>
     </div>
     <div class="row table_pagination">
-        @if (Model.ImportList.Length > 0)
+        @if (Model.ImportList != null && Model.ImportList.Length > 0)
         {
             <div class="col-9">
                 <nav aria-label="Page navigation">

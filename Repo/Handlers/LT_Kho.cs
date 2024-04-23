@@ -5,11 +5,11 @@ namespace Repo
 {
     public class LT_Kho : ILT_Kho
     {
-        private const string khoFile = "Data/Kho.json";
+        private const string _khoFile = "Data/Kho.json";
 
         public Kho[] DocDanhSach(string sKeyword)
         {
-            StreamReader reader = new StreamReader(khoFile);
+            StreamReader reader = new StreamReader(_khoFile);
             int count = 0;
             while (null != reader.ReadLine())
             {
@@ -18,7 +18,7 @@ namespace Repo
             reader.Close();
 
             Kho[] DSkho = new Kho[count];
-            reader = new StreamReader(khoFile);
+            reader = new StreamReader(_khoFile);
             for (int i = 0; i < DSkho.Length; i++)
             {
                 string? sData = reader.ReadLine();
@@ -182,7 +182,7 @@ namespace Repo
 
         public void LuuDanhSach(Kho[] DSkho)
         {
-            StreamWriter writer = new StreamWriter(khoFile);
+            StreamWriter writer = new StreamWriter(_khoFile);
             foreach (Kho kho in DSkho)
             {
                 string sData = JsonConvert.SerializeObject(kho);

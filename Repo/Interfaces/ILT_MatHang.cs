@@ -7,14 +7,16 @@ using Entities;
 
 namespace Repo
 {
-    public interface ILT_MatHang
+    public interface ILT_MatHang : IRepository<MatHang>
     {
-        MatHang[] DocDanhSach(string sKeyword);
-        void LuuDanhSach(MatHang[] DSmathang);
-        string Them(MatHang mathang);
-        string Sua(MatHang mathangOld, MatHang mathangNew);
-        string Xoa(MatHang mathang);
-        MatHang? ReadInfo(string sMatHangMaSo);
-        void CapNhatLoaiHang(LoaiHang loaihangOld, LoaiHang loaihangNew);
+        public void LuuDanhSach(MatHang[] DSmathang);
+        public void CapNhatLoaiHang(LoaiHang loaihangOld, LoaiHang loaihangNew);
+        // MatHang[] DocDanhSach(string sKeyword);
+        // void LuuDanhSach(MatHang[] DSmathang);
+        // string Them(MatHang mathang);
+        // string Sua(MatHang mathangOld, MatHang mathangNew);
+        // string Xoa(MatHang mathang);
+        // MatHang? ReadInfo(string sMatHangMaSo);
+        // void CapNhatLoaiHang(LoaiHang loaihangOld, LoaiHang loaihangNew);
     }
 }

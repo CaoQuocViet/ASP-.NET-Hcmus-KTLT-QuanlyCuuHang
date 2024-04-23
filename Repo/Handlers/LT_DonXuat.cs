@@ -5,11 +5,11 @@ namespace Repo
 {
     public class LT_DonXuat : ILT_DonXuat
     {
-        private const string donxuatFile = "Data/DonXuat.json";
+        private const string _donxuatFile = "Data/DonXuat.json";
 
         public DonXuat[] DocDanhSach(string sKeyword)
         {
-            StreamReader reader = new StreamReader(donxuatFile);
+            StreamReader reader = new StreamReader(_donxuatFile);
             int count = 0;
             while (null != reader.ReadLine())
             {
@@ -18,7 +18,7 @@ namespace Repo
             reader.Close();
 
             DonXuat[] DSdonxuat = new DonXuat[count];
-            reader = new StreamReader(donxuatFile);
+            reader = new StreamReader(_donxuatFile);
             for (int i = 0; i < DSdonxuat.Length; i++)
             {
                 string? sData = reader.ReadLine();
@@ -76,7 +76,7 @@ namespace Repo
 
         public void LuuDanhSach(DonXuat[] DSdonxuat)
         {
-            StreamWriter writer = new StreamWriter(donxuatFile);
+            StreamWriter writer = new StreamWriter(_donxuatFile);
             foreach (DonXuat donxuat in DSdonxuat)
             {
                 string sData = JsonConvert.SerializeObject(donxuat);
