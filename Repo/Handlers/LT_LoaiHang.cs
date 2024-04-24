@@ -7,73 +7,55 @@ namespace Repo
     {
         private const string _loaihangFile = "Data/LoaiHang.json";
 
-        public LoaiHang[] DocDanhSach(string sKeyword)
+        // Đọc danh sách loại hàng từ file và tìm kiếm theo từ khóa
+        public List<LoaiHang> DocDanhSach(string sKeyword)
         {
-            StreamReader reader = new StreamReader(_loaihangFile);
-            int count = 0;
-            while (null != reader.ReadLine())
+            List<LoaiHang> DSloaihang = new List<LoaiHang>();
+            using (StreamReader reader = new StreamReader(_loaihangFile))
             {
-                count++;
-            }
-            reader.Close();
-
-            LoaiHang[] DSloaihang = new LoaiHang[count];
-            reader = new StreamReader(_loaihangFile);
-            for (int i = 0; i < DSloaihang.Length; i++)
-            {
-                string? sData = reader.ReadLine();
-                if (null != sData)
+                string sData;
+                while ((sData = reader.ReadLine()) != null)
                 {
-                    DSloaihang[i] = JsonConvert.DeserializeObject<LoaiHang>(sData);
+                    DSloaihang.Add(JsonConvert.DeserializeObject<LoaiHang>(sData));
                 }
             }
-            reader.Close();
 
             if (string.IsNullOrEmpty(sKeyword))
             {
                 return DSloaihang;
             }
 
-            count = 0;
-            for (int i = 0; i < DSloaihang.Length; i++)
+            List<LoaiHang> searchList = new List<LoaiHang>();
+            foreach (LoaiHang loaihang in DSloaihang)
             {
-                if (DSloaihang[i].MaSo.Contains(sKeyword) ||
-                    DSloaihang[i].Ten.Contains(sKeyword))
+                if (loaihang.MaSo?.Contains(sKeyword) == true || loaihang.Ten?.Contains(sKeyword) == true)
                 {
-                    count++;
-                }
-            }
-
-            LoaiHang[] searchList = new LoaiHang[count];
-            count = 0;
-            for (int i = 0; i < DSloaihang.Length; i++)
-            {
-                if (DSloaihang[i].MaSo.Contains(sKeyword) ||
-                    DSloaihang[i].Ten.Contains(sKeyword))
-                {
-                    searchList[count++] = DSloaihang[i];
+                    searchList.Add(loaihang);
                 }
             }
 
             return searchList;
         }
 
-        public void LuuDanhSach(LoaiHang[] DSloaihang)
+        // Lưu danh sách loại hàng vào file
+        public void LuuDanhSach(List<LoaiHang> DSloaihang)
         {
-            StreamWriter writer = new StreamWriter(_loaihangFile);
-            foreach (LoaiHang loaihang in DSloaihang)
+            using (StreamWriter writer = new StreamWriter(_loaihangFile))
             {
-                string sData = JsonConvert.SerializeObject(loaihang);
-                writer.WriteLine(sData);
+                foreach (LoaiHang loaihang in DSloaihang)
+                {
+                    string sData = JsonConvert.SerializeObject(loaihang);
+                    writer.WriteLine(sData);
+                }
             }
-            writer.Close();
         }
 
+        // Thêm một loại hàng mới vào danh sách
         public string Them(LoaiHang loaihang)
         {
-            LoaiHang[] DSloaihang = DocDanhSach("");
+            List<LoaiHang> DSloaihang = DocDanhSach("");
 
-            for (int i = 0; i < DSloaihang.Length; i++)
+            for (int i = 0; i < DSloaihang.Count; i++)
             {
                 if (DSloaihang[i].MaSo == loaihang.MaSo)
                 {
@@ -85,25 +67,20 @@ namespace Repo
                 }
             }
 
-            LoaiHang[] DSloaihangNew = new LoaiHang[DSloaihang.Length + 1];
-            DSloaihangNew[0] = loaihang;
+            DSloaihang.Insert(0, loaihang);
 
-            for (int i = 0; i < DSloaihang.Length; i++)
-            {
-                DSloaihangNew[i + 1] = DSloaihang[i];
-            }
-
-            LuuDanhSach(DSloaihangNew);
+            LuuDanhSach(DSloaihang);
 
             return string.Empty;
         }
 
+        // Sửa thông tin một loại hàng trong danh sách
         public string Sua(LoaiHang loaihangOld, LoaiHang loaihangNew)
         {
-            LoaiHang[] DSloaihang = DocDanhSach("");
+            List<LoaiHang> DSloaihang = DocDanhSach("");
 
             bool IsExist = false;
-            for (int i = 0; i < DSloaihang.Length; i++)
+            for (int i = 0; i < DSloaihang.Count; i++)
             {
                 if (DSloaihang[i].MaSo == loaihangOld.MaSo || DSloaihang[i].Ten == loaihangOld.Ten)
                 {
@@ -116,7 +93,7 @@ namespace Repo
                 return "Loại hàng không tồn tại";
             }
 
-            for (int i = 0; i < DSloaihang.Length; i++)
+            for (int i = 0; i < DSloaihang.Count; i++)
             {
                 if (DSloaihang[i].MaSo == loaihangOld.MaSo || DSloaihang[i].Ten == loaihangOld.Ten)
                 {
@@ -130,12 +107,13 @@ namespace Repo
             return string.Empty;
         }
 
+        // Xóa một loại hàng khỏi danh sách
         public string Xoa(LoaiHang loaihang)
         {
-            LoaiHang[] DSloaihang = DocDanhSach("");
+            List<LoaiHang> DSloaihang = DocDanhSach("");
 
             bool IsExist = false;
-            for (int i = 0; i < DSloaihang.Length; i++)
+            for (int i = 0; i < DSloaihang.Count; i++)
             {
                 if (DSloaihang[i].MaSo == loaihang.MaSo || DSloaihang[i].Ten == loaihang.Ten)
                 {
@@ -148,25 +126,17 @@ namespace Repo
                 return "Loại hàng không tồn tại";
             }
 
-            LoaiHang[] DSloaihangNew = new LoaiHang[DSloaihang.Length - 1];
-            int count = 0;
-            for (int i = 0; i < DSloaihang.Length; i++)
-            {
-                if (DSloaihang[i].MaSo != loaihang.MaSo && DSloaihang[i].Ten != loaihang.Ten)
-                {
-                    DSloaihangNew[count] = DSloaihang[i];
-                    count++;
-                }
-            }
+            DSloaihang.RemoveAll(lh => lh.MaSo == loaihang.MaSo && lh.Ten == loaihang.Ten);
 
-            LuuDanhSach(DSloaihangNew);
+            LuuDanhSach(DSloaihang);
 
             return string.Empty;
         }
 
+        // Đọc thông tin một loại hàng dựa trên mã số
         public LoaiHang? ReadInfo(string loaihangCode)
         {
-            LoaiHang[] DSloaihang = DocDanhSach("");
+            List<LoaiHang> DSloaihang = DocDanhSach("");
 
             foreach (LoaiHang loaihang in DSloaihang)
             {

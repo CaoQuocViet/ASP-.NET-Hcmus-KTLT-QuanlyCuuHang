@@ -8,25 +8,14 @@ namespace Repo
         private const string _donxuatFile = "Data/DonXuat.json";
 
         // Đọc danh sách Đơn Xuất từ file và tìm kiếm theo từ khóa
-        public DonXuat[] DocDanhSach(string sKeyword)
+        public List<DonXuat> DocDanhSach(string sKeyword)
         {
             StreamReader reader = new StreamReader(_donxuatFile);
-            int count = 0;
-            while (null != reader.ReadLine())
+            List<DonXuat> DSdonxuat = new List<DonXuat>();
+            string? sData;
+            while ((sData = reader.ReadLine()) != null)
             {
-                count++;
-            }
-            reader.Close();
-
-            DonXuat[] DSdonxuat = new DonXuat[count];
-            reader = new StreamReader(_donxuatFile);
-            for (int i = 0; i < DSdonxuat.Length; i++)
-            {
-                string? sData = reader.ReadLine();
-                if (null != sData)
-                {
-                    DSdonxuat[i] = JsonConvert.DeserializeObject<DonXuat>(sData);
-                }
+                DSdonxuat.Add(JsonConvert.DeserializeObject<DonXuat>(sData));
             }
             reader.Close();
 
@@ -35,22 +24,12 @@ namespace Repo
                 return DSdonxuat;
             }
 
-            count = 0;
-            for (int i = 0; i < DSdonxuat.Length; i++)
+            List<DonXuat> searchList = new List<DonXuat>();
+            foreach (DonXuat donxuat in DSdonxuat)
             {
-                if (DSdonxuat[i].MaSo.Contains(sKeyword))
+                if (donxuat.MaSo.Contains(sKeyword))
                 {
-                    count++;
-                }
-            }
-
-            DonXuat[] searchList = new DonXuat[count];
-            count = 0;
-            for (int i = 0; i < DSdonxuat.Length; i++)
-            {
-                if (DSdonxuat[i].MaSo.Contains(sKeyword))
-                {
-                    searchList[count++] = DSdonxuat[i];
+                    searchList.Add(donxuat);
                 }
             }
 
@@ -60,15 +39,15 @@ namespace Repo
         // Cập nhật danh sách Đơn Xuất với thông tin mới
         public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
         {
-            DonXuat[] DSdonxuat = DocDanhSach("");
+            List<DonXuat> DSdonxuat = DocDanhSach("");
 
-            for (int i = 0; i < DSdonxuat.Length; i++)
+            foreach (DonXuat donxuat in DSdonxuat)
             {
-                for (int k = 0; k < DSdonxuat[i].Kho.Length; k++)
+                foreach (Kho kho in donxuat.Kho)
                 {
-                    if (mathangOld.Ten == DSdonxuat[i].Kho[k].TenMatHang)
+                    if (mathangOld.Ten == kho.TenMatHang)
                     {
-                        DSdonxuat[i].Kho[k].TenMatHang = mathangNew.Ten;
+                        kho.TenMatHang = mathangNew.Ten;
                     }
                 }
             }
@@ -77,23 +56,24 @@ namespace Repo
         }
 
         // Lưu danh sách Đơn Xuất vào file
-        public void LuuDanhSach(DonXuat[] DSdonxuat)
+        public void LuuDanhSach(List<DonXuat> DSdonxuat)
         {
-            StreamWriter writer = new StreamWriter(_donxuatFile);
-            foreach (DonXuat donxuat in DSdonxuat)
+            using (StreamWriter writer = new StreamWriter(_donxuatFile))
             {
-                string sData = JsonConvert.SerializeObject(donxuat);
-                writer.WriteLine(sData);
+                foreach (DonXuat donxuat in DSdonxuat)
+                {
+                    string sData = JsonConvert.SerializeObject(donxuat);
+                    writer.WriteLine(sData);
+                }
             }
-            writer.Close();
         }
 
         // Thêm Đơn Xuất mới vào danh sách
         public string Them(DonXuat donxuat)
         {
-            DonXuat[] DSdonxuat = DocDanhSach("");
+            List<DonXuat> DSdonxuat = DocDanhSach("");
 
-            for (int i = 0; i < DSdonxuat.Length; i++)
+            for (int i = 0; i < DSdonxuat.Count; i++)
             {
                 if (DSdonxuat[i].MaSo == donxuat.MaSo)
                 {
@@ -101,15 +81,9 @@ namespace Repo
                 }
             }
 
-            DonXuat[] DSdonxuatNew = new DonXuat[DSdonxuat.Length + 1];
-            DSdonxuatNew[0] = donxuat;
+            DSdonxuat.Insert(0, donxuat);
 
-            for (int i = 0; i < DSdonxuat.Length; i++)
-            {
-                DSdonxuatNew[i + 1] = DSdonxuat[i];
-            }
-
-            LuuDanhSach(DSdonxuatNew);
+            LuuDanhSach(DSdonxuat);
 
             return string.Empty;
         }
@@ -117,10 +91,10 @@ namespace Repo
         // Sửa thông tin Đơn Xuất trong danh sách
         public string Sua(DonXuat donxuatOld, DonXuat donxuatNew)
         {
-            DonXuat[] DSdonxuat = DocDanhSach("");
+            List<DonXuat> DSdonxuat = DocDanhSach("");
 
             bool IsExist = false;
-            for (int i = 0; i < DSdonxuat.Length; i++)
+            for (int i = 0; i < DSdonxuat.Count; i++)
             {
                 if (DSdonxuat[i].MaSo == donxuatOld.MaSo)
                 {
@@ -133,7 +107,7 @@ namespace Repo
                 return "Đơn Xuất không tồn tại";
             }
 
-            for (int i = 0; i < DSdonxuat.Length; i++)
+            for (int i = 0; i < DSdonxuat.Count; i++)
             {
                 if (DSdonxuat[i].MaSo == donxuatOld.MaSo)
                 {
@@ -151,10 +125,10 @@ namespace Repo
         // Xóa Đơn Xuất khỏi danh sách
         public string Xoa(DonXuat donxuat)
         {
-            DonXuat[] DSdonxuat = DocDanhSach("");
+            List<DonXuat> DSdonxuat = DocDanhSach("");
 
             bool IsExist = false;
-            for (int i = 0; i < DSdonxuat.Length; i++)
+            for (int i = 0; i < DSdonxuat.Count; i++)
             {
                 if (DSdonxuat[i].MaSo == donxuat.MaSo)
                 {
@@ -167,18 +141,9 @@ namespace Repo
                 return "Đơn Xuất không tồn tại";
             }
 
-            DonXuat[] DSdonxuatNew = new DonXuat[DSdonxuat.Length - 1];
-            int count = 0;
-            for (int i = 0; i < DSdonxuat.Length; i++)
-            {
-                if (DSdonxuat[i].MaSo != donxuat.MaSo)
-                {
-                    DSdonxuatNew[count] = DSdonxuat[i];
-                    count++;
-                }
-            }
+            DSdonxuat.RemoveAll(d => d.MaSo == donxuat.MaSo);
 
-            LuuDanhSach(DSdonxuatNew);
+            LuuDanhSach(DSdonxuat);
 
             return string.Empty;
         }
@@ -186,7 +151,7 @@ namespace Repo
         // Đọc thông tin Đơn Xuất dựa trên mã số
         public DonXuat? ReadInfo(string donxuatCode)
         {
-            DonXuat[] DSdonxuat = DocDanhSach("");
+            List<DonXuat> DSdonxuat = DocDanhSach("");
 
             foreach (DonXuat donxuat in DSdonxuat)
             {

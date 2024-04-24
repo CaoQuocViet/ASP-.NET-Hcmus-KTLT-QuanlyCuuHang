@@ -1,15 +1,15 @@
 ﻿using Repo;
 using Entities;
-using System;
+using System.Collections.Generic;
 
 namespace Service
 {
     public class XL_DonXuat : IXL_DonXuat
     {
-        private ILT_DonXuat luuTruDonXuat = new LT_DonXuat();
+        private readonly ILT_DonXuat luuTruDonXuat = new LT_DonXuat();
 
         // Đọc danh sách Đơn xuất dựa trên từ khóa tìm kiếm
-        public DonXuat[] DocDanhSach(string sKeyword)
+        public List<DonXuat> DocDanhSach(string sKeyword)
         {
             return luuTruDonXuat.DocDanhSach(sKeyword);
         }
@@ -23,10 +23,10 @@ namespace Service
         // Kiểm tra xem Mặt hàng đã tồn tại trong danh sách Đơn xuất chưa
         public string MatHangTonTai(MatHang mathang)
         {
-            DonXuat[] DSdonxuat = DocDanhSach("");
-            for (int i = 0; i < DSdonxuat.Length; i++)
+            List<DonXuat> DSdonxuat = DocDanhSach("");
+            for (int i = 0; i < DSdonxuat.Count; i++)
             {
-                for (int k = 0; k < DSdonxuat[i].Kho.Length; k++)
+                for (int k = 0; k < DSdonxuat[i].Kho.Count; k++)
                 {
                     if (mathang.Ten == DSdonxuat[i].Kho[k].TenMatHang)
                     {
@@ -39,7 +39,7 @@ namespace Service
         }
 
         // Thêm Đơn xuất mới
-        public string Them(string sMaSo, string sNgay, Kho[] DSkho, ref DonXuat donxuat)
+        public string Them(string sMaSo, string sNgay, List<Kho> DSkho, ref DonXuat donxuat)
         {
             donxuat.MaSo = sMaSo;
             int MaSoMaxLength = 10;
@@ -70,7 +70,7 @@ namespace Service
         // Sửa thông tin Đơn xuất
         public string Sua(string sMaSo, string sNgay, ref DonXuat donxuatOld)
         {
-            DonXuat donxuat = new DonXuat(sMaSo, default, new Kho[0]);
+            DonXuat donxuat = new DonXuat(sMaSo, default, new List<Kho>());
             int MaSoMaxLength = 10;
 
             if (donxuat.MaSo.Length == 0 || donxuat.MaSo.Length > MaSoMaxLength)

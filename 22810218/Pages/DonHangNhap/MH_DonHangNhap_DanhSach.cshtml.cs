@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Service;
 using Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Pages
 {
     public class MH_DonHangNhap_DanhSachModel : PageModel
     {
         public XL_DonNhap XlDonNhap { get; } = new XL_DonNhap();
-        public DonNhap[]? ImportList { get; private set; }
+        public List<DonNhap>? ImportList { get; private set; }
         public int PageIndex { get; private set; }
         public int PageTotal { get; private set; }
         public int NoStart { get; private set; }
@@ -23,15 +25,15 @@ namespace Pages
             string sKeyword = Request.Query["search"];
             int.TryParse(Request.Query["page"], out pageIndex);
 
-            ImportList = XlDonNhap.DocDanhSach(sKeyword);
-            PageTotal = ImportList.Length > 0 ? ((int)ImportList.Length - 1) / itemPerPage + 1 : 1;
+            ImportList = XlDonNhap.DocDanhSach(sKeyword).ToList();
+            PageTotal = ImportList.Count > 0 ? ((int)ImportList.Count - 1) / itemPerPage + 1 : 1;
             PageIndex = pageIndex == 0 || pageIndex > PageTotal ? 1 : pageIndex;
             NoStart = (PageIndex - 1) * itemPerPage + 1;
             NoEnd = NoStart + itemPerPage - 1;
-            NoTotal = (int)ImportList.Length;
+            NoTotal = ImportList.Count;
             if (PageIndex == PageTotal)
             {
-                NoEnd = NoStart + ((int)ImportList.Length - 1) % itemPerPage;
+                NoEnd = NoStart + ((int)ImportList.Count - 1) % itemPerPage;
             }
             SearchKeyword = sKeyword;
         }

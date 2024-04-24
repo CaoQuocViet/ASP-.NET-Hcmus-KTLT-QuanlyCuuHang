@@ -10,7 +10,7 @@ namespace Service
 {
     public interface IService<T>
     {
-        T[] DocDanhSach(string sKeyword);
-        T? ReadInfo(string maSo);
+        List<T> DocDanhSach(string sKeyword);
+        T ReadInfo(string maSo);
     }
 }

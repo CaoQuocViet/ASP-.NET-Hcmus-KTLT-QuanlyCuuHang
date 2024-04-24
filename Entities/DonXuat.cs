@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using System;
+using System.Collections.Generic;
 
 namespace Entities
 {
@@ -6,9 +8,9 @@ namespace Entities
     {
         public string MaSo { get; set; }
         public DateOnly Ngay { get; set; }
-        public Kho[] Kho { get; set; }
+        public List<Kho> Kho { get; set; }
 
-        public DonXuat(string maSo, DateOnly ngay, Kho[] kho)
+        public DonXuat(string maSo, DateOnly ngay, List<Kho> kho)
         {
             MaSo = maSo;
             Ngay = ngay;

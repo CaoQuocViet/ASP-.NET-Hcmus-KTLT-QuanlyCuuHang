@@ -8,67 +8,39 @@ namespace Repo
         private const string _donnhapFile = "Data/DonNhap.json";
 
         // Đọc danh sách đơn nhập từ file và tìm kiếm theo từ khóa
-        public DonNhap[] DocDanhSach(string sKeyword)
+        public List<DonNhap> DocDanhSach(string sKeyword)
         {
-            StreamReader reader = new StreamReader(_donnhapFile);
-            int count = 0;
-            while (null != reader.ReadLine())
+            List<DonNhap> DSdonnhap = new List<DonNhap>();
+            using (StreamReader reader = new StreamReader(_donnhapFile))
             {
-                count++;
-            }
-            reader.Close();
-
-            DonNhap[] DSdonnhap = new DonNhap[count];
-            reader = new StreamReader(_donnhapFile);
-            for (int i = 0; i < DSdonnhap.Length; i++)
-            {
-                string? sData = reader.ReadLine();
-                if (null != sData)
+                string sData;
+                while ((sData = reader.ReadLine()) != null)
                 {
-                    DSdonnhap[i] = JsonConvert.DeserializeObject<DonNhap>(sData);
+                    DSdonnhap.Add(JsonConvert.DeserializeObject<DonNhap>(sData)!);
                 }
             }
-            reader.Close();
 
             if (string.IsNullOrEmpty(sKeyword))
             {
                 return DSdonnhap;
             }
-            
-            count = 0;
-            for (int i = 0; i < DSdonnhap.Length; i++)
-            {
-                if (DSdonnhap[i].MaSo.Contains(sKeyword))
-                {
-                    count++;
-                }
-            }
 
-            DonNhap[] searchList = new DonNhap[count];
-            count = 0;
-            for (int i = 0; i < DSdonnhap.Length; i++)
-            {
-                if (DSdonnhap[i].MaSo.Contains(sKeyword))
-                {
-                    searchList[count++] = DSdonnhap[i];
-                }
-            }
-
+            List<DonNhap> searchList = DSdonnhap.FindAll(d => d.MaSo.Contains(sKeyword));
             return searchList;
         }
 
         // Cập nhật danh sách đơn nhập với thông tin mặt hàng mới
         public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
         {
-            DonNhap[] DSdonnhap = DocDanhSach("");
+            List<DonNhap> DSdonnhap = DocDanhSach("");
 
-            for (int i = 0; i < DSdonnhap.Length; i++)
+            foreach (DonNhap donnhap in DSdonnhap)
             {
-                for (int k = 0; k < DSdonnhap[i].Kho.Length; k++)
+                foreach (Kho kho in donnhap.Kho)
                 {
-                    if (mathangOld.Ten == DSdonnhap[i].Kho[k].TenMatHang)
+                    if (mathangOld.Ten == kho.TenMatHang)
                     {
-                        DSdonnhap[i].Kho[k].TenMatHang = mathangNew.Ten;
+                        kho.TenMatHang = mathangNew.Ten;
                     }
                 }
             }
@@ -77,23 +49,24 @@ namespace Repo
         }
 
         // Lưu danh sách đơn nhập vào file
-        public void LuuDanhSach(DonNhap[] DSdonnhap)
+        public void LuuDanhSach(List<DonNhap> DSdonnhap)
         {
-            StreamWriter writer = new StreamWriter(_donnhapFile);
-            foreach (DonNhap donnhap in DSdonnhap)
+            using (StreamWriter writer = new StreamWriter(_donnhapFile))
             {
-                string sData = JsonConvert.SerializeObject(donnhap);
-                writer.WriteLine(sData);
+                foreach (DonNhap donnhap in DSdonnhap)
+                {
+                    string sData = JsonConvert.SerializeObject(donnhap);
+                    writer.WriteLine(sData);
+                }
             }
-            writer.Close();
         }
 
         // Thêm đơn nhập mới vào danh sách
         public string Them(DonNhap donnhap)
         {
-            DonNhap[] DSdonnhap = DocDanhSach("");
+            List<DonNhap> DSdonnhap = DocDanhSach("");
 
-            for (int i = 0; i < DSdonnhap.Length; i++)
+            for (int i = 0; i < DSdonnhap.Count; i++)
             {
                 if (DSdonnhap[i].MaSo == donnhap.MaSo)
                 {
@@ -101,15 +74,9 @@ namespace Repo
                 }
             }
 
-            DonNhap[] DSdonnhapNew = new DonNhap[DSdonnhap.Length + 1];
-            DSdonnhapNew[0] = donnhap;
+            DSdonnhap.Insert(0, donnhap);
 
-            for (int i = 0; i < DSdonnhap.Length; i++)
-            {
-                DSdonnhapNew[i + 1] = DSdonnhap[i];
-            }
-
-            LuuDanhSach(DSdonnhapNew);
+            LuuDanhSach(DSdonnhap);
 
             return string.Empty;
         }
@@ -117,10 +84,10 @@ namespace Repo
         // Sửa thông tin đơn nhập trong danh sách
         public string Sua(DonNhap donnhapOld, DonNhap donnhapNew)
         {
-            DonNhap[] DSdonnhap = DocDanhSach("");
+            List<DonNhap> DSdonnhap = DocDanhSach("");
 
             bool IsExist = false;
-            for (int i = 0; i < DSdonnhap.Length; i++)
+            for (int i = 0; i < DSdonnhap.Count; i++)
             {
                 if (DSdonnhap[i].MaSo == donnhapOld.MaSo)
                 {
@@ -133,7 +100,7 @@ namespace Repo
                 return "Đơn nhập không tồn tại";
             }
 
-            for (int i = 0; i < DSdonnhap.Length; i++)
+            for (int i = 0; i < DSdonnhap.Count; i++)
             {
                 if (DSdonnhap[i].MaSo == donnhapOld.MaSo)
                 {
@@ -151,10 +118,10 @@ namespace Repo
         // Xóa đơn nhập khỏi danh sách
         public string Xoa(DonNhap donnhap)
         {
-            DonNhap[] DSdonnhap = DocDanhSach("");
+            List<DonNhap> DSdonnhap = DocDanhSach("");
 
             bool IsExist = false;
-            for (int i = 0; i < DSdonnhap.Length; i++)
+            for (int i = 0; i < DSdonnhap.Count; i++)
             {
                 if (DSdonnhap[i].MaSo == donnhap.MaSo)
                 {
@@ -167,18 +134,9 @@ namespace Repo
                 return "Đơn nhập không tồn tại";
             }
 
-            DonNhap[] DSdonnhapNew = new DonNhap[DSdonnhap.Length - 1];
-            int count = 0;
-            for (int i = 0; i < DSdonnhap.Length; i++)
-            {
-                if (DSdonnhap[i].MaSo != donnhap.MaSo)
-                {
-                    DSdonnhapNew[count] = DSdonnhap[i];
-                    count++;
-                }
-            }
+            DSdonnhap.RemoveAll(d => d.MaSo == donnhap.MaSo);
 
-            LuuDanhSach(DSdonnhapNew);
+            LuuDanhSach(DSdonnhap);
 
             return string.Empty;
         }
@@ -186,7 +144,7 @@ namespace Repo
         // Đọc thông tin đơn nhập dựa trên mã số
         public DonNhap? ReadInfo(string donnhapMaSo)
         {
-            DonNhap[] DSdonnhap = DocDanhSach("");
+            List<DonNhap> DSdonnhap = DocDanhSach("");
 
             foreach (DonNhap donnhap in DSdonnhap)
             {

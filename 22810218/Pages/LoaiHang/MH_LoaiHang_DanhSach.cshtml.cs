@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Entities;
 using Service;
+using System.Collections.Generic;
 
 namespace Pages
 {
@@ -14,7 +15,7 @@ namespace Pages
         public int NoEnd { get; private set; } = 1;
         public int NoTotal { get; private set; } = 1;
         public string SKeyword { get; private set; } = string.Empty;
-        public LoaiHang[]? DSLoaihang { get; private set; }
+        public List<LoaiHang>? DSLoaihang { get; private set; }
 
         public void OnGet()
         {
@@ -26,9 +27,9 @@ namespace Pages
             XL_LoaiHang xlLoaiHang = new XL_LoaiHang();
             DSLoaihang = xlLoaiHang.DocDanhSach(SKeyword);
 
-            if (DSLoaihang.Length > 0)
+            if (DSLoaihang.Count > 0)
             {
-                PageTotal = ((int)DSLoaihang.Length - 1) / ItemPerPage + 1;
+                PageTotal = ((int)DSLoaihang.Count - 1) / ItemPerPage + 1;
 
                 if (PageIndex == 0 || PageIndex > PageTotal)
                 {
@@ -37,10 +38,10 @@ namespace Pages
 
                 NoStart = (PageIndex - 1) * ItemPerPage + 1;
                 NoEnd = NoStart + ItemPerPage - 1;
-                NoTotal = (int)DSLoaihang.Length;
+                NoTotal = (int)DSLoaihang.Count;
                 if (PageIndex == PageTotal)
                 {
-                    NoEnd = NoStart + ((int)DSLoaihang.Length - 1) % ItemPerPage;
+                    NoEnd = NoStart + ((int)DSLoaihang.Count - 1) % ItemPerPage;
                 }
             }
         }

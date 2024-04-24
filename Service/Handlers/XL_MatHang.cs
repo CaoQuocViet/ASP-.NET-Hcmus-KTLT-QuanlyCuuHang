@@ -1,5 +1,6 @@
 ﻿using Repo;
 using Entities;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -9,7 +10,7 @@ namespace Service
         private const int _maSoMaxLength = 30;
 
         // Hàm để đọc danh sách mặt hàng dựa trên từ khóa
-        public MatHang[] DocDanhSach(string sKeyword)
+        public List<MatHang> DocDanhSach(string sKeyword)
         {
             return _luuTruMatHang.DocDanhSach(sKeyword);  
         }
@@ -66,9 +67,9 @@ namespace Service
 
             // Kiểm tra loại hàng có tồn tại hay không
             XL_LoaiHang xlLoaiHang = new XL_LoaiHang(); 
-            LoaiHang[] DSloaihang = xlLoaiHang.DocDanhSach(""); 
+            List<LoaiHang> DSloaihang = xlLoaiHang.DocDanhSach(""); 
             bool isValid = false;
-            for (int i = 0; i < DSloaihang.Length; i++)
+            for (int i = 0; i < DSloaihang.Count; i++)
             {
                 if (mathang.LoaiHang == DSloaihang[i].Ten)
                 {

@@ -9,7 +9,7 @@ namespace Repo
 {
     public interface ILT_Kho
     {
-        Kho[] DocDanhSach(string sKeyword);
+        List<Kho> DocDanhSach(string sKeyword);
         void CapNhatDS(MatHang mathangOld, MatHang mathangNew);
         void DonNhap(DonNhap donnhap);
         void DonXuat(DonXuat donxuat);

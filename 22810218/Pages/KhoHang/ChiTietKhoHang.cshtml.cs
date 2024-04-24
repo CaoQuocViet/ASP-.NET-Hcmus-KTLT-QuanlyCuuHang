@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Entities;
 using Service;
+using System.Collections.Generic;
 
 namespace Pages
 {
     public class ChiTietKhoHangModel : PageModel
     {
-        public Kho[]? DSkho { get; set; }
+        public List<Kho>? DSkho { get; set; }
         public string? sKeyword { get; set; }
         public int pageIndex { get; set; }
         public int pageTotal { get; set; }
@@ -29,9 +30,9 @@ namespace Pages
             XL_Kho kho = new XL_Kho();
             DSkho = kho.DocDanhSach(sKeyword, Filter);
 
-            if (DSkho.Length > 0)
+            if (DSkho.Count > 0)
             {
-                pageTotal = ((int)DSkho.Length - 1) / itemPerPage + 1;
+                pageTotal = (DSkho.Count - 1) / itemPerPage + 1;
 
                 if (pageIndex == 0 || pageIndex > pageTotal)
                 {
@@ -40,10 +41,10 @@ namespace Pages
 
                 noStart = (pageIndex - 1) * itemPerPage + 1;
                 noEnd = noStart + itemPerPage - 1;
-                noTotal = (int)DSkho.Length;
+                noTotal = DSkho.Count;
                 if (pageIndex == pageTotal)
                 {
-                    noEnd = noStart + ((int)DSkho.Length - 1) % itemPerPage;
+                    noEnd = noStart + (DSkho.Count - 1) % itemPerPage;
                 }
             }
         }

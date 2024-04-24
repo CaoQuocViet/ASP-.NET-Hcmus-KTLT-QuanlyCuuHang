@@ -31,7 +31,7 @@
             </thead>
 
             <tbody>
-                @if (Model.DSLoaihang != null && Model.DSLoaihang.Length > 0)
+                @if (Model.DSLoaihang != null && Model.DSLoaihang.Count > 0)
                 {
                     int j = Model.NoStart - 1;
                     for (int i = Model.NoStart; i <= Model.NoEnd; i++)
@@ -57,9 +57,8 @@
             </tbody>
         </table>
     </div>
-
    <div class="row table_pagination">
-        @if (Model.DSLoaihang != null && Model.DSLoaihang.Length > 0)
+        @if (Model.DSLoaihang != null && Model.DSLoaihang.Count > 0)
         {
             <div class="col-9">
                 <nav aria-label="Page navigation">

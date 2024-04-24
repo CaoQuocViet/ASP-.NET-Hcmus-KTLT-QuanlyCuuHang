@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Entities;
 using Service;
+using System.Collections.Generic;
 
 namespace Pages
 {
     public class MH_ThongKe_HetHanModel : PageModel
     {
-        public Kho[]? DSkho { get; private set; }
+        public List<Kho>? DSkho { get; private set; }
         public int PageIndex { get; private set; }
         public int PageTotal { get; private set; }
         public int NoStart { get; private set; }
@@ -43,9 +44,9 @@ namespace Pages
             XL_Kho kho = new XL_Kho();
             DSkho = kho.DocDanhSach(SKeyword, Filter);
 
-            if (DSkho.Length > 0)
+            if (DSkho.Count > 0)
             {
-                PageTotal = ((int)DSkho.Length - 1) / itemPerPage + 1;
+                PageTotal = (DSkho.Count - 1) / itemPerPage + 1;
 
                 if (PageIndex == 0 || PageIndex > PageTotal)
                 {
@@ -54,10 +55,10 @@ namespace Pages
 
                 NoStart = (PageIndex - 1) * itemPerPage + 1;
                 NoEnd = NoStart + itemPerPage - 1;
-                NoTotal = (int)DSkho.Length;
+                NoTotal = DSkho.Count;
                 if (PageIndex == PageTotal)
                 {
-                    NoEnd = NoStart + ((int)DSkho.Length - 1) % itemPerPage;
+                    NoEnd = NoStart + (DSkho.Count - 1) % itemPerPage;
                 }
             }
         }

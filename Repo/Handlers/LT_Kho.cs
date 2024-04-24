@@ -3,116 +3,80 @@ using Newtonsoft.Json;
 
 namespace Repo
 {
-    public class LT_Kho : ILT_Kho
+    using Entities;
+    using Newtonsoft.Json;
+    using System.Collections.Generic;
+    using System.IO;
+
+    namespace Repo
     {
-        private const string _khoFile = "Data/Kho.json";
-
-        // Đọc danh sách các mặt hàng trong kho
-        public Kho[] DocDanhSach(string sKeyword)
+        public class LT_Kho : ILT_Kho
         {
-            StreamReader reader = new StreamReader(_khoFile);
-            int count = 0;
-            while (null != reader.ReadLine())
-            {
-                count++;
-            }
-            reader.Close();
+            private const string _khoFile = "Data/Kho.json";
 
-            Kho[] DSkho = new Kho[count];
-            reader = new StreamReader(_khoFile);
-            for (int i = 0; i < DSkho.Length; i++)
+            // Đọc danh sách các mặt hàng trong kho
+            public List<Kho> DocDanhSach(string sKeyword)
             {
-                string? sData = reader.ReadLine();
-                if (null != sData)
+                List<Kho> DSkho = new List<Kho>();
+                using (StreamReader reader = new StreamReader(_khoFile))
                 {
-                    DSkho[i] = JsonConvert.DeserializeObject<Kho>(sData);
-                }
-            }
-            reader.Close();
-
-            if (string.IsNullOrEmpty(sKeyword))
-            {
-                return DSkho;
-            }
-
-            count = 0;
-            for (int i = 0; i < DSkho.Length; i++)
-            {
-                if (DSkho[i]?.TenMatHang?.Contains(sKeyword) == true)
-                {
-                    count++;
-                }
-            }
-
-            Kho[] searchList = new Kho[count];
-            count = 0;
-            for (int i = 0; i < DSkho.Length; i++)
-            {
-                if (DSkho[i]?.TenMatHang?.Contains(sKeyword) == true)
-                {
-                    searchList[count++] = DSkho[i];
-                }
-            }
-
-            return searchList;
-        }
-
-        // Cập nhật danh sách mặt hàng trong kho
-        public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
-        {
-            Kho[] DSkho = DocDanhSach("");
-
-            for (int i = 0; i < DSkho.Length; i++)
-            {
-                if (mathangOld.Ten == DSkho[i].TenMatHang)
-                {
-                    DSkho[i].TenMatHang = mathangNew.Ten;
-                }
-            }
-
-            LuuDanhSach(DSkho);
-        }
-
-        // Thêm đơn nhập vào kho
-        public void DonNhap(DonNhap donnhap)
-        {
-            Kho[] DSkho = DocDanhSach("");
-
-            bool isExist = false;
-            int count = 0;
-            for (int i = 0; i < donnhap.Kho.Length; i++)
-            {
-                for (int k = 0; k < DSkho.Length; k++)
-                {
-                    if (donnhap.Kho[i].TenMatHang == DSkho[k].TenMatHang &&
-                        donnhap.Kho[i].NgaySanXuat == DSkho[k].NgaySanXuat &&
-                        donnhap.Kho[i].HanDung == DSkho[k].HanDung)
+                    string sData;
+                    while ((sData = reader.ReadLine()) != null)
                     {
-                        DSkho[k].SoLuong += donnhap.Kho[i].SoLuong;
-                        isExist = true;
-                        break;
+                        Kho kho = JsonConvert.DeserializeObject<Kho>(sData);
+                        DSkho.Add(kho);
                     }
                 }
 
-                if (!isExist)
+                if (string.IsNullOrEmpty(sKeyword))
                 {
-                    count++;
+                    return DSkho;
                 }
 
-                isExist = false;
+                List<Kho> searchList = new List<Kho>();
+                foreach (Kho kho in DSkho)
+                {
+                    if (kho.TenMatHang?.Contains(sKeyword) == true)
+                    {
+                        searchList.Add(kho);
+                    }
+                }
+
+                return searchList;
             }
 
-            if (count > 0)
+            // Cập nhật danh sách mặt hàng trong kho
+            public void CapNhatDS(MatHang mathangOld, MatHang mathangNew)
             {
-                Kho[] DSkhoNew = new Kho[DSkho.Length + count];
-                for (int i = 0; i < count; i++)
+                List<Kho> DSkho = DocDanhSach("");
+
+                for (int i = 0; i < DSkho.Count; i++)
                 {
-                    for (int k = 0; k < DSkho.Length; k++)
+                    if (mathangOld.Ten == DSkho[i].TenMatHang)
                     {
-                        if (donnhap.Kho[i].TenMatHang == DSkho[k].TenMatHang &&
-                            donnhap.Kho[i].NgaySanXuat == DSkho[k].NgaySanXuat &&
-                            donnhap.Kho[i].HanDung == DSkho[k].HanDung)
+                        DSkho[i].TenMatHang = mathangNew.Ten;
+                    }
+                }
+
+                LuuDanhSach(DSkho);
+            }
+
+            // Thêm đơn nhập vào kho
+            public void DonNhap(DonNhap donnhap)
+            {
+                List<Kho> DSkho = DocDanhSach("");
+
+                bool isExist = false;
+                int count = 0;
+                foreach (Kho kho in donnhap.Kho)
+                {
+                    foreach (Kho existingKho in DSkho)
+                    {
+                        if (kho.TenMatHang == existingKho.TenMatHang &&
+                            kho.NgaySanXuat == existingKho.NgaySanXuat &&
+                            kho.HanDung == existingKho.HanDung)
                         {
+                            existingKho.SoLuong += kho.SoLuong;
                             isExist = true;
                             break;
                         }
@@ -120,80 +84,85 @@ namespace Repo
 
                     if (!isExist)
                     {
-                        DSkhoNew[i] = donnhap.Kho[i];
+                        count++;
                     }
 
                     isExist = false;
                 }
 
-                for (int i = 0; i < DSkho.Length; i++)
+                if (count > 0)
                 {
-                    DSkhoNew[i + count] = DSkho[i];
-                }
-
-                DSkho = DSkhoNew;
-            }
-
-            LuuDanhSach(DSkho);
-        }
-
-        // Thêm đơn xuất khỏi kho
-        public void DonXuat(DonXuat donxuat)
-        {
-            Kho[] DSkho = DocDanhSach("");
-
-            for (int i = 0; i < donxuat.Kho.Length; i++)
-            {
-                for (int k = 0; k < DSkho.Length; k++)
-                {
-                    if (donxuat.Kho[i].TenMatHang == DSkho[k].TenMatHang &&
-                        donxuat.Kho[i].NgaySanXuat == DSkho[k].NgaySanXuat &&
-                        donxuat.Kho[i].HanDung == DSkho[k].HanDung)
+                    List<Kho> DSkhoNew = new List<Kho>(DSkho);
+                    for (int i = 0; i < count; i++)
                     {
-                        DSkho[k].SoLuong -= donxuat.Kho[i].SoLuong;
-                        break;
+                        foreach (Kho kho in DSkho)
+                        {
+                            if (donnhap.Kho[i].TenMatHang == kho.TenMatHang &&
+                                donnhap.Kho[i].NgaySanXuat == kho.NgaySanXuat &&
+                                donnhap.Kho[i].HanDung == kho.HanDung)
+                            {
+                                isExist = true;
+                                break;
+                            }
+                        }
+
+                        if (!isExist)
+                        {
+                            DSkhoNew.Add(donnhap.Kho[i]);
+                        }
+
+                        isExist = false;
                     }
+
+                    DSkho = DSkhoNew;
                 }
+
+                LuuDanhSach(DSkho);
             }
 
-            int count = 0;
-            for (int i = 0; i < DSkho.Length; i++)
+            // Thêm đơn xuất khỏi kho
+            public void DonXuat(DonXuat donxuat)
             {
-                if (DSkho[i].SoLuong != 0)
-                {
-                    count++;
-                }
-            }
+                List<Kho> DSkho = DocDanhSach("");
 
-            if (count > 0)
-            {
-                Kho[] DSkhoNew = new Kho[count];
-                count = 0;
-                for (int i = 0; i < DSkho.Length; i++)
+                foreach (Kho kho in donxuat.Kho)
                 {
-                    if (DSkho[i].SoLuong != 0)
+                    foreach (Kho existingKho in DSkho)
                     {
-                        DSkhoNew[count] = DSkho[i];
-                        count++;
+                        if (kho.TenMatHang == existingKho.TenMatHang &&
+                            kho.NgaySanXuat == existingKho.NgaySanXuat &&
+                            kho.HanDung == existingKho.HanDung)
+                        {
+                            existingKho.SoLuong -= kho.SoLuong;
+                            break;
+                        }
                     }
                 }
 
-                DSkho = DSkhoNew;
+                List<Kho> DSkhoNew = new List<Kho>();
+                foreach (Kho kho in DSkho)
+                {
+                    if (kho.SoLuong != 0)
+                    {
+                        DSkhoNew.Add(kho);
+                    }
+                }
+
+                LuuDanhSach(DSkhoNew);
             }
 
-            LuuDanhSach(DSkho);
-        }
-
-        // Lưu danh sách mặt hàng trong kho vào file
-        public void LuuDanhSach(Kho[] DSkho)
-        {
-            StreamWriter writer = new StreamWriter(_khoFile);
-            foreach (Kho kho in DSkho)
+            // Lưu danh sách mặt hàng trong kho vào file
+            public void LuuDanhSach(List<Kho> DSkho)
             {
-                string sData = JsonConvert.SerializeObject(kho);
-                writer.WriteLine(sData);
+                using (StreamWriter writer = new StreamWriter(_khoFile))
+                {
+                    foreach (Kho kho in DSkho)
+                    {
+                        string sData = JsonConvert.SerializeObject(kho);
+                        writer.WriteLine(sData);
+                    }
+                }
             }
-            writer.Close();
         }
     }
 }

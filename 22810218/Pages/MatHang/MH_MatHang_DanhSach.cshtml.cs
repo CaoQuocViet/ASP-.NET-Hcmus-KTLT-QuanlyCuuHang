@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Entities;
 using Service;
+using System.Collections.Generic;
 
 namespace Pages
 {
     public class MH_MatHang_DanhSachModel : PageModel
     {
-        public MatHang[]? DSMatHang { get; private set; }
+        public List<MatHang>? DSMatHang { get; private set; }
         public int PageIndex { get; private set; }
         public int PageTotal { get; private set; }
         public int NoStart { get; private set; }
@@ -28,19 +29,19 @@ namespace Pages
             XL_MatHang xlMatHang = new XL_MatHang();
             DSMatHang = xlMatHang.DocDanhSach(SKeyword);
 
-            if (DSMatHang.Length > 0)
+            if (DSMatHang.Count > 0)
             {
-                PageTotal = ((int)DSMatHang.Length - 1) / itemPerPage + 1;
+                PageTotal = (DSMatHang.Count - 1) / itemPerPage + 1;
                 if (PageIndex == 0 || PageIndex > PageTotal)
                 {
                     PageIndex = 1;
                 }
                 NoStart = (PageIndex - 1) * itemPerPage + 1;
                 NoEnd = NoStart + itemPerPage - 1;
-                NoTotal = (int)DSMatHang.Length;
+                NoTotal = DSMatHang.Count;
                 if (PageIndex == PageTotal)
                 {
-                    NoEnd = NoStart + ((int)DSMatHang.Length - 1) % itemPerPage;
+                    NoEnd = NoStart + (DSMatHang.Count - 1) % itemPerPage;
                 }
             }
         }

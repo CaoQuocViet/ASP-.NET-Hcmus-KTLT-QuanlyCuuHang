@@ -3,15 +3,16 @@ using Entities;
 using Newtonsoft.Json;
 using System;
 using System.Net.NetworkInformation;
+using System.Collections.Generic;
 
 namespace Service
 {
     public class XL_DonNhap : IXL_DonNhap
     {
-        private ILT_DonNhap _luuTruDonNhap = new LT_DonNhap();
+        private readonly ILT_DonNhap _luuTruDonNhap = new LT_DonNhap();
 
         // Hàm để đọc danh sách Đơn nhập dựa trên từ khóa tìm kiếm
-        public DonNhap[] DocDanhSach(string sKeyword)
+        public List<DonNhap> DocDanhSach(string sKeyword)
         {
             return _luuTruDonNhap.DocDanhSach(sKeyword);
         }
@@ -25,10 +26,10 @@ namespace Service
         // Hàm để kiểm tra xem Mặt hàng đã tồn tại trong Đơn nhập hay chưa
         public string MatHangTonTai(MatHang mathang)
         {
-            DonNhap[] DSdonnhap = DocDanhSach("");
-            for (int i = 0; i < DSdonnhap.Length; i++)
+            List<DonNhap> DSdonnhap = DocDanhSach("");
+            for (int i = 0; i < DSdonnhap.Count; i++)
             {
-                for (int k = 0; k < DSdonnhap[i].Kho.Length; k++)
+                for (int k = 0; k < DSdonnhap[i].Kho.Count; k++)
                 {
                     if (mathang.Ten == DSdonnhap[i].Kho[k].TenMatHang)
                     {
@@ -41,7 +42,7 @@ namespace Service
         }
 
         // Hàm để thêm Đơn nhập mới
-        public string Them(string sMaSo, string sNgay, Kho[] DSkho, ref DonNhap donnhap)
+        public string Them(string sMaSo, string sNgay, List<Kho> DSkho, ref DonNhap donnhap)
         {
             donnhap.MaSo = sMaSo;
             int MaSoMaxLength = 10;
@@ -63,7 +64,7 @@ namespace Service
             string sInfo = _luuTruDonNhap.Them(donnhap);
             if (string.IsNullOrEmpty(sInfo))
             {
-                XL_Kho kho = new XL_Kho();
+                XL_Kho kho = new();
                 kho.DonNhap(donnhap);
             }
 
@@ -73,7 +74,7 @@ namespace Service
         // Hàm để sửa thông tin Đơn nhập
         public string Sua(string sMaSo, string sNgay, ref DonNhap donnhapOld)
         {
-            DonNhap donnhap = new DonNhap();
+            DonNhap donnhap = new();
             int MaSoMaxLength = 10;
             donnhap.MaSo = sMaSo;
 

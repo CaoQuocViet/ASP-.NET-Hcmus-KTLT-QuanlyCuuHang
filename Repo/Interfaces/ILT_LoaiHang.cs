@@ -9,7 +9,7 @@ namespace Repo
 {
     public interface ILT_LoaiHang : IRepository<LoaiHang>
     {
-        public void LuuDanhSach(LoaiHang[] DSloaihang);
+        public void LuuDanhSach(List<LoaiHang> DSloaihang);
         // LoaiHang[] DocDanhSach(string sKeyword);
         // void LuuDanhSach(LoaiHang[] DSloaihang);
         // string Them(LoaiHang loaihang);

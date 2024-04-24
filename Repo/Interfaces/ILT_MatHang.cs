@@ -9,7 +9,7 @@ namespace Repo
 {
     public interface ILT_MatHang : IRepository<MatHang>
     {
-        public void LuuDanhSach(MatHang[] DSmathang);
+        public void LuuDanhSach(List<MatHang> DSmathang);
         public void CapNhatLoaiHang(LoaiHang loaihangOld, LoaiHang loaihangNew);
         // MatHang[] DocDanhSach(string sKeyword);
         // void LuuDanhSach(MatHang[] DSmathang);

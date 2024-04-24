@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Entities;
 using Service;
+using System.Collections.Generic;
 
 namespace Pages
 {
@@ -10,7 +11,7 @@ namespace Pages
         public string? sInfoDonXuat { get; set; }
         public DonXuat? donxuat { get; set; }
         public Kho? kho { get; set; }
-        public Kho[]? DSkho { get; set; }
+        public List<Kho>? DSkho { get; set; }
         public string? sKhoList { get; set; }
         public int formId { get; set; }
 
@@ -19,9 +20,9 @@ namespace Pages
             ViewData["Title"] = "Quản lý cửa hàng";
             sInfoKho = string.Empty;
             sInfoDonXuat = string.Empty;
-            donxuat = new DonXuat("", new DateOnly(), new Kho[0]);
+            donxuat = new DonXuat("", new DateOnly(), new List<Kho>());
             kho = new Kho();
-            DSkho = new Kho[0];
+            DSkho = new List<Kho>();
             sKhoList = string.Empty;
             formId = 0;
 
@@ -29,7 +30,7 @@ namespace Pages
             {
                 sKhoList = Request.Form["khos"];
                 XL_Kho xl_Kho = new XL_Kho();
-                Kho[] tempDSkho = DSkho;
+                List<Kho> tempDSkho = DSkho;
                 xl_Kho.KiemTraHangHoaTonTai(sKhoList, ref tempDSkho);
                 DSkho = tempDSkho;
 
@@ -48,9 +49,9 @@ namespace Pages
 
                         if (string.IsNullOrEmpty(sInfoDonXuat))
                         {
-                            donxuat = new DonXuat("", new DateOnly(), new Kho[0]);
+                            donxuat = new DonXuat("", new DateOnly(), new List<Kho>());
                             kho = new Kho();
-                            DSkho = new Kho[0];
+                            DSkho = new List<Kho>();
                             sKhoList = string.Empty;
                         }
                     }
@@ -65,7 +66,7 @@ namespace Pages
                         kho = tempKho;
                         if (string.IsNullOrEmpty(sInfoKho))
                         {
-                            Kho[] TempDSkho = DSkho;
+                            List<Kho> TempDSkho = DSkho;
                             sInfoKho = xl_Kho.ThemVaoDS(kho, ref TempDSkho);
                             DSkho = TempDSkho;
                             if (string.IsNullOrEmpty(sInfoKho))
@@ -76,7 +77,7 @@ namespace Pages
                         }
                     }
                 }
-                Kho[] xlDSKho = DSkho;
+                List<Kho> xlDSKho = DSkho;
                 xl_Kho.KiemTraHangHoaTonTai(sKhoList, ref xlDSKho);
                 DSkho = xlDSKho;
             }

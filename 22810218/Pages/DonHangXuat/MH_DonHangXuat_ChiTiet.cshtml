@@ -38,10 +38,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model.DonXuat.Kho.Length > 0)
+                    @if (Model.DonXuat.Kho.Count > 0)
                     {
                         int i = 1;
-                        for (int j = 0; j < Model.DonXuat.Kho.Length; j++)
+                        for (int j = 0; j < Model.DonXuat.Kho.Count; j++)
                         {
                             <tr>
                                 <td>@i</td>

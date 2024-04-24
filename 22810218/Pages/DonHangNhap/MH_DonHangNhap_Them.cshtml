@@ -84,10 +84,10 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model.DSkho != null && Model.DSkho.Length > 0)
+                @if (Model.DSkho != null && Model.DSkho.Count > 0)
                 {
                     int j = 1;
-                    for (int i = 0; i < Model.DSkho.Length; i++)
+                    for (int i = 0; i < Model.DSkho.Count; i++)
                     {
                         <tr>
                             <td>@j</td>

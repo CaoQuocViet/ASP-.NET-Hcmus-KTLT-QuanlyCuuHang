@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Entities;
 using Service;
+using System.Collections.Generic;
 
 namespace Pages
 {
@@ -10,7 +11,7 @@ namespace Pages
         public string? sInfoDonNhap { get; set; }
         public DonNhap? import { get; set; }
         public Kho? kho { get; set; }
-        public Kho[]? DSkho { get; set; }
+        public List<Kho>? DSkho { get; set; }
         public string? sKhoList { get; set; }
         public int? formId { get; set; }
 
@@ -21,7 +22,7 @@ namespace Pages
             sInfoDonNhap = string.Empty;
             import = new DonNhap();
             kho = new Kho();
-            DSkho = new Kho[0];
+            DSkho = new List<Kho>();
             sKhoList = string.Empty;
             formId = 0;
         }
@@ -31,7 +32,7 @@ namespace Pages
             sKhoList = Request.Form["khos"];
             XL_Kho xl_Kho = new XL_Kho();
             XL_Kho khoHelper = new XL_Kho();
-            Kho[] tempDSkho = DSkho ?? new Kho[0];
+            List<Kho> tempDSkho = DSkho ?? new List<Kho>();
             khoHelper.KiemTraHangHoaTonTai(sKhoList, ref tempDSkho);
             DSkho = tempDSkho;
 
@@ -52,7 +53,7 @@ namespace Pages
                     {
                         import = new DonNhap();
                         kho = new Kho();
-                        DSkho = new Kho[0];
+                        DSkho = new List<Kho>();
                         sKhoList = string.Empty;
                     }
                 }
@@ -62,14 +63,16 @@ namespace Pages
                     string sSoLuong = Request.Form["quantity"];
                     string sNgaySanXuat = Request.Form["mdate"];
                     string sHanDung = Request.Form["edate"];
-                    Kho tempKho = kho ?? new Kho(); 
+                    Kho tempKho = kho ?? new Kho();
                     if (tempKho != null)
                     {
                         sInfoKho = xl_Kho.XacMinhNhapKho(sTenMatHang, sSoLuong, sNgaySanXuat, sHanDung, ref tempKho);
                     }
                 }
             }
-            Kho[] tempDSkho3 = DSkho;
+            List<Kho> tempDSkho3 = DSkho ?? new List<Kho>();
+            xl_Kho.KiemTraHangHoaTonTai(sKhoList, ref tempDSkho3);
+            DSkho = tempDSkho3;
             xl_Kho.KiemTraHangHoaTonTai(sKhoList, ref tempDSkho3);
             DSkho = tempDSkho3;
         }

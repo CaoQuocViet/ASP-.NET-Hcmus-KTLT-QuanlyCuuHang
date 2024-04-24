@@ -2,12 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Entities;
 using Service;
+using System.Collections.Generic;
 
 namespace Pages
 {
     public class MH_ThongKe_TonKhoModel : PageModel
     {
-        public Kho[]? DSkho { get; private set; }
+        public List<Kho>? DSkho { get; private set; }
         public int PageIndex { get; private set; }
         public int PageTotal { get; private set; }
         public int NoStart { get; private set; }
@@ -19,7 +20,7 @@ namespace Pages
         {
             ViewData["Title"] = "Thống kê Hàng tồn kho";
             const int itemPerPage = 10;
-            int PageIndex = 1; // Declare the PageIndex variable before assigning a value to it
+            int pageIndex = 1; // Declare the pageIndex variable before assigning a value to it
             PageTotal = 1;
             NoStart = 1;
             NoEnd = 1;
@@ -28,7 +29,7 @@ namespace Pages
             int Filter = 1;
 
             string pageValue = Request.Query["page"];
-            int.TryParse(pageValue, out int pageIndex);
+            int.TryParse(pageValue, out pageIndex);
             PageIndex = pageIndex;
 
             SKeyword = Request.Query["search"];
@@ -36,9 +37,9 @@ namespace Pages
             XL_Kho kho = new XL_Kho();
             DSkho = kho.DocDanhSach(SKeyword, Filter);
 
-            if (DSkho.Length > 0)
+            if (DSkho.Count > 0)
             {
-                PageTotal = ((int)DSkho.Length - 1) / itemPerPage + 1;
+                PageTotal = (DSkho.Count - 1) / itemPerPage + 1;
 
                 if (PageIndex == 0 || PageIndex > PageTotal)
                 {
@@ -47,10 +48,10 @@ namespace Pages
 
                 NoStart = (PageIndex - 1) * itemPerPage + 1;
                 NoEnd = NoStart + itemPerPage - 1;
-                NoTotal = (int)DSkho.Length;
+                NoTotal = DSkho.Count;
                 if (PageIndex == PageTotal)
                 {
-                    NoEnd = NoStart + ((int)DSkho.Length - 1) % itemPerPage;
+                    NoEnd = NoStart + (DSkho.Count - 1) % itemPerPage;
                 }
             }
         }

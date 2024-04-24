@@ -33,7 +33,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if (Model.DSMatHang != null && Model.DSMatHang.Length > 0)
+                @if (Model.DSMatHang != null && Model.DSMatHang.Count > 0)
                 {
                     int j = Model.NoStart - 1;
                     for (int i = Model.NoStart; i <= Model.NoEnd; i++)
@@ -63,7 +63,7 @@
         </table>
     </div>
     <div class="row table_pagination">
-        @if (Model.DSMatHang != null && Model.DSMatHang.Length > 0)
+        @if (Model.DSMatHang != null && Model.DSMatHang.Count > 0)
         {
             <div class="col-9">
                 <nav aria-label="Page navigation">

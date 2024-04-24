@@ -1,11 +1,12 @@
 ﻿using Repo;
 using Entities;
+using System.Collections.Generic;
 
 namespace Service
 {
     public class XL_LoaiHang : IXL_LoaiHang
     {
-        private ILT_LoaiHang _luuTruLoaiHang = new LT_LoaiHang();
+        private readonly ILT_LoaiHang _luuTruLoaiHang = new LT_LoaiHang();
         private const int _maSoMaxLength = 30;
         private const int _tenMaxLength = 50;
 
@@ -16,7 +17,7 @@ namespace Service
         }
 
         // Đọc danh sách LoaiHang dựa trên từ khóa tìm kiếm
-        public LoaiHang[] DocDanhSach(string sKeyword)
+        public List<LoaiHang> DocDanhSach(string sKeyword)
         {
             return _luuTruLoaiHang.DocDanhSach(sKeyword);
         }
@@ -33,7 +34,6 @@ namespace Service
                 return "Tên loại hàng không hợp lệ";
             }
 
-            LT_LoaiHang ltLoaiHang = new();
             return _luuTruLoaiHang.Them(loaihang);
         }
 
@@ -45,8 +45,8 @@ namespace Service
             string sInfo = _luuTruLoaiHang.Sua(loaihangOld, loaihang);
             if (string.IsNullOrEmpty(sInfo))
             {
-                XL_MatHang matHang = new XL_MatHang(); 
-                matHang.CapNhatLoaiHang(loaihangOld, loaihang);  
+                XL_MatHang matHang = new XL_MatHang();
+                matHang.CapNhatLoaiHang(loaihangOld, loaihang);
                 loaihangOld = loaihang;
             }
 
@@ -56,22 +56,22 @@ namespace Service
         // Xóa một đối tượng LoaiHang
         public string Xoa(string sMaSo, string sTen)
         {
-            LoaiHang loaihang = new LoaiHang(sMaSo, sTen);  
+            LoaiHang loaihang = new LoaiHang(sMaSo, sTen);
 
             XL_MatHang xlMatHang = new XL_MatHang();
-            MatHang[] DSmathang = xlMatHang.DocDanhSach("");
-            for (int i = 0; i < DSmathang.Length; i++)
+            List<MatHang> DSmathang = xlMatHang.DocDanhSach("");
+            for (int i = 0; i < DSmathang.Count; i++)
             {
                 if (loaihang.Ten == DSmathang[i].LoaiHang)
                 {
-                    XL_DonNhap xlDonNhap = new XL_DonNhap();  
-                    if (string.IsNullOrEmpty(xlDonNhap.MatHangTonTai(DSmathang[i]))) 
+                    XL_DonNhap xlDonNhap = new XL_DonNhap();
+                    if (string.IsNullOrEmpty(xlDonNhap.MatHangTonTai(DSmathang[i])))
                     {
                         return "Không thể xóa loại hàng có mặt hàng được sử dụng trong đơn nhập";
                     }
 
-                    XL_DonXuat xlDonXuat = new XL_DonXuat(); 
-                    if (string.IsNullOrEmpty(xlDonXuat.MatHangTonTai(DSmathang[i])))  
+                    XL_DonXuat xlDonXuat = new XL_DonXuat();
+                    if (string.IsNullOrEmpty(xlDonXuat.MatHangTonTai(DSmathang[i])))
                     {
                         return "Không thể xóa loại hàng có mặt hàng được sử dụng trong đơn xuất";
                     }

@@ -1,7 +1,9 @@
-﻿using Repo;
+﻿using Repo.Repo;
+using Repo;
 using Entities;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -10,9 +12,9 @@ namespace Service
         private ILT_Kho _luuTruKho = new LT_Kho();
 
         // Hàm để đọc danh sách kho dựa trên từ khóa và bộ lọc
-        public Kho[] DocDanhSach(string sKeyword, int Filter)
+        public List<Kho> DocDanhSach(string sKeyword, int Filter)
         {
-            Kho[] DSkho = _luuTruKho.DocDanhSach(sKeyword);
+            List<Kho> DSkho = _luuTruKho.DocDanhSach(sKeyword);
 
             // Lọc danh sách kho theo hạn dùng chưa hết
             if (1 == Filter)
@@ -20,7 +22,7 @@ namespace Service
                 // Lấy ngày hiện tại
                 DateOnly dateNow = DateOnly.FromDateTime(DateTime.Now);
                 int count = 0;
-                for (int i = 0; i < DSkho.Length; i++)
+                for (int i = 0; i < DSkho.Count; i++)
                 {
                     if (0 > dateNow.CompareTo(DSkho[i].HanDung))
                     {
@@ -28,13 +30,13 @@ namespace Service
                     }
                 }
 
-                Kho[] unexpiryList = new Kho[count];
+                List<Kho> unexpiryList = new List<Kho>(count);
                 count = 0;
-                for (int i = 0; i < DSkho.Length; i++)
+                for (int i = 0; i < DSkho.Count; i++)
                 {
                     if (0 > dateNow.CompareTo(DSkho[i].HanDung))
                     {
-                        unexpiryList[count] = DSkho[i];
+                        unexpiryList.Add(DSkho[i]);
                         count++;
                     }
                 }
@@ -48,7 +50,7 @@ namespace Service
                 // Lấy ngày hiện tại
                 DateOnly dateNow = DateOnly.FromDateTime(DateTime.Now);
                 int count = 0;
-                for (int i = 0; i < DSkho.Length; i++)
+                for (int i = 0; i < DSkho.Count; i++)
                 {
                     if (0 < dateNow.CompareTo(DSkho[i].HanDung))
                     {
@@ -56,13 +58,13 @@ namespace Service
                     }
                 }
 
-                Kho[] expiryList = new Kho[count];
+                List<Kho> expiryList = new List<Kho>(count);
                 count = 0;
-                for (int i = 0; i < DSkho.Length; i++)
+                for (int i = 0; i < DSkho.Count; i++)
                 {
                     if (0 < dateNow.CompareTo(DSkho[i].HanDung))
                     {
-                        expiryList[count] = DSkho[i];
+                        expiryList.Add(DSkho[i]);
                         count++;
                     }
                 }
@@ -84,9 +86,9 @@ namespace Service
         {
             kho.TenMatHang = sTenMatHang;
             XL_MatHang xlMatHang = new XL_MatHang();
-            MatHang[] DSmathang = xlMatHang.DocDanhSach("");
+            List<MatHang> DSmathang = xlMatHang.DocDanhSach("");
             bool isValid = false;
-            for (int i = 0; i < DSmathang.Length; i++)
+            for (int i = 0; i < DSmathang.Count; i++)
             {
                 if (kho.TenMatHang == DSmathang[i].Ten)
                 {
@@ -127,9 +129,9 @@ namespace Service
         {
             kho.TenMatHang = sTenMatHang;
             XL_MatHang xlMatHang = new XL_MatHang();
-            MatHang[] DSmathang = xlMatHang.DocDanhSach("");
+            List<MatHang> DSmathang = xlMatHang.DocDanhSach("");
             bool isValid = false;
-            for (int i = 0; i < DSmathang.Length; i++)
+            for (int i = 0; i < DSmathang.Count; i++)
             {
                 if (kho.TenMatHang == DSmathang[i].Ten)
                 {
@@ -162,10 +164,10 @@ namespace Service
                 return "Ngày sản xuất phải trước ngày hết hạn";
             }
 
-            Kho[] DSkho = DocDanhSach("", 0);
+            List<Kho> DSkho = DocDanhSach("", 0);
 
             isValid = false;
-            for (int i = 0; i < DSkho.Length; i++)
+            for (int i = 0; i < DSkho.Count; i++)
             {
                 if (kho.TenMatHang == DSkho[i].TenMatHang &&
                     kho.NgaySanXuat == DSkho[i].NgaySanXuat &&
@@ -189,10 +191,10 @@ namespace Service
         }
 
         // Hàm để thêm một kho vào danh sách kho
-        public string ThemVaoDS(Kho kho, ref Kho[] DSkho)
+        public string ThemVaoDS(Kho kho, ref List<Kho> DSkho)
         {
             bool addFlag = false;
-            for (int i = 0; i < DSkho.Length; i++)
+            for (int i = 0; i < DSkho.Count; i++)
             {
                 if (kho.TenMatHang == DSkho[i].TenMatHang &&
                     kho.NgaySanXuat == DSkho[i].NgaySanXuat &&
@@ -205,20 +207,14 @@ namespace Service
 
             if (!addFlag)
             {
-                Kho[] DSkhoNew = new Kho[DSkho.Length + 1];
-                for (int i = 0; i < DSkho.Length; i++)
-                {
-                    DSkhoNew[i] = DSkho[i];
-                }
-                DSkhoNew[DSkho.Length] = kho;
-                DSkho = DSkhoNew;
+                DSkho.Add(kho);
             }
 
             return string.Empty;
         }
 
         // Hàm để kiểm tra sự tồn tại của hàng hóa trong danh sách kho
-        public void KiemTraHangHoaTonTai(string sKhoList, ref Kho[] DSkho)
+        public void KiemTraHangHoaTonTai(string sKhoList, ref List<Kho> DSkho)
         {
             StringReader reader = new StringReader(sKhoList);
             int count = 0;
@@ -228,9 +224,9 @@ namespace Service
             }
             reader.Close();
 
-            DSkho = new Kho[count];
+            DSkho = new List<Kho>(count);
             reader = new StringReader(sKhoList);
-            for (int i = 0; i < DSkho.Length; i++)
+            for (int i = 0; i < DSkho.Count; i++)
             {
                 string? sData = reader.ReadLine();
                 if (sData != null)
@@ -238,7 +234,7 @@ namespace Service
                     Kho? deserializedKho = JsonConvert.DeserializeObject<Kho>(sData);
                     if (deserializedKho != null)
                     {
-                        DSkho[i] = deserializedKho;
+                        DSkho.Add(deserializedKho);
                     }
                 }
             }
@@ -246,7 +242,7 @@ namespace Service
         }
 
         // Hàm để tạo danh sách hàng hóa từ danh sách kho
-        public string TaoDanhSachHangHoa(Kho[] DSkho)
+        public string TaoDanhSachHangHoa(List<Kho> DSkho)
         {
             StringWriter writer = new StringWriter();
             foreach (Kho r in DSkho)

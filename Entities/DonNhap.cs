@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Entities
 {
@@ -6,13 +7,13 @@ namespace Entities
     {
         public string MaSo { get; set; }
         public DateOnly Ngay { get; set; }
-        public Kho[] Kho { get; set; }
+        public List<Kho> Kho { get; set; }
 
         public DonNhap()
         {
             MaSo = string.Empty;
             Ngay = default;
-            Kho = new Kho[0];
+            Kho = new List<Kho>();
         }
     }
 }

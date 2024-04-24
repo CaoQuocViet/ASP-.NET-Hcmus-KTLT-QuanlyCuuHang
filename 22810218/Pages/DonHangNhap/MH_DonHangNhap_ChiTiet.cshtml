@@ -38,10 +38,10 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if (Model.Import.Kho.Length > 0)
+                    @if (Model.Import.Kho.Count > 0)
                     {
                         int i = 1;
-                        for (int j = 0; j < Model.Import.Kho.Length; j++)
+                        for (int j = 0; j < Model.Import.Kho.Count; j++)
                         {
                             <tr>
                                 <td>@i</td>

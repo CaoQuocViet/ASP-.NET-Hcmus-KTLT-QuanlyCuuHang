@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Entities;
 using Service;
+using System.Collections.Generic;
 
 namespace Pages
 {
     public class MH_DonHangXuat_DanhSachModel : PageModel
     {
-        public DonXuat[]? DSdonxuat { get; private set; }
+        public List<DonXuat>? DSdonxuat { get; private set; }
         public int PageIndex { get; private set; }
         public int PageTotal { get; private set; }
         public int NoStart { get; private set; }
@@ -25,9 +26,9 @@ namespace Pages
             XL_DonXuat xlDonXuat = new XL_DonXuat();
             DSdonxuat = xlDonXuat.DocDanhSach(SKeyword);
 
-            if (DSdonxuat.Length > 0)
+            if (DSdonxuat.Count > 0)
             {
-                PageTotal = ((int)DSdonxuat.Length - 1) / itemPerPage + 1;
+                PageTotal = (DSdonxuat.Count - 1) / itemPerPage + 1;
 
                 if (pageIndex == 0 || pageIndex > PageTotal)
                 {
@@ -36,10 +37,10 @@ namespace Pages
 
                 NoStart = (pageIndex - 1) * itemPerPage + 1;
                 NoEnd = NoStart + itemPerPage - 1;
-                NoTotal = (int)DSdonxuat.Length;
+                NoTotal = DSdonxuat.Count;
                 if (pageIndex == PageTotal)
                 {
-                    NoEnd = NoStart + ((int)DSdonxuat.Length - 1) % itemPerPage;
+                    NoEnd = NoStart + (DSdonxuat.Count - 1) % itemPerPage;
                 }
             }
 
