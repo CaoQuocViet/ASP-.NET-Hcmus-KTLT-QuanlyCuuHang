@@ -13,19 +13,19 @@ namespace Pages
         public void OnGet()
         {
             ViewData["Title"] = "Quản lý cửa hàng";
-            LoaiHang = new LoaiHang("", "");
+            LoaiHang = new LoaiHang("", ""); // Pass the required arguments to the constructor
             BFlag = false;
         }
 
         public void OnPost()
         {
             BFlag = true;
-            LoaiHang = new LoaiHang(Request.Form["id"], Request.Form["name"]);
+            LoaiHang = new LoaiHang(Request.Form["id"], Request.Form["name"]); // Pass the required arguments to the constructor
             XL_LoaiHang xlLoaiHang = new XL_LoaiHang();
             SInfo = xlLoaiHang.Them(LoaiHang);
             if (string.IsNullOrEmpty(SInfo))
             {
-                LoaiHang = new LoaiHang("", "");
+                LoaiHang = new LoaiHang(Request.Form["id"], Request.Form["name"]); // Pass the required arguments to the constructor
             }
         }
     }

@@ -14,3 +14,19 @@ C:\Users\vietc\Downloads\LTHDT\22810218\Repo\obj\Debug\net6.0\refint\Repo.dll
 C:\Users\vietc\Downloads\LTHDT\22810218\Repo\obj\Debug\net6.0\Repo.pdb
 C:\Users\vietc\Downloads\LTHDT\22810218\Repo\obj\Debug\net6.0\ref\Repo.dll
 C:\Users\vietc\Downloads\LTHDT\22810218\Repo\obj\Debug\net6.0\Repo.sourcelink.json
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\bin\Debug\net6.0\Repo.deps.json
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\bin\Debug\net6.0\Repo.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\bin\Debug\net6.0\Repo.pdb
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\bin\Debug\net6.0\Entities.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\bin\Debug\net6.0\Entities.pdb
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\Repo.csproj.AssemblyReference.cache
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\Repo.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\Repo.AssemblyInfoInputs.cache
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\Repo.AssemblyInfo.cs
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\Repo.csproj.CoreCompileInputs.cache
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\Repo.sourcelink.json
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\Repo.csproj.CopyComplete
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\Repo.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\refint\Repo.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\Repo.pdb
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Repo\obj\Debug\net6.0\ref\Repo.dll

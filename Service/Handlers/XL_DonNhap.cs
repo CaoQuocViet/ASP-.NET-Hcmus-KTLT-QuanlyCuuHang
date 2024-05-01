@@ -74,19 +74,18 @@ namespace Service
         // Hàm để sửa thông tin Đơn nhập
         public string Sua(string sMaSo, string sNgay, ref DonNhap donnhapOld)
         {
-            DonNhap donnhap = new();
-            int MaSoMaxLength = 10;
-            donnhap.MaSo = sMaSo;
-
-            if (donnhap.MaSo.Length == 0 || donnhap.MaSo.Length > MaSoMaxLength)
-            {
-                return "Mã số Đơn nhập không hợp lệ";
-            }
-
             DateOnly parsedDate;
             if (!DateOnly.TryParse(sNgay, out parsedDate))
             {
                 return "Ngày Đơn nhập không hợp lệ";
+            }
+
+            DonNhap donnhap = new DonNhap(sMaSo, parsedDate, new List<Kho>());
+            int MaSoMaxLength = 10;
+
+            if (donnhap.MaSo.Length == 0 || donnhap.MaSo.Length > MaSoMaxLength)
+            {
+                return "Mã số Đơn nhập không hợp lệ";
             }
 
             donnhap.Ngay = parsedDate;

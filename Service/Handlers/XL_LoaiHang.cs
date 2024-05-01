@@ -8,8 +8,6 @@ namespace Service
     {
         private readonly ILT_LoaiHang _luuTruLoaiHang = new LT_LoaiHang();
         private const int _maSoMaxLength = 30;
-        private const int _tenMaxLength = 50;
-
         // Tạo một đối tượng LoaiHang rỗng
         public LoaiHang Empty()
         {
@@ -23,6 +21,8 @@ namespace Service
         }
 
         // Thêm một đối tượng LoaiHang mới
+        private const int _tenMaxLength = 100;
+
         public string Them(LoaiHang loaihang)
         {
             if (loaihang.MaSo.Length > _maSoMaxLength)
@@ -56,7 +56,7 @@ namespace Service
         // Xóa một đối tượng LoaiHang
         public string Xoa(string sMaSo, string sTen)
         {
-            LoaiHang loaihang = new LoaiHang(sMaSo, sTen);
+            LoaiHang loaihang = new LoaiHang("", "");
 
             XL_MatHang xlMatHang = new XL_MatHang();
             List<MatHang> DSmathang = xlMatHang.DocDanhSach("");

@@ -15,7 +15,7 @@ namespace Pages
         {
             ViewData["Title"] = "Quản lý cửa hàng";
             string sMatHangMaSo = Request.Query["id"];
-            MatHang = new MatHang("", "", "", "", 0);
+            MatHang = new MatHang("", "", "", "", 0); // Pass the required arguments to the constructor
             XL_MatHang xlMatHang = new XL_MatHang();
             MatHang? isMatHang = xlMatHang.ReadInfo(sMatHangMaSo);
             if (isMatHang == null)

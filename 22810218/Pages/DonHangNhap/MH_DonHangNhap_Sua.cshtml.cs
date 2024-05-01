@@ -15,7 +15,7 @@ namespace Pages
             ViewData["Title"] = "Quản lý cửa hàng";
             sInfo = string.Empty;
             bFlag = false;
-            import = new DonNhap();
+            import = new DonNhap("maSo", new DateOnly(), new List<Kho>());
             string importMaSo = Request.Query["id"];
             DonNhap? isDonNhap = new XL_DonNhap().ReadInfo(importMaSo);
             if (isDonNhap == null)
@@ -31,7 +31,7 @@ namespace Pages
             string sMaSo = Request.Form["id"];
             string sNgay = Request.Form["date"];
             XL_DonNhap xlDonNhap = new XL_DonNhap();
-            DonNhap tempImport = import ?? new DonNhap();
+            DonNhap tempImport = new DonNhap(sMaSo, new DateOnly(), new List<Kho>());
             sInfo = xlDonNhap.Sua(sMaSo, sNgay, ref tempImport);
             import = tempImport;
         }

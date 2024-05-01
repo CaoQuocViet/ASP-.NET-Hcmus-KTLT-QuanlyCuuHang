@@ -70,7 +70,7 @@ namespace Service
         // Sửa thông tin Đơn xuất
         public string Sua(string sMaSo, string sNgay, ref DonXuat donxuatOld)
         {
-            DonXuat donxuat = new DonXuat(sMaSo, default, new List<Kho>());
+            DonXuat donxuat = new DonXuat(sMaSo, default, null);
             int MaSoMaxLength = 10;
 
             if (donxuat.MaSo.Length == 0 || donxuat.MaSo.Length > MaSoMaxLength)

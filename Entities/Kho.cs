@@ -9,8 +9,12 @@ namespace Entities
         public DateOnly NgaySanXuat;
         public DateOnly HanDung;
 
-        public Kho()
+        public Kho(string tenMatHang, int soLuong, DateOnly ngaySanXuat, DateOnly hanDung)
         {
+            TenMatHang = tenMatHang;
+            SoLuong = soLuong;
+            NgaySanXuat = ngaySanXuat;
+            HanDung = hanDung;
         }
     }
 }

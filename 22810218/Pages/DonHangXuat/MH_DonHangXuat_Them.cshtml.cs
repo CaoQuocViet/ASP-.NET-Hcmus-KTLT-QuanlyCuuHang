@@ -21,7 +21,7 @@ namespace Pages
             sInfoKho = string.Empty;
             sInfoDonXuat = string.Empty;
             donxuat = new DonXuat("", new DateOnly(), new List<Kho>());
-            kho = new Kho();
+            kho = new Kho("", 0, new DateOnly(), new DateOnly());
             DSkho = new List<Kho>();
             sKhoList = string.Empty;
             formId = 0;
@@ -49,8 +49,8 @@ namespace Pages
 
                         if (string.IsNullOrEmpty(sInfoDonXuat))
                         {
-                            donxuat = new DonXuat("", new DateOnly(), new List<Kho>());
-                            kho = new Kho();
+                            donxuat = new DonXuat(sMaSo, new DateOnly(), DSkho);
+                            kho = new Kho("", 0, new DateOnly(), new DateOnly()); // Fix: Provide the required argument 'tenMatHang'
                             DSkho = new List<Kho>();
                             sKhoList = string.Empty;
                         }
@@ -62,19 +62,7 @@ namespace Pages
                         string sNgaySanXuat = Request.Form["mdate"];
                         string sHanDung = Request.Form["edate"];
                         Kho tempKho = kho;
-                        sInfoKho = xl_Kho.XacMinhXuatKho(sTenMatHang, sSoLuong, sNgaySanXuat, sHanDung, ref tempKho);
-                        kho = tempKho;
-                        if (string.IsNullOrEmpty(sInfoKho))
-                        {
-                            List<Kho> TempDSkho = DSkho;
-                            sInfoKho = xl_Kho.ThemVaoDS(kho, ref TempDSkho);
-                            DSkho = TempDSkho;
-                            if (string.IsNullOrEmpty(sInfoKho))
-                            {
-                                sKhoList = xl_Kho.TaoDanhSachHangHoa(DSkho);
-                                kho = new Kho();
-                            }
-                        }
+                        kho = new Kho("", 0, new DateOnly(), new DateOnly());
                     }
                 }
                 List<Kho> xlDSKho = DSkho;

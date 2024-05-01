@@ -43,3 +43,6 @@ C:\Users\vietc\Downloads\LTHDT\22810218\22810218\obj\Debug\net6.0\22810218.pdb
 C:\Users\vietc\Downloads\LTHDT\22810218\22810218\obj\Debug\net6.0\22810218.genruntimeconfig.cache
 C:\Users\vietc\Downloads\LTHDT\22810218\22810218\obj\Debug\net6.0\ref\22810218.dll
 C:\Users\vietc\Downloads\LTHDT\22810218\22810218\obj\Debug\net6.0\22810218.sourcelink.json
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\22810218\obj\Debug\net6.0\22810218.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\22810218\obj\Debug\net6.0\refint\22810218.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\22810218\obj\Debug\net6.0\22810218.pdb

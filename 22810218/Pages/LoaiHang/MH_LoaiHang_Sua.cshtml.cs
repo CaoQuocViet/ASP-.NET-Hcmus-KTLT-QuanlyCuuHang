@@ -17,7 +17,7 @@ namespace Pages
         {
             ViewData["Title"] = "Quản lý cửa hàng";
             BFlag = false;
-            LoaiHang = new LoaiHang("", "");
+            LoaiHang = new LoaiHang("", ""); // Pass the required arguments to the constructor
 
             string sLoaiHangMaSo = id;
 
@@ -37,7 +37,7 @@ namespace Pages
             XL_LoaiHang xlLoaiHang = new XL_LoaiHang();
             string sMaSo = Request.Form["id"];
             string sTen = Request.Form["name"];
-            LoaiHang tempLoaiHang = LoaiHang ?? new LoaiHang("", ""); 
+            LoaiHang tempLoaiHang = LoaiHang ?? new LoaiHang("", ""); // Pass the required arguments to the constructor
             SInfo = xlLoaiHang.Sua(sMaSo, sTen, ref tempLoaiHang);
             LoaiHang = tempLoaiHang;
 

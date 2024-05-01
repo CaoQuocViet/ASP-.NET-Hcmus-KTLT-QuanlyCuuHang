@@ -9,11 +9,11 @@ namespace Entities
         public DateOnly Ngay { get; set; }
         public List<Kho> Kho { get; set; }
 
-        public DonNhap()
+        public DonNhap(string maSo, DateOnly ngay, List<Kho> kho)
         {
-            MaSo = string.Empty;
-            Ngay = default;
-            Kho = new List<Kho>();
+            MaSo = maSo;
+            Ngay = ngay;
+            Kho = kho;
         }
     }
 }
