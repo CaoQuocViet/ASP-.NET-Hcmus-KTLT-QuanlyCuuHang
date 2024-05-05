@@ -7,7 +7,7 @@ namespace Service
     public class XL_MatHang : IXL_MatHang
     {
         private ILT_MatHang _luuTruMatHang = new LT_MatHang();
-        private const int _maSoMaxLength = 30;
+        private const int _maSoMaxLength = 1000;
 
         // Hàm để đọc danh sách mặt hàng dựa trên từ khóa
         public List<MatHang> DocDanhSach(string sKeyword)
@@ -60,7 +60,7 @@ namespace Service
             };
 
             // Kiểm tra mã số mặt hàng có hợp lệ hay không
-            if (mathang.MaSo.Length == 0 || mathang.MaSo.Length > _maSoMaxLength)
+            if (mathang == null || mathang.MaSo.Length == 0 || mathang.MaSo.Length > _maSoMaxLength)
             {
                 return "Mã mặt hàng không hợp lệ";
             }
@@ -142,7 +142,7 @@ namespace Service
         }
 
         // Hàm để đọc thông tin một mặt hàng dựa trên mã số
-        public MatHang? ReadInfo(string sMatHangMaSo)
+        public MatHang ReadInfo(string sMatHangMaSo)
         {
             return _luuTruMatHang.ReadInfo(sMatHangMaSo);  
         }

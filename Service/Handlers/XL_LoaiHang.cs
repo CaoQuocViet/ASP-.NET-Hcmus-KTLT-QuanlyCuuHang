@@ -56,10 +56,10 @@ namespace Service
         // Xóa một đối tượng LoaiHang
         public string Xoa(string sMaSo, string sTen)
         {
-            LoaiHang loaihang = new LoaiHang("", "");
+            LoaiHang loaihang = new LoaiHang(sMaSo, sTen);
 
             XL_MatHang xlMatHang = new XL_MatHang();
-            List<MatHang> DSmathang = xlMatHang.DocDanhSach("");
+            List<MatHang> DSmathang = xlMatHang.DocDanhSach(sTen);
             for (int i = 0; i < DSmathang.Count; i++)
             {
                 if (loaihang.Ten == DSmathang[i].LoaiHang)
@@ -82,7 +82,7 @@ namespace Service
         }
 
         // Đọc thông tin một đối tượng LoaiHang dựa trên mã loại hàng
-        public LoaiHang? ReadInfo(string loaihangCode)
+        public LoaiHang ReadInfo(string loaihangCode)
         {
             return _luuTruLoaiHang.ReadInfo(loaihangCode);
         }

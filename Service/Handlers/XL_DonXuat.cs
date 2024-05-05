@@ -70,7 +70,7 @@ namespace Service
         // Sửa thông tin Đơn xuất
         public string Sua(string sMaSo, string sNgay, ref DonXuat donxuatOld)
         {
-            DonXuat donxuat = new DonXuat(sMaSo, default, null);
+            DonXuat donxuat = new DonXuat(sMaSo, default, new List<Kho>());
             int MaSoMaxLength = 10;
 
             if (donxuat.MaSo.Length == 0 || donxuat.MaSo.Length > MaSoMaxLength)
@@ -95,7 +95,7 @@ namespace Service
         }
 
         // Đọc thông tin Đơn xuất dựa trên mã số
-        public DonXuat? ReadInfo(string donxuatMaSo)
+        public DonXuat ReadInfo(string donxuatMaSo)
         {
             return luuTruDonXuat.ReadInfo(donxuatMaSo);
         }

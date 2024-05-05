@@ -24,11 +24,11 @@
     <form class="row g-3 mb-2" method="post">
         <div class="col-md-4">
             <label for="id" class="form-label">Mã loại hàng</label>
-            <input class="form-control" type="text" id="id" name="id" value="@Model.LoaiHang?.MaSo" maxlength="30" required>
+            <input class="form-control" type="text" id="id" name="LoaiHang.MaSo" value="@Model.LoaiHang?.MaSo" maxlength="30" required>
         </div>
         <div class="col-md-4">
             <label for="name" class="form-label">Tên loại hàng</label>
-            <input class="form-control" type="text" id="name" name="name" value="@Model.LoaiHang?.Ten" maxlength="30" required>
+            <input class="form-control" type="text" id="name" name="LoaiHang.Ten" value="@Model.LoaiHang?.Ten" maxlength="30" required>
         </div>
         <div class="col-md-4 d-sm-flex align-items-end justify-content-end pb-1">
             <input class="btn btn-sm btn-warning text-light" type="submit" value="Sửa">

@@ -17,17 +17,22 @@ namespace Pages
         {
             ViewData["Title"] = "Quản lý cửa hàng";
             BFlag = false;
-            LoaiHang = new LoaiHang("", ""); // Pass the required arguments to the constructor
 
-            string sLoaiHangMaSo = id;
-
-            XL_LoaiHang xlLoaiHang = new XL_LoaiHang();
-            LoaiHang? isLoaiHang = xlLoaiHang.ReadInfo(sLoaiHangMaSo);
-
-            if (null == isLoaiHang)
+            if (string.IsNullOrEmpty(id))
             {
-                SInfo = "This loaihang is not exists";
+                SInfo = "Mã loại hàng không được cung cấp";
                 BFlag = true;
+            }
+            else
+            {
+                XL_LoaiHang xlLoaiHang = new XL_LoaiHang();
+                LoaiHang = xlLoaiHang.ReadInfo(id);
+
+                if (LoaiHang == null)
+                {
+                    SInfo = "This loaihang is not exists";
+                    BFlag = true;
+                }
             }
         }
 
@@ -35,8 +40,8 @@ namespace Pages
         {
             BFlag = true;
             XL_LoaiHang xlLoaiHang = new XL_LoaiHang();
-            string sMaSo = Request.Form["id"];
-            string sTen = Request.Form["name"];
+            string sMaSo = Request.Form["LoaiHang.MaSo"];
+            string sTen = Request.Form["LoaiHang.Ten"];
             LoaiHang tempLoaiHang = LoaiHang ?? new LoaiHang("", ""); // Pass the required arguments to the constructor
             SInfo = xlLoaiHang.Sua(sMaSo, sTen, ref tempLoaiHang);
             LoaiHang = tempLoaiHang;

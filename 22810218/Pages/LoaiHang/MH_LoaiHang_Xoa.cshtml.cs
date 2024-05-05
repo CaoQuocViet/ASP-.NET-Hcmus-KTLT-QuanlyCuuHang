@@ -15,7 +15,6 @@ namespace Pages
         {
             ViewData["Title"] = "Quản lý cửa hàng";
             string sLoaiHangMaSo = Request.Query["id"];
-            LoaiHang = new LoaiHang(sLoaiHangMaSo, ""); // Pass the required arguments to the constructor
             XL_LoaiHang xlLoaiHang = new XL_LoaiHang();
             LoaiHang? isLoaiHang = xlLoaiHang.ReadInfo(sLoaiHangMaSo);
 
@@ -27,6 +26,7 @@ namespace Pages
             else
             {
                 BFlag = false;
+                LoaiHang = isLoaiHang;
             }
 
             return Page();
@@ -41,7 +41,7 @@ namespace Pages
             SInfo = xlLoaiHang.Xoa(sMaSo, sTen);
             if (string.IsNullOrEmpty(SInfo))
             {
-                return RedirectToPage("/loaihang/index");
+                return RedirectToPage("/LoaiHang/MH_LoaiHang_DanhSach");
             }
             return Page();
         }

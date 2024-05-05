@@ -1,5 +1,5 @@
 ﻿@page
-@model YourNamespace.Pages.MH_MatHang_SuaModel
+@model Pages.MH_MatHang_SuaModel
 
 <div class="border border-secondary rounded px-3 mb-3">
     <div class="row pt-2">
@@ -20,23 +20,23 @@
     <form class="row g-3 mb-2" method="post">
         <div class="col-md-2">
             <label for="id" class="form-label">Mã mặt hàng</label>
-            <input class="form-control" type="text" id="id" name="id" value="@Model.mathang?.MaSo" maxlength="30" required>
+            <input class="form-control" type="text" id="id" name="MatHang.MaSo" value="@Model.mathang?.MaSo" maxlength="30" required>
         </div>
         <div class="col-md-2">
             <label for="name" class="form-label">Tên mặt hàng</label>
-            <input class="form-control" type="text" id="name" name="name" value="@Model.mathang?.Ten" maxlength="30" required>
+            <input class="form-control" type="text" id="name" name="MatHang.Ten" value="@Model.mathang?.Ten" maxlength="30" required>
         </div>
         <div class="col-md-2">
             <label for="loaihang" class="form-label">Loại hàng</label>
-            <input class="form-control" type="text" id="loaihang" name="loaihang" value="@Model.mathang?.LoaiHang" maxlength="30" required>
+            <input class="form-control" type="text" id="loaihang" name="MatHang.LoaiHang" value="@Model.mathang?.LoaiHang" maxlength="30" required>
         </div>
         <div class="col-md-2">
             <label for="brand" class="form-label">Thương Hiệu</label>
-            <input class="form-control" type="text" id="brand" name="brand" value="@Model.mathang?.ThuongHieu" maxlength="30" required>
+            <input class="form-control" type="text" id="brand" name="MatHang.ThuongHieu" value="@Model.mathang?.ThuongHieu" maxlength="30" required>
         </div>
         <div class="col-md-2">
             <label for="price" class="form-label">Giá</label>
-            <input class="form-control" type="number" id="price" name="price" value="@Model.mathang?.Gia" min="1" required>
+            <input class="form-control" type="number" id="price" name="MatHang.Gia" value="@Model.mathang?.Gia" min="1" required>
         </div>
         <div class="col-md-2 d-sm-flex align-items-end justify-content-end pb-1">
             <input class="btn btn-sm btn-warning text-light" type="submit" value="Sửa">
