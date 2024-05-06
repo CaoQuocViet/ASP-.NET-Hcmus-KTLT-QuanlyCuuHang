@@ -22,12 +22,14 @@ namespace Service
         }
 
         // Hàm để thêm một mặt hàng mới
-        public string Them(string sMaSo, string sTen, string sLoaiHang, string sGia, ref MatHang mathang)
+        public string Them(string sMaSo, string sTen, string sLoaiHang, string sGia, string sThuongHieu, ref MatHang mathang)
         {
             // Kiểm tra và gán các thuộc tính của mặt hàng
             mathang.MaSo = sMaSo;
             mathang.Ten = sTen;
             mathang.LoaiHang = sLoaiHang;
+            mathang.ThuongHieu = sThuongHieu;
+            mathang.Gia = int.Parse(sGia);
 
             // Kiểm tra mã số mặt hàng có hợp lệ hay không
             if (mathang.MaSo.Length == 0 || mathang.MaSo.Length > _maSoMaxLength)
@@ -102,7 +104,7 @@ namespace Service
                 xlDonXuat.CapNhatDS(mathangOld, mathang); 
                 mathangOld = mathang;
             }
-
+            _luuTruMatHang.Sua(mathangOld, mathang);
             return sInfo;
         }
 

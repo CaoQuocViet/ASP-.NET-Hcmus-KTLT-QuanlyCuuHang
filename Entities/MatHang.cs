@@ -8,6 +8,8 @@
         public string ThuongHieu { get; set; }
         public int Gia { get; set; }
 
+        public MatHang(){}
+
         public MatHang(string maSo, string ten, string loaiHang, string thuongHieu, int gia)
         {
             MaSo = maSo;

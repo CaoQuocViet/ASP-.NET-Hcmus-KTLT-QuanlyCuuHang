@@ -11,11 +11,11 @@ namespace Pages
         public bool BFlag { get; private set; }
         public MatHang? MatHang { get; private set; }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
             ViewData["Title"] = "Quản lý cửa hàng";
             string sMatHangMaSo = Request.Query["id"];
-            MatHang = new MatHang("", "", "", "", 0); // Pass the required arguments to the constructor
+            MatHang = new MatHang("", "", "", "", 0);
             XL_MatHang xlMatHang = new XL_MatHang();
             MatHang? isMatHang = xlMatHang.ReadInfo(sMatHangMaSo);
             if (isMatHang == null)
@@ -23,6 +23,11 @@ namespace Pages
                 SInfo = "This mathang is not exists";
                 BFlag = true;
             }
+            else
+            {
+                MatHang = isMatHang;
+            }
+            return Page();
         }
 
         public IActionResult OnPost()
@@ -37,7 +42,7 @@ namespace Pages
             SInfo = xlMatHang.Xoa(sMaSo, sTen, sLoaiHang, sThuongHieu, sGia);
             if (string.IsNullOrEmpty(SInfo))
             {
-                return RedirectToPage("/mathang/index");
+                return RedirectToPage("/MatHang/MH_MatHang_DanhSach");
             }
             else
             {

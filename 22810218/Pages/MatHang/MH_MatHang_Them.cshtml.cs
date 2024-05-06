@@ -15,33 +15,7 @@ namespace Pages
 
         public void OnGet()
         {
-            Mathang = new MatHang("", "", "", "", 0);
         }
 
-        public IActionResult OnPost()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            string sMaSo = Request.Form["id"];
-            string sTen = Request.Form["name"];
-            string sLoaiHang = Request.Form["loaihang"];
-            string sThuongHieu = Request.Form["brand"];
-            string sGia = Request.Form["price"];
-
-            XL_MatHang xlMatHang = new XL_MatHang();
-            MatHang tempMatHang = Mathang ?? new MatHang("", "", "", "", 0); // Fix: Pass the required arguments to the MatHang constructor
-            SInfo = xlMatHang.Them(sMaSo, sTen, sLoaiHang, sGia, ref tempMatHang);
-            Mathang = tempMatHang;
-
-            if (string.IsNullOrEmpty(SInfo))
-            {
-                Mathang = new MatHang("", "", "", "", 0); // Fix: Pass the required arguments to the MatHang constructor
-            }
-
-            return Page();
-        }
     }
 }

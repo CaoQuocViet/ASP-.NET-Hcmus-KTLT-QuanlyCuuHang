@@ -43,7 +43,10 @@ namespace Pages
             {
                 return RedirectToPage("/LoaiHang/MH_LoaiHang_DanhSach");
             }
-            return Page();
+            else
+            {
+                return Page();
+            }
         }
     }
 }

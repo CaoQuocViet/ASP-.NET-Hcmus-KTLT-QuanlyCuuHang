@@ -12,7 +12,7 @@ namespace Service
     {
         // MatHang[] DocDanhSach(string sKeyword);
         void CapNhatLoaiHang(LoaiHang loaihangOld, LoaiHang loaihangNew);
-        string Them(string sMaSo, string sTen, string sLoaiHang, string sGia, ref MatHang mathang);
+        string Them(string sMaSo, string sTen, string sLoaiHang, string sGia, string sThuongHieu, ref MatHang mathang);
         string Sua(string sMaSo, string sTen, string sLoaiHang, string sGia, string sThuongHieu, ref MatHang mathangOld);
         string Xoa(string sMaSo, string sTen, string sLoaiHang, string sThuongHieu, string sGia);
         // MatHang? ReadInfo(string sMatHangMaSo);
