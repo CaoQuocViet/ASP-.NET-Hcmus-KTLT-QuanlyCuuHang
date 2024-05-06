@@ -1,42 +1,21 @@
 ﻿@page
-@using Entities;
-@using Service;
 @model Pages.MH_MatHang_ThemModel
 @{
     ViewData["Title"] = "Quản lý cửa hàng";
-    MatHang mathang = new MatHang() { MaSo = "", Ten = "", LoaiHang = "", Gia = 0 };
-    string sInfo = string.Empty;
-    bool bFlag = false;
-
-    if (Request.Method == "POST")
-    {
-        bFlag = true;
-        string sMaSo = Request.Form["id"];
-        string sTen = Request.Form["name"];
-        string sLoaiHang = Request.Form["loaihang"];
-        string sThuongHieu = Request.Form["brand"];
-        string sGia = Request.Form["price"];
-        XL_MatHang xlMatHang = new XL_MatHang();
-        sInfo = xlMatHang.Them(sMaSo, sTen, sLoaiHang, sGia, sThuongHieu, ref mathang);
-        if (string.IsNullOrEmpty(sInfo))
-        {
-            mathang = new MatHang() { MaSo = "", Ten = "", LoaiHang = "", Gia = 0 };
-        }
-    }
 }
 
 <div class="border border-secondary rounded px-3 mb-3">
     <div class="row pt-2">
         <p class="col-sm-6 text-start fw-bold">Thông tin mặt hàng</p>
-        @if (bFlag)
+        @if (Model.BFlag)
         {
-            if (string.IsNullOrEmpty(sInfo))
+            if (string.IsNullOrEmpty(Model.SInfo))
             {
                 <p class="col-sm-6 text-end text-success fw-bold">Added new mathang successfully</p>
             }
             else
             {
-                <p class="col-sm-6 text-end text-danger fw-bold">@sInfo</p>
+                <p class="col-sm-6 text-end text-danger fw-bold">@Model.SInfo</p>
             }
         }
     </div>
@@ -44,23 +23,23 @@
     <form class="row g-3 mb-2" method="post">
         <div class="col-md-2">
             <label for="id" class="form-label">Mã mặt hàng</label>
-            <input class="form-control" type="text" id="id" name="id" value="@mathang.MaSo" maxlength="30" required>
+            <input class="form-control" type="text" id="id" name="id" value="@Model.Mathang.MaSo" maxlength="30" required>
         </div>
         <div class="col-md-2">
             <label for="name" class="form-label">Tên mặt hàng</label>
-            <input class="form-control" type="text" id="name" name="name" value="@mathang.Ten" maxlength="30" required>
+            <input class="form-control" type="text" id="name" name="name" value="@Model.Mathang.Ten" maxlength="30" required>
         </div>
         <div class="col-md-2">
             <label for="loaihang" class="form-label">Loại hàng</label>
-            <input class="form-control" type="text" id="loaihang" name="loaihang" value="@mathang.LoaiHang" maxlength="30" required>
+            <input class="form-control" type="text" id="loaihang" name="loaihang" value="@Model.Mathang.LoaiHang" maxlength="30" required>
         </div>
         <div class="col-md-2">
             <label for="brand" class="form-label">Thương Hiệu</label>
-            <input class="form-control" type="text" id="brand" name="brand" value="@mathang.ThuongHieu" maxlength="30" required>
+            <input class="form-control" type="text" id="brand" name="brand" value="@Model.Mathang.ThuongHieu" maxlength="30" required>
         </div>
         <div class="col-md-2">
             <label for="price" class="form-label">Giá</label>
-            <input class="form-control" type="number" id="price" name="price" value="@mathang.Gia" min="1" required>
+            <input class="form-control" type="number" id="price" name="price" value="@Model.Mathang.Gia" min="1" required>
         </div>
         <div class="col-md-2 d-sm-flex align-items-end justify-content-end pb-1">
             <input class="btn btn-sm btn-success text-light" type="submit" value="Thêm">
