@@ -32,7 +32,7 @@ namespace Service
             mathang.Gia = int.Parse(sGia);
 
             // Kiểm tra mã số mặt hàng có hợp lệ hay không
-            if (mathang.MaSo.Length == 0 || mathang.MaSo.Length > _maSoMaxLength)
+            if (mathang == null || mathang.MaSo.Length == 0 || mathang.MaSo.Length > _maSoMaxLength)
             {
                 return "Mã mặt hàng không hợp lệ";
             }

@@ -8,8 +8,8 @@ namespace Pages
     public class MH_MatHang_ThemModel : PageModel
     {
         [BindProperty]
-        public MatHang Mathang { get; set; }
-        public string SInfo { get; set; }
+        public MatHang? Mathang { get; set; }
+        public string? SInfo { get; set; }
         public bool BFlag { get; set; }
 
         public void OnGet()
@@ -21,10 +21,6 @@ namespace Pages
         public IActionResult OnPost()
         {
             BFlag = true;
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             string sMaSo = Request.Form["id"];
             string sTen = Request.Form["name"];
@@ -32,15 +28,14 @@ namespace Pages
             string sThuongHieu = Request.Form["brand"];
             string sGia = Request.Form["price"];
 
-            MatHang tempMatHang = new MatHang(sMaSo, sTen, sLoaiHang, sThuongHieu, int.Parse(sGia));
-
             int parsedGia;
             if (!int.TryParse(sGia, out parsedGia))
             {
                 SInfo = "Giá mặt hàng không hợp lệ";
                 return Page();
             }
-            tempMatHang.Gia = parsedGia;
+
+            MatHang tempMatHang = new MatHang(sMaSo, sTen, sLoaiHang, sThuongHieu, parsedGia);
 
             XL_MatHang xlMatHang = new XL_MatHang();
             SInfo = xlMatHang.Them(sMaSo, sTen, sLoaiHang, sGia, sThuongHieu, ref tempMatHang);

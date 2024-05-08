@@ -15,13 +15,18 @@ namespace Pages
             ViewData["Title"] = "Quản lý cửa hàng";
             sInfo = string.Empty;
             bFlag = false;
-            import = new DonNhap("maSo", new DateOnly(), new List<Kho>());
+            import = new DonNhap("", new DateOnly(), new List<Kho>());
             string importMaSo = Request.Query["id"];
-            DonNhap? isDonNhap = new XL_DonNhap().ReadInfo(importMaSo);
+            XL_DonNhap xlDonNhap = new XL_DonNhap();
+            DonNhap? isDonNhap = xlDonNhap.ReadInfo(importMaSo);
             if (isDonNhap == null)
             {
                 sInfo = "Đơn nhập này không tồn tại";
                 bFlag = true;
+            }
+            else
+            {
+                import = isDonNhap;
             }
         }
 

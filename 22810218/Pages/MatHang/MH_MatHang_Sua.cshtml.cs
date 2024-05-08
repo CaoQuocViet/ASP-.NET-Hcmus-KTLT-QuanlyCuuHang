@@ -35,11 +35,11 @@ namespace Pages
         public void OnPost()
         {
             bFlag = true;
-            string sMaSo = Request.Form["id"];
-            string sTen = Request.Form["name"];
-            string sLoaiHang = Request.Form["loaihang"];
-            string sThuongHieu = Request.Form["brand"];
-            string sGia = Request.Form["price"];
+            string sMaSo = Request.Form["MatHang.MaSo"];
+            string sTen = Request.Form["MatHang.Ten"];
+            string sLoaiHang = Request.Form["MatHang.LoaiHang"];
+            string sThuongHieu = Request.Form["MatHang.ThuongHieu"];
+            string sGia = Request.Form["MatHang.Gia"];
 
             XL_MatHang xlMatHang = new XL_MatHang();
 
