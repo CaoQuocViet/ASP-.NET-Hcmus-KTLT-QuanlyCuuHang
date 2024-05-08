@@ -134,7 +134,7 @@ namespace Repo
         }
 
         // Đọc thông tin một loại hàng dựa trên mã số
-        public LoaiHang? ReadInfo(string loaihangCode)
+        public LoaiHang? DocThongTin(string loaihangCode)
         {
             List<LoaiHang> DSloaihang = DocDanhSach("");
 

@@ -18,7 +18,7 @@ namespace Pages
             import = new DonNhap("", new DateOnly(), new List<Kho>());
             string importMaSo = Request.Query["id"];
             XL_DonNhap xlDonNhap = new XL_DonNhap();
-            DonNhap? isDonNhap = xlDonNhap.ReadInfo(importMaSo);
+            DonNhap? isDonNhap = xlDonNhap.DocThongTin(importMaSo);
             if (isDonNhap == null)
             {
                 sInfo = "Đơn nhập này không tồn tại";

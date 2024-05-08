@@ -9,6 +9,6 @@ namespace Repo
         string Them(T entity);
         string Sua(T entityOld, T entityNew);
         string Xoa(T entity);
-        T? ReadInfo(string maSo);
+        T? DocThongTin(string maSo);
     }
 }

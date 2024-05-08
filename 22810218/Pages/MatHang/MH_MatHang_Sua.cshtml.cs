@@ -19,11 +19,11 @@ namespace Pages
 
             string sMatHangMaSo = Request.Query["id"];
             XL_MatHang xlMatHang = new XL_MatHang();
-            MatHang? isMatHang = xlMatHang.ReadInfo(sMatHangMaSo);
+            MatHang? isMatHang = xlMatHang.DocThongTin(sMatHangMaSo);
 
             if (null == isMatHang)
             {
-                sInfo = "This mathang is not exists";
+                sInfo = "Mặt hàng này không tồn tại";
                 bFlag = true;
             }
             else if (isMatHang is MatHang matHang)

@@ -17,8 +17,8 @@ namespace Pages
             bFlag = false;
             donxuat = new DonXuat("someMaSo", new DateOnly(), new List<Kho>());
             string donxuatMaSo = Request.Query["id"];
-            XL_DonXuat xlDonXuat = new XL_DonXuat(); // Create an instance of the XL_DonXuat class
-            DonXuat? isDonXuat = xlDonXuat.ReadInfo(donxuatMaSo); // Call the ReadInfo method on the instance
+            XL_DonXuat xlDonXuat = new XL_DonXuat(); 
+            DonXuat? isDonXuat = xlDonXuat.DocThongTin(donxuatMaSo); 
 
             if (isDonXuat != null)
             {

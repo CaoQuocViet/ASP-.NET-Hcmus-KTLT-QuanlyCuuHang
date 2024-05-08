@@ -17,10 +17,10 @@ namespace Pages
             string sMatHangMaSo = Request.Query["id"];
             MatHang = new MatHang("", "", "", "", 0);
             XL_MatHang xlMatHang = new XL_MatHang();
-            MatHang? isMatHang = xlMatHang.ReadInfo(sMatHangMaSo);
+            MatHang? isMatHang = xlMatHang.DocThongTin(sMatHangMaSo);
             if (isMatHang == null)
             {
-                SInfo = "This mathang is not exists";
+                SInfo = "Mặt hàng này không tồn tại";
                 BFlag = true;
             }
             else

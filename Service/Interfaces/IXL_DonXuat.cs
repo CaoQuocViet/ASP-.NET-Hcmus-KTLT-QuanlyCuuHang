@@ -10,11 +10,9 @@ namespace Service
 {
     public interface IXL_DonXuat : IService<DonXuat>
     {
-        // DonXuat[] DocDanhSach(string sKeyword);
         void CapNhatDS(MatHang mathangOld, MatHang mathangNew);
         string MatHangTonTai(MatHang mathang);
         string Them(string sMaSo, string sNgay, List<Kho> DSkho, ref DonXuat donxuat);
         string Sua(string sMaSo, string sNgay, ref DonXuat donxuatOld);
-        // DonXuat? ReadInfo(string donxuatMaSo);
     }
 }

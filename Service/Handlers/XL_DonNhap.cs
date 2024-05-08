@@ -100,9 +100,9 @@ namespace Service
         }
 
         // Hàm để đọc thông tin Đơn nhập dựa trên mã số Đơn nhập
-        public DonNhap? ReadInfo(string donnhapMaSo)
+        public DonNhap? DocThongTin(string donnhapMaSo)
         {
-            return _luuTruDonNhap.ReadInfo(donnhapMaSo);
+            return _luuTruDonNhap.DocThongTin(donnhapMaSo);
         }
     }
 }

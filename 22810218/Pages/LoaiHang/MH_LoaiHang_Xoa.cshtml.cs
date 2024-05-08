@@ -16,11 +16,11 @@ namespace Pages
             ViewData["Title"] = "Quản lý cửa hàng";
             string sLoaiHangMaSo = Request.Query["id"];
             XL_LoaiHang xlLoaiHang = new XL_LoaiHang();
-            LoaiHang? isLoaiHang = xlLoaiHang.ReadInfo(sLoaiHangMaSo);
+            LoaiHang? isLoaiHang = xlLoaiHang.DocThongTin(sLoaiHangMaSo);
 
             if (isLoaiHang == null)
             {
-                SInfo = "This loaihang is not exists";
+                SInfo = "Loại hàng này không tồn tại";
                 BFlag = true;
             }
             else

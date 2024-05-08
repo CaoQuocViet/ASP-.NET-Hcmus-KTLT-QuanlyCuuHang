@@ -12,7 +12,7 @@ namespace Pages
         {
             ViewData["Title"] = "Quản lý cửa hàng";
             string donxuatMaSo = Request.Query["id"];
-            DonXuat = new XL_DonXuat().ReadInfo(donxuatMaSo);
+            DonXuat = new XL_DonXuat().DocThongTin(donxuatMaSo);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Pages
         {
             ViewData["Title"] = "Quản lý cửa hàng";
             ImportMaSo = Request.Query["id"];
-            Import = new XL_DonNhap().ReadInfo(ImportMaSo);
+            Import = new XL_DonNhap().DocThongTin(ImportMaSo);
         }
     }
 }

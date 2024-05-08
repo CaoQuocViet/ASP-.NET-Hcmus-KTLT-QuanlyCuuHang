@@ -142,7 +142,7 @@ namespace Repo
         }
 
         // Đọc thông tin đơn nhập dựa trên mã số
-        public DonNhap? ReadInfo(string donnhapMaSo)
+        public DonNhap? DocThongTin(string donnhapMaSo)
         {
             List<DonNhap> DSdonnhap = DocDanhSach("");
 

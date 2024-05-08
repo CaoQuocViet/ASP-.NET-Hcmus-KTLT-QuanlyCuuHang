@@ -26,11 +26,11 @@ namespace Pages
             else
             {
                 XL_LoaiHang xlLoaiHang = new XL_LoaiHang();
-                LoaiHang = xlLoaiHang.ReadInfo(id);
+                LoaiHang = xlLoaiHang.DocThongTin(id);
 
                 if (LoaiHang == null)
                 {
-                    SInfo = "This loaihang is not exists";
+                    SInfo = "Loại hàng này không tồn tại";
                     BFlag = true;
                 }
             }
@@ -42,7 +42,7 @@ namespace Pages
             XL_LoaiHang xlLoaiHang = new XL_LoaiHang();
             string sMaSo = Request.Form["LoaiHang.MaSo"];
             string sTen = Request.Form["LoaiHang.Ten"];
-            LoaiHang tempLoaiHang = LoaiHang ?? new LoaiHang("", ""); // Pass the required arguments to the constructor
+            LoaiHang tempLoaiHang = LoaiHang ?? new LoaiHang("", ""); 
             SInfo = xlLoaiHang.Sua(sMaSo, sTen, ref tempLoaiHang);
             LoaiHang = tempLoaiHang;
 

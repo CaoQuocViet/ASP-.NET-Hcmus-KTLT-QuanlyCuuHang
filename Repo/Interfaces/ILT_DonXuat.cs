@@ -10,11 +10,5 @@ namespace Repo
     public interface ILT_DonXuat : IRepository<DonXuat>
     {
         public void CapNhatDS(MatHang mathangOld, MatHang mathangNew);
-        // DonXuat[] DocDanhSach(string sKeyword);
-        // void CapNhatDS(MatHang mathangOld, MatHang mathangNew);
-        // string Them(DonXuat donxuat);
-        // string Sua(DonXuat donxuatOld, DonXuat donxuatNew);
-        // string Xoa(DonXuat donxuat);
-        // DonXuat? ReadInfo(string donxuatCode);
     }
 }

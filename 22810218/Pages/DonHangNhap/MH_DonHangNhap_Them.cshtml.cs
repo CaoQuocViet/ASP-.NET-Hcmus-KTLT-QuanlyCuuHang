@@ -63,7 +63,7 @@ namespace Pages
                     string sSoLuong = Request.Form["quantity"];
                     string sNgaySanXuat = Request.Form["mdate"];
                     string sHanDung = Request.Form["edate"];
-                    Kho tempKho = kho ?? new Kho("", 0, default, default); // Provide the required arguments for the 'Kho' constructor
+                    Kho tempKho = kho ?? new Kho("", 0, default, default); 
                     if (tempKho != null)
                     {
                         sInfoKho = xl_Kho.XacMinhNhapKho(sTenMatHang, sSoLuong, sNgaySanXuat, sHanDung, ref tempKho);

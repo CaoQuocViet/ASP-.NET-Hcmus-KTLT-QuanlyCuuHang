@@ -11,6 +11,6 @@ namespace Service
     public interface IService<T>
     {
         List<T> DocDanhSach(string sKeyword);
-        T ReadInfo(string maSo);
+        T DocThongTin(string maSo);
     }
 }

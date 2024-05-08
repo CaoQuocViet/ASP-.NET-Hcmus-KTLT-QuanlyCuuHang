@@ -144,9 +144,9 @@ namespace Service
         }
 
         // Hàm để đọc thông tin một mặt hàng dựa trên mã số
-        public MatHang ReadInfo(string sMatHangMaSo)
+        public MatHang DocThongTin(string sMatHangMaSo)
         {
-            return _luuTruMatHang.ReadInfo(sMatHangMaSo);  
+            return _luuTruMatHang.DocThongTin(sMatHangMaSo);  
         }
     }
 }

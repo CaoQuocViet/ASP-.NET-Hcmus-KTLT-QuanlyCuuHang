@@ -50,7 +50,7 @@ namespace Pages
                         if (string.IsNullOrEmpty(sInfoDonXuat))
                         {
                             donxuat = new DonXuat(sMaSo, new DateOnly(), DSkho);
-                            kho = new Kho("", 0, new DateOnly(), new DateOnly()); // Fix: Provide the required argument 'tenMatHang'
+                            kho = new Kho("", 0, new DateOnly(), new DateOnly()); 
                             DSkho = new List<Kho>();
                             sKhoList = string.Empty;
                         }

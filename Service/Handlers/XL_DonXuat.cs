@@ -95,9 +95,9 @@ namespace Service
         }
 
         // Đọc thông tin Đơn xuất dựa trên mã số
-        public DonXuat ReadInfo(string donxuatMaSo)
+        public DonXuat DocThongTin(string donxuatMaSo)
         {
-            return luuTruDonXuat.ReadInfo(donxuatMaSo);
+            return luuTruDonXuat.DocThongTin(donxuatMaSo);
         }
     }
 }

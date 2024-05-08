@@ -20,7 +20,7 @@ namespace Pages
         {
             ViewData["Title"] = "Thống kê Hàng tồn kho";
             const int itemPerPage = 10;
-            int pageIndex = 1; // Declare the pageIndex variable before assigning a value to it
+            int pageIndex = 1; 
             PageTotal = 1;
             NoStart = 1;
             NoEnd = 1;

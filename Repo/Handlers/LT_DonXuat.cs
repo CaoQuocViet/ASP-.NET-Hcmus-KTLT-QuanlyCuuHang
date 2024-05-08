@@ -149,7 +149,7 @@ namespace Repo
         }
 
         // Đọc thông tin Đơn Xuất dựa trên mã số
-        public DonXuat? ReadInfo(string donxuatCode)
+        public DonXuat? DocThongTin(string donxuatCode)
         {
             List<DonXuat> DSdonxuat = DocDanhSach("");
 

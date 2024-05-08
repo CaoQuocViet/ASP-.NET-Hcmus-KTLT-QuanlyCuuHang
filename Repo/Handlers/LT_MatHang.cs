@@ -151,7 +151,7 @@ namespace Repo
         }
 
         // Đọc thông tin một mặt hàng dựa trên mã số
-        public MatHang? ReadInfo(string sMatHangMaSo)
+        public MatHang? DocThongTin(string sMatHangMaSo)
         {
             List<MatHang> DSmathang = DocDanhSach("");
 
