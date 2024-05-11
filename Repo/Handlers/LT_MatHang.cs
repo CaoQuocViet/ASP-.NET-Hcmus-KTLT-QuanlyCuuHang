@@ -15,11 +15,14 @@ namespace Repo
             List<MatHang> DSmathang = new List<MatHang>();
             using (StreamReader reader = new StreamReader(_mathangFile))
             {
-                string line;
+                string? line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    MatHang mathang = JsonConvert.DeserializeObject<MatHang>(line);
-                    DSmathang.Add(mathang);
+                    MatHang? mathang = JsonConvert.DeserializeObject<MatHang>(line);
+                    if (mathang != null)
+                    {
+                        DSmathang.Add(mathang);
+                    }
                 }
             }
 

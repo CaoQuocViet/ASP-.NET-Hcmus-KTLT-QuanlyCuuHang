@@ -13,10 +13,14 @@ namespace Repo
             List<LoaiHang> DSloaihang = new List<LoaiHang>();
             using (StreamReader reader = new StreamReader(_loaihangFile))
             {
-                string sData;
+                string? sData;
                 while ((sData = reader.ReadLine()) != null)
                 {
-                    DSloaihang.Add(JsonConvert.DeserializeObject<LoaiHang>(sData));
+                    LoaiHang? loaihang = JsonConvert.DeserializeObject<LoaiHang>(sData);
+                    if (loaihang != null)
+                    {
+                        DSloaihang.Add(loaihang);
+                    }
                 }
             }
 

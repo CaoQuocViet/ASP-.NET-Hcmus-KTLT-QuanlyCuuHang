@@ -11,9 +11,9 @@ namespace Repo
         public List<DonNhap> DocDanhSach(string sKeyword)
         {
             List<DonNhap> DSdonnhap = new List<DonNhap>();
-            using (StreamReader reader = new StreamReader(_donnhapFile))
+            StreamReader reader = new StreamReader(_donnhapFile);
             {
-                string sData;
+                string? sData;
                 while ((sData = reader.ReadLine()) != null)
                 {
                     DSdonnhap.Add(JsonConvert.DeserializeObject<DonNhap>(sData)!);

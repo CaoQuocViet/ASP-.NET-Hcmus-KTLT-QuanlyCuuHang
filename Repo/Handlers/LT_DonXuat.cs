@@ -15,7 +15,11 @@ namespace Repo
             string? sData;
             while ((sData = reader.ReadLine()) != null)
             {
-                DSdonxuat.Add(JsonConvert.DeserializeObject<DonXuat>(sData));
+                DonXuat? donXuat = JsonConvert.DeserializeObject<DonXuat>(sData);
+                if (donXuat != null)
+                {
+                    DSdonxuat.Add(donXuat);
+                }
             }
             reader.Close();
 

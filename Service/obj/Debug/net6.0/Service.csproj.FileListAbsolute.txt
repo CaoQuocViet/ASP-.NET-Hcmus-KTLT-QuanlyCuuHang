@@ -25,3 +25,21 @@ C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Service\obj\Debug\net6.0\Serv
 C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Service\obj\Debug\net6.0\Service.dll
 C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Service\obj\Debug\net6.0\refint\Service.dll
 C:\Users\vietc\Downloads\LTHDT\22810218 - Add List\Service\obj\Debug\net6.0\Service.pdb
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\bin\Debug\net6.0\Service.deps.json
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\bin\Debug\net6.0\Service.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\bin\Debug\net6.0\Service.pdb
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\bin\Debug\net6.0\Entities.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\bin\Debug\net6.0\Repo.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\bin\Debug\net6.0\Entities.pdb
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\bin\Debug\net6.0\Repo.pdb
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\Service.csproj.AssemblyReference.cache
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\Service.AssemblyInfoInputs.cache
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\Service.AssemblyInfo.cs
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\Service.csproj.CoreCompileInputs.cache
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\Service.sourcelink.json
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\Service.csproj.CopyComplete
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\Service.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\refint\Service.dll
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\Service.pdb
+C:\Users\vietc\Downloads\LTHDT\22810218 - Chua fix don hang\Service\obj\Debug\net6.0\ref\Service.dll

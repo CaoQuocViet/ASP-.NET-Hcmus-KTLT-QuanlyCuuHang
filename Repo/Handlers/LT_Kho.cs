@@ -20,11 +20,14 @@ namespace Repo
                 List<Kho> DSkho = new List<Kho>();
                 using (StreamReader reader = new StreamReader(_khoFile))
                 {
-                    string sData;
+                    string? sData;
                     while ((sData = reader.ReadLine()) != null)
                     {
-                        Kho kho = JsonConvert.DeserializeObject<Kho>(sData);
-                        DSkho.Add(kho);
+                        Kho? kho = JsonConvert.DeserializeObject<Kho>(sData);
+                        if (kho != null)
+                        {
+                            DSkho.Add(kho);
+                        }
                     }
                 }
 
