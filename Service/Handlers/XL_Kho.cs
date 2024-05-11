@@ -101,20 +101,26 @@ namespace Service
                 return "Mặt hàng không tồn tại";
             }
 
-            if (!int.TryParse(sSoLuong, out kho.SoLuong) || kho.SoLuong == 0)
+            int tempSoLuong;
+            if (!int.TryParse(sSoLuong, out tempSoLuong) || tempSoLuong == 0)
             {
                 return "Số lượng không hợp lệ";
             }
+            kho.SoLuong = tempSoLuong;
 
-            if (!DateOnly.TryParse(sNgaySanXuat, out kho.NgaySanXuat))
+            DateOnly tempNgaySanXuat;
+            if (!DateOnly.TryParse(sNgaySanXuat, out tempNgaySanXuat))
             {
                 return "Ngày sản xuất không hợp lệ";
             }
+            kho.NgaySanXuat = tempNgaySanXuat;
 
-            if (!DateOnly.TryParse(sHanDung, out kho.HanDung))
+            DateOnly tempHanDung;
+            if (!DateOnly.TryParse(sHanDung, out tempHanDung))
             {
                 return "Ngày hết hạn không hợp lệ";
             }
+            kho.HanDung = tempHanDung;
 
             if (kho.NgaySanXuat.CompareTo(kho.HanDung) >= 0)
             {
@@ -144,20 +150,27 @@ namespace Service
                 return "Mặt hàng không tồn tại";
             }
 
-            if (!int.TryParse(sSoLuong, out kho.SoLuong) || kho.SoLuong == 0)
+            int tempSoLuong;
+            if (!int.TryParse(sSoLuong, out tempSoLuong) || tempSoLuong == 0)
             {
                 return "Số lượng không hợp lệ";
             }
+            kho.SoLuong = tempSoLuong;
 
-            if (!DateOnly.TryParse(sNgaySanXuat, out kho.NgaySanXuat))
+            DateOnly tempNgaySanXuat;
+            if (!DateOnly.TryParse(sNgaySanXuat, out tempNgaySanXuat))
             {
                 return "Ngày sản xuất không hợp lệ";
             }
+            kho.NgaySanXuat = tempNgaySanXuat;
 
-            if (!DateOnly.TryParse(sHanDung, out kho.HanDung))
+            DateOnly tempHanDung;
+            if (!DateOnly.TryParse(sHanDung, out tempHanDung))
             {
                 return "Ngày hết hạn không hợp lệ";
             }
+            kho.HanDung = tempHanDung;
+
 
             if (kho.NgaySanXuat.CompareTo(kho.HanDung) >= 0)
             {
@@ -244,16 +257,14 @@ namespace Service
         // Hàm để tạo danh sách hàng hóa từ danh sách kho
         public string TaoDanhSachHangHoa(List<Kho> DSkho)
         {
-            StringWriter writer = new StringWriter();
+            return "TaoDanhSachHangHoa";
+            using StringWriter writer = new StringWriter();
             foreach (Kho r in DSkho)
             {
                 string sData = JsonConvert.SerializeObject(r);
                 writer.WriteLine(sData);
             }
-            string sResult = writer.ToString();
-            writer.Close();
-
-            return sResult;
+            return writer.ToString();
         }
 
         public void DonNhap(DonNhap donnhap)

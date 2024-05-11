@@ -6,9 +6,9 @@ namespace Entities
     {
         // Thuộc tính
         public string? TenMatHang { get; set; }
-        public int SoLuong;
-        public DateOnly NgaySanXuat;
-        public DateOnly HanDung;
+        public int SoLuong { get; set; }
+        public DateOnly NgaySanXuat { get; set; }
+        public DateOnly HanDung { get; set; }
 
         // Constructor mặc định
         public Kho(string tenMatHang, int soLuong, DateOnly ngaySanXuat, DateOnly hanDung)

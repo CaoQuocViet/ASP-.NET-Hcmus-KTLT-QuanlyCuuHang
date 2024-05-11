@@ -1,4 +1,4 @@
-﻿@page
+@page
 @using Entities;
 @using Service;
 @model Pages.MH_DonHangNhap_ThemModel
@@ -50,7 +50,7 @@
                     kho.NgaySanXuat = DateOnly.Parse(sNgaySanXuat);
                     kho.HanDung = DateOnly.Parse(sHanDung);
                     sInfoKho = xlKho.ThemVaoDS(kho, ref DSkho); //
-                    
+
                     if (string.IsNullOrEmpty(sInfoKho))
                     {
                         sKhoList = xlKho.TaoDanhSachHangHoa(DSkho); //

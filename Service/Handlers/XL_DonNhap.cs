@@ -64,7 +64,7 @@ namespace Service
             string sInfo = _luuTruDonNhap.Them(donnhap);
             if (string.IsNullOrEmpty(sInfo))
             {
-                XL_Kho kho = new();
+                XL_Kho kho = new XL_Kho();
                 kho.DonNhap(donnhap);
             }
 

@@ -11,7 +11,7 @@ namespace Repo
         public List<DonNhap> DocDanhSach(string sKeyword)
         {
             List<DonNhap> DSdonnhap = new List<DonNhap>();
-            StreamReader reader = new StreamReader(_donnhapFile);
+            using(StreamReader reader = new StreamReader(_donnhapFile))
             {
                 string? sData;
                 while ((sData = reader.ReadLine()) != null)
