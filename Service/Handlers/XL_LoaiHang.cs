@@ -82,7 +82,7 @@ namespace Service
         }
 
         // Đọc thông tin một đối tượng LoaiHang dựa trên mã loại hàng
-        public LoaiHang DocThongTin(string loaihangCode)
+        public LoaiHang? DocThongTin(string loaihangCode)
         {
             return _luuTruLoaiHang.DocThongTin(loaihangCode);
         }

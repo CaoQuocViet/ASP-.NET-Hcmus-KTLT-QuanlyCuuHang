@@ -6,9 +6,9 @@ namespace Pages
 {
     public class MH_DonHangXuat_SuaModel : PageModel
     {
-        public string sInfo { get; set; }
+        public string? sInfo { get; set; }
         public bool bFlag { get; set; }
-        public DonXuat donxuat { get; set; }
+        public DonXuat? donxuat { get; set; }
 
         public void OnGet()
         {
