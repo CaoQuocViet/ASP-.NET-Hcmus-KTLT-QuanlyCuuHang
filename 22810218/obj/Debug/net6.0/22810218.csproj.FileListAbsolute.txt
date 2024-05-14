@@ -43,3 +43,13 @@ C:\Users\vietc\Downloads\LTHDT\22810218\22810218\obj\Debug\net6.0\22810218.pdb
 C:\Users\vietc\Downloads\LTHDT\22810218\22810218\obj\Debug\net6.0\22810218.genruntimeconfig.cache
 C:\Users\vietc\Downloads\LTHDT\22810218\22810218\obj\Debug\net6.0\ref\22810218.dll
 C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\DonNhap.json
+C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\bin\Debug\net6.0\22810218.deps.json
+C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\bin\Debug\net6.0\22810218.runtimeconfig.json
+C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\bin\Debug\net6.0\22810218.staticwebassets.runtime.json
+C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\bin\Debug\net6.0\appsettings.json
+C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\bin\Debug\net6.0\Data\DonNhap.json
+C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\bin\Debug\net6.0\Data\DonXuat.json
+C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\bin\Debug\net6.0\Data\Kho.json
+C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\bin\Debug\net6.0\Data\LoaiHang.json
+C:\Users\vietc\Downloads\LTHDT\22810218\22810218\bin\Debug\net6.0\Data\bin\Debug\net6.0\Data\MatHang.json
