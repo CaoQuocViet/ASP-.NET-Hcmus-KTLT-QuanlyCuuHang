@@ -10,6 +10,14 @@ namespace Entities
         public DateOnly Ngay { get; set; }
         public List<Kho> Kho { get; set; }
 
+        // Constructor không tham số
+        public DonNhap()
+        {
+            MaSo = default!;
+            Ngay = default!;
+            Kho = default!;
+        }
+
         // Constructor mặc định
         public DonNhap(string maSo, DateOnly ngay, List<Kho> kho)
         {

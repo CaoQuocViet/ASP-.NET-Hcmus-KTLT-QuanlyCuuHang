@@ -10,6 +10,9 @@ namespace Entities
         public DateOnly NgaySanXuat { get; set; }
         public DateOnly HanDung { get; set; }
 
+        // Constructor không tham số
+        public Kho(){}
+
         // Constructor mặc định
         public Kho(string tenMatHang, int soLuong, DateOnly ngaySanXuat, DateOnly hanDung)
         {

@@ -257,7 +257,6 @@ namespace Service
         // Hàm để tạo danh sách hàng hóa từ danh sách kho
         public string TaoDanhSachHangHoa(List<Kho> DSkho)
         {
-            return "TaoDanhSachHangHoa";
             using StringWriter writer = new StringWriter();
             foreach (Kho r in DSkho)
             {

@@ -11,6 +11,14 @@ namespace Entities
         public DateOnly Ngay { get; set; }
         public List<Kho> Kho { get; set; }
 
+        // Constructor khoogn tham số
+        public DonXuat()
+        {
+            MaSo = default!;
+            Ngay = default!;
+            Kho = default!;
+        }
+
         // Constructor mặc định
         public DonXuat(string maSo, DateOnly ngay, List<Kho> kho)
         {

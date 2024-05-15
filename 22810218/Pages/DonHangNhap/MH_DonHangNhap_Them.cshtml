@@ -1,131 +1,76 @@
 ﻿@page
-@using Entities;
-@using Service;
 @model Pages.MH_DonHangNhap_ThemModel
+
 @{
     ViewData["Title"] = "Quản lý cửa hàng";
-    string sInfoKho = string.Empty;
-    string sInfoDonNhap = string.Empty;
-    DonNhap import = new DonNhap("", new DateOnly(), new List<Kho>()); //
-    Kho kho = new Kho("", 0, new DateOnly(), new DateOnly()); //
-    List<Kho> DSkho = new List<Kho>(); //
-    string sKhoList = string.Empty;
-    int formId = 0;
-
-    if (Request.Method == "POST")
-    {
-        sKhoList = Request.Form["khos"];
-        var xlKho = new XL_Kho();
-        xlKho.KiemTraHangHoaTonTai(sKhoList, ref DSkho);
-
-        if (int.TryParse(Request.Form["form"], out formId))
-        {
-            if (formId == 1)
-            {
-                string sMaSo = Request.Form["id"];
-                string sNgay = Request.Form["date"];
-                var xlDonNhap = new XL_DonNhap();
-                sInfoDonNhap = xlDonNhap.Them(sMaSo, sNgay, DSkho, ref import); //
-
-                if (string.IsNullOrEmpty(sInfoDonNhap))
-                {
-                    import = new DonNhap(sMaSo, DateOnly.Parse(sNgay), new List<Kho>()); //
-                    kho = new Kho("", 0, new DateOnly(), new DateOnly()); //
-                    DSkho = new List<Kho>(); //
-                    sKhoList = string.Empty;
-                }
-            }
-            else if (formId == 2)
-            {
-                string sTenMatHang = Request.Form["pname"];
-                string sSoLuong = Request.Form["quantity"];
-                string sNgaySanXuat = Request.Form["mdate"];
-                string sHanDung = Request.Form["edate"];
-                
-                sInfoKho = xlKho.XacMinhNhapKho(sTenMatHang, sSoLuong, sNgaySanXuat, sHanDung, ref kho); //
-                if (string.IsNullOrEmpty(sInfoKho))
-                {
-                    kho.TenMatHang = sTenMatHang;
-                    kho.SoLuong = int.Parse(sSoLuong);
-                    kho.NgaySanXuat = DateOnly.Parse(sNgaySanXuat);
-                    kho.HanDung = DateOnly.Parse(sHanDung);
-                    sInfoKho = xlKho.ThemVaoDS(kho, ref DSkho); //
-                    
-                    if (string.IsNullOrEmpty(sInfoKho))
-                    {
-                        sKhoList = xlKho.TaoDanhSachHangHoa(DSkho); //
-                        kho = new Kho(sTenMatHang, int.Parse(sSoLuong), DateOnly.Parse(sNgaySanXuat), DateOnly.Parse(sHanDung)); //
-                    }
-                }
-            }
-        }
-        xlKho.KiemTraHangHoaTonTai(sKhoList, ref DSkho); //
-    }
 }
+
 <div class="border border-secondary rounded px-3 mb-3">
     <div class="row pt-2">
         <p class="col-sm-6 text-start fw-bold">Thêm đơn:</p>
-        @if (!string.IsNullOrEmpty(sInfoDonNhap))
+        @if (!string.IsNullOrEmpty(Model.sInfoDonNhap))
         {
-            <p class="col-sm-6 text-end text-danger fw-bold">@sInfoDonNhap</p>
+            <p class="col-sm-6 text-end text-danger fw-bold">@Model.sInfoDonNhap</p>
         }
-        else if (formId == 1)
+        else if (Model.formId == 1)
         {
             <p class="col-sm-6 text-end text-success fw-bold">Thêm đơn nhập mới thành công</p>
         }
     </div>
     <form class="row g-3 mb-2" method="post">
         <input type="hidden" id="form" name="form" value="1">
-        <input type="hidden" id="khos" name="khos" value="@sKhoList">
+        <input type="hidden" id="khos" name="khos" value="@Model.sKhoList">
         <div class="col-md-3">
             <label for="id" class="form-label">Mã đơn nhập</label>
-            <input class="form-control" type="text" id="id" name="id" value="@import.MaSo" maxlength="30" required>
+            <input class="form-control" type="text" id="id" name="id" value="@Model.import.MaSo" maxlength="30" required>
         </div>
-        <div class="col-md-3">
+        <div class="col-md3">
             <label for="date" class="form-label">Ngày nhập đơn</label>
-            <input class="form-control" type="date" id="date" name="date" value="@import.Ngay" required>
+            <input class="form-control" type="date" id="date" name="date" value="@Model.import.Ngay" required>
         </div>
         <div class="col-md-3 d-sm-flex align-items-end justify-content-end pb-1">
             <input class="btn btn-sm btn-success text-light" type="submit" value="DonNhap">
         </div>
     </form>
 </div>
+
 <div class="border border-secondary rounded px-3 mb-3">
     <div class="row pt-2">
         <p class="col-sm-6 text-start fw-bold">Dữ liệu ghi chú</p>
-        @if (!string.IsNullOrEmpty(sInfoKho))
+        @if (!string.IsNullOrEmpty(Model.sInfoKho))
         {
-            <p class="col-sm-6 text-end text-danger fw-bold">@sInfoKho</p>
+            <p class="col-sm-6 text-end text-danger fw-bold">@Model.sInfoKho</p>
         }
-        else if (formId == 2)
+        else if (Model.formId == 2)
         {
             <p class="col-sm-6 text-end text-success fw-bold">Thêm bản ghi mới thành công</p>
         }
     </div>
     <form class="row g-3 mb-2" method="post">
         <input type="hidden" id="form" name="form" value="2">
-        <input type="hidden" id="khos" name="khos" value="@sKhoList">
+        <input type="hidden" id="khos" name="khos" value="@Model.sKhoList">
         <div class="col-md-3">
             <label for="pname" class="form-label">Tên mặt hàng</label>
-            <input class="form-control" type="text" id="pname" name="pname" value="@kho.TenMatHang" maxlength="30" required>
+            <input class="form-control" type="text" id="pname" name="pname" value="@Model.kho.TenMatHang" maxlength="30" required>
         </div>
         <div class="col-md-3">
             <label for="quantity" class="form-label">Số lượng</label>
-            <input class="form-control" type="number" id="quantity" name="quantity" value="@kho.SoLuong" min="1" required>
+            <input class="form-control" type="number" id="quantity" name="quantity" value="@Model.kho.SoLuong" min="1" required>
         </div>
         <div class="col-md-2">
             <label for="mdate" class="form-label">Ngày sản xuất</label>
-            <input class="form-control" type="date" id="mdate" name="mdate" value="@kho.NgaySanXuat" required>
+            <input class="form-control" type="date" id="mdate" name="mdate" value="@Model.kho.NgaySanXuat" required>
         </div>
         <div class="col-md-2">
-            <label for="edate" class "form-label">Ngày hết hạn</label>
-            <input class="form-control" type="date" id="edate" name="edate" value="@kho.HanDung" required>
+            <label for="edate" class="form-label">Ngày hết hạn</label>
+            <input class="form-control" type="date" id="edate" name="edate" value="@Model.kho.HanDung" required>
         </div>
         <div class="col-md-2 d-sm-flex align-items-end justify-content-end pb-1">
             <input class="btn btn-sm btn-info text-light" type="submit" value="Thêm Bản Ghi">
         </div>
     </form>
 </div>
+
 <div class="border border-secondary rounded px-3 mb-3">
     <div class="row pt-2">
         <p class="text-start fw-bold">Bảng Ghi Chú</p>
@@ -142,25 +87,25 @@
                 </tr>
             </thead>
             <tbody>
-                @if (DSkho.Count > 0)
+                @if (Model.DSkho.Count > 0)
                 {
                     int j = 1;
-                    for (int i = 0; i < DSkho.Count; i++)
+                    for (int i = 0; i < Model.DSkho.Count; i++)
                     {
                         <tr>
                             <td>@j</td>
-                            <td>@DSkho[i].TenMatHang</td>
-                            <td>@DSkho[i].SoLuong</td>
-                            <td>@DSkho[i].NgaySanXuat</td>
-                            <td>@DSkho[i].HanDung</td>
+                            <td>@Model.DSkho[i].TenMatHang</td>
+                            <td>@Model.DSkho[i].SoLuong</td>
+                            <td>@Model.DSkho[i].NgaySanXuat</td>
+                            <td>@Model.DSkho[i].HanDung</td>
                             <td>
                                 <form method="post">
                                     <input type="hidden" id="form" name="form" value="3">
-                                    <input type="hidden" id="khos" name="khos" value="@sKhoList">
-                                    <input type="hidden" id="khos" name="khos" value="@DSkho[i].TenMatHang">
-                                    <input type="hidden" id="khos" name="khos" value="@DSkho[i].SoLuong">
-                                    <input type="hidden" id="khos" name="khos" value="@DSkho[i].NgaySanXuat">
-                                    <input type="hidden" id="khos" name="khos" value="@DSkho[i].HanDung">
+                                    <input type="hidden" id="khos" name="khos" value="@Model.sKhoList">
+                                    <input type="hidden" id="khos" name="khos" value="@Model.DSkho[i].TenMatHang">
+                                    <input type="hidden" id="khos" name="khos" value="@Model.DSkho[i].SoLuong">
+                                    <input type="hidden" id="khos" name="khos" value="@Model.DSkho[i].NgaySanXuat">
+                                    <input type="hidden" id="khos" name="khos" value="@Model.DSkho[i].HanDung">
                                 </form>
                             </td>
                         </tr>
