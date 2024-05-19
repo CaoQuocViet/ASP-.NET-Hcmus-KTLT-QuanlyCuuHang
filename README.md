@@ -86,10 +86,8 @@ Dưới đây là một hình minh họa giao diện của ứng dụng.
 ## Liên hệ
 
 Nếu bạn có bất kỳ câu hỏi hoặc vấn đề gì, xin vui lòng liên hệ:
-- Tên: Nguyễn Văn A
-- Email: nguyenvana@example.com
-- Số điện thoại: 0123456789
+- Tên: Cao Quốc Việt
+- Email: vietcao10@gmail.com
+- Số điện thoại: 0367252854
 
 ---
-
-Cảm ơn bạn đã sử dụng phần mềm Quản lý Cửa hàng của chúng tôi. Hy vọng ứng dụng sẽ giúp bạn quản lý công việc hiệu quả hơn!
