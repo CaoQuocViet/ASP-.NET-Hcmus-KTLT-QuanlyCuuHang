@@ -1,0 +1,76 @@
+﻿@page
+@using CaoQuocViet.Entities;
+@using CaoQuocViet.XuLyNghiepVu;
+@model CaoQuocViet.Pages.MH_DonHangNhap_ChiTietModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+    string importMaSo = Request.Query["id"];
+    DonNhap? import = XL_DonNhap.ReadInfo(importMaSo);
+}
+
+<div>
+    @if(import.HasValue)
+    {
+        <div class="row table_header mb-2">
+            <p class="col-auto mb-2 text-start fw-bold">Hóa đơn nhập: MaSo = @import.Value.MaSo</p>
+        </div>
+        <div class="text-center table_section mb-2">
+            <table class="table table-bordered table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Mã đơn nhập</th>
+                        <th>Ngày nhập đơn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@import.Value.MaSo</td>
+                        <td>@import.Value.Ngay</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center table_section mb-2">
+            <table class="table table-bordered table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên Mặt Hàng</th>
+                        <th>Số Lượng</th>
+                        <th>Ngày Sản Xuất</th>
+                        <th>Hạn Sử Dụng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (import.Value.Kho.Length > 0)
+                    {
+                        int i = 1;
+                        for (int j = 0; j < import.Value.Kho.Length; j++)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@import.Value.Kho[j].TenMatHang</td>
+                                <td>@import.Value.Kho[j].SoLuong</td>
+                                <td>@import.Value.Kho[j].NgaySanXuat</td>
+                                <td>@import.Value.Kho[j].HanDung</td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center fw-bold">Không có dữ liệu</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="row table_header mb-2">
+            <p class="col-auto mb-2 text-start text-danger fw-bold">Đơn nhập với MaSo = "@importMaSo" không được tìm thấy</p>
+        </div>
+    }
+</div>

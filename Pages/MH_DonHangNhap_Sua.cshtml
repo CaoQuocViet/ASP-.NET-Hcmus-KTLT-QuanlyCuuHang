@@ -1,0 +1,79 @@
+﻿@page
+@using CaoQuocViet.Entities;
+@using CaoQuocViet.XuLyNghiepVu;
+@model CaoQuocViet.Pages.MH_DonHangNhap_SuaModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+    string sInfo = string.Empty;
+    bool bFlag = false;
+    DonNhap import = new DonNhap();
+    string importMaSo = Request.Query["id"];
+    DonNhap? isDonNhap = XL_DonNhap.ReadInfo(importMaSo);
+    if (null == isDonNhap)
+    {
+        sInfo = "Đơn nhập này không tồn tại";
+        bFlag = true;
+    }
+    else
+    {
+        import = isDonNhap.Value;
+        if (Request.Method == "POST")
+        {
+            bFlag = true;
+            string sMaSo = Request.Form["id"];
+            string sNgay = Request.Form["date"];
+            sInfo = XL_DonNhap.Sua(sMaSo, sNgay, ref import);
+        }
+    }
+}
+
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="col-sm-6 text-start fw-bold">Thuộc tính:</p>
+        @if (bFlag)
+        {
+            if (string.IsNullOrEmpty(sInfo))
+            {
+                <p class="col-sm-6 text-end text-success fw-bold">Sửa đơn nhập thành công</p>
+            }
+            else
+            {
+                <p class="col-sm-6 text-end text-danger fw-bold">@sInfo</p>
+            }
+        }
+    </div>
+    <form class="row g-3 mb-2" method="post">
+        <div class="col-md-3">
+            <label for="id" class="form-label">Mã đơn nhập</label>
+            <input class="form-control" type="text" id="id" name="id" value="@import.MaSo" maxlength="30" required>
+        </div>
+        <div class="col-md-3">
+            <label for="date" class="form-label">Ngày nhập đơn</label>
+            <input class="form-control" type="date" id="date" name="date" value="@import.Ngay" required>
+        </div>
+        <div class="col-md-3 d-sm-flex align-items-end justify-content-end pb-1">
+            <input class="btn btn-sm btn-warning text-light" type="submit" value="Sửa">
+        </div>
+    </form>
+</div>
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="text-start fw-bold">Các thuộc tính hiện tại của đơn nhập</p>
+    </div>
+    <div class="text-center table_section">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Mã đơn nhập</th>
+                    <th>Ngày nhập đơn</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@import.MaSo</td>
+                    <td>@import.Ngay</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+﻿@page
+@using CaoQuocViet.Entities;
+@using CaoQuocViet.XuLyNghiepVu;
+@model CaoQuocViet.Pages.MH_DonHangXuat_SuaModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+    string sInfo = string.Empty;
+    bool bFlag = false;
+    DonXuat donxuat = new DonXuat();
+    string donxuatMaSo = Request.Query["id"];
+    DonXuat? isDonXuat = XL_DonXuat.ReadInfo(donxuatMaSo);
+
+    if (isDonXuat != null)
+    {
+        donxuat = isDonXuat.Value;
+        if (Request.Method == "POST")
+        {
+            bFlag = true;
+            string sMaSo = Request.Form["id"];
+            string sNgay = Request.Form["date"];
+            sInfo = XL_DonXuat.Sua(sMaSo, sNgay, ref donxuat);
+        }
+    }
+}
+
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="col-sm-6 text-start fw-bold">Thuộc tính:</p>
+        @if (bFlag)
+        {
+            if (string.IsNullOrEmpty(sInfo))
+            {
+                <p class="col-sm-6 text-end text-success fw-bold">Sửa đơn xuất thành công</p>
+            }
+            else
+            {
+                <p class="col-sm-6 text-end text-danger fw-bold">@sInfo</p>
+            }
+        }
+    </div>
+    <form class="row g-3 mb-2" method="post">
+        <div class="col-md-3">
+            <label for="id" class="form-label"> Mã đơn xuất</label>
+            <input class="form-control" type="text" id="id" name="id" value="@donxuat.MaSo" maxlength="30" required>
+        </div>
+        <div class="col-md-3">
+            <label for="date" class="form-label">Ngày Đơn Xuất</label>
+            <input class="form-control" type="date" id="date" name="date" value="@donxuat.Ngay" required>
+        </div>
+        <div class="col-md-3 d-sm-flex align-items-end justify-content-end pb-1">
+            <input class="btn btn-sm btn-warning text-light" type="submit" value="Sửa">
+        </div>
+    </form>
+</div>
+
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="text-start fw-bold">Thuộc tính hiện tại của đơn xuất</p>
+    </div>
+    <div class="text-center table_section">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Mã đơn xuất</th>
+                    <th>Ngày Đơn Xuất</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@donxuat.MaSo</td>
+                    <td>@donxuat.Ngay</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

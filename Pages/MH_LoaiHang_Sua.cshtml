@@ -1,0 +1,85 @@
+﻿@page
+@using CaoQuocViet.Entities
+@using CaoQuocViet.XuLyNghiepVu
+@model CaoQuocViet.Pages.MH_LoaiHang_SuaModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+    string sInfo = string.Empty;
+    bool bFlag = false;
+    LoaiHang loaihang = new LoaiHang() {};
+
+    string sLoaiHangMaSo = Request.Query["id"];
+
+    LoaiHang? isLoaiHang = XL_LoaiHang.ReadInfo(sLoaiHangMaSo);
+
+    if (null == isLoaiHang)
+    {
+        sInfo = "This loaihang is not exists";
+        bFlag = true;
+    }
+    else
+    {
+        loaihang = isLoaiHang.Value;
+
+        if (Request.Method == "POST")
+        {
+            bFlag = true;
+            string sMaSo = Request.Form["id"];
+            string sTen = Request.Form["name"];
+            sInfo = XL_LoaiHang.Sua(sMaSo, sTen, ref loaihang);
+        }
+    }
+}
+
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="col-sm-6 text-start fw-bold">Thuộc tính:</p>
+        @if (bFlag)
+        {
+            if (string.IsNullOrEmpty(sInfo))
+            {
+                <p class="col-sm-6 text-end text-success fw-bold">Sửa loaihang successfully</p>
+            }
+            else
+            {
+                <p class="col-sm-6 text-end text-danger fw-bold">@sInfo</p>
+            }
+        }
+    </div>
+
+    <form class="row g-3 mb-2" method="post">
+        <div class="col-md-4">
+            <label for="id" class="form-label">Mã loại hàng</label>
+            <input class="form-control" type="text" id="id" name="id" value="@loaihang.MaSo" maxlength="30" required>
+        </div>
+        <div class="col-md-4">
+            <label for="name" class="form-label">Tên loại hàng</label>
+            <input class="form-control" type="text" id="name" name="name" value="@loaihang.Ten" maxlength="30" required>
+        </div>
+        <div class="col-md-4 d-sm-flex align-items-end justify-content-end pb-1">
+            <input class="btn btn-sm btn-warning text-light" type="submit" value="Sửa">
+        </div>
+    </form>
+</div>
+
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="text-start fw-bold">Current loaihang attributes</p>
+    </div>
+    <div class="text-center table_section">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>Mã loại hàng</th>
+                    <th>Tên loại hàng</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@loaihang.MaSo</td>
+                    <td>@loaihang.Ten</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

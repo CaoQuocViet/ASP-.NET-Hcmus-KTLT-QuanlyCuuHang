@@ -1,0 +1,52 @@
+﻿@page
+@using CaoQuocViet.Entities
+@using CaoQuocViet.XuLyNghiepVu
+@model CaoQuocViet.Pages.MH_LoaiHang_ThemModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+    LoaiHang loaihang = new LoaiHang() {};
+    string sInfo = string.Empty;
+    bool bFlag = false;
+
+    if (Request.Method == "POST")
+    {
+        bFlag = true;
+        loaihang.MaSo = Request.Form["id"];
+        loaihang.Ten = Request.Form["name"];
+        sInfo = XL_LoaiHang.Them(loaihang);
+        if (string.IsNullOrEmpty(sInfo))
+        {
+            loaihang = new LoaiHang() {};
+        }
+    }
+}
+
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="col-sm-6 text-start fw-bold">Thêm loại hàng</p>
+        @if (bFlag)
+        {
+            if (string.IsNullOrEmpty(sInfo))
+            {
+                <p class="col-sm-6 text-end text-success fw-bold">Added loaihang successfully</p>
+            }
+            else
+            {
+                <p class="col-sm-6 text-end text-danger fw-bold">@sInfo</p>
+            }
+        }
+    </div>
+    <form class="row g-3 mb-2" method="post">
+        <div class="col-sm-4">
+            <label for="id" class="form-label">Mã loại hàng</label>
+            <input class="form-control" type="text" id="id" name="id" value="@loaihang.MaSo" maxlength="30" required>
+        </div>
+        <div class="col-sm-5">
+            <label for="name" class="form-label">Tên loại hàng</label>
+            <input class="form-control" type="text" id="name" name="name" value="@loaihang.Ten" maxlength="30" required>
+        </div>
+        <div class="col-sm-3 d-sm-flex align-items-end justify-content-end pb-1">
+            <input class="btn btn-sm btn-success text-light" type="submit" value="Thêm">
+        </div>
+    </form>
+</div>

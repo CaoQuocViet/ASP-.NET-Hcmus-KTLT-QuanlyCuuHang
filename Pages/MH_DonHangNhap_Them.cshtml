@@ -1,0 +1,172 @@
+﻿@page
+@using CaoQuocViet.Entities;
+@using CaoQuocViet.XuLyNghiepVu;
+@using Newtonsoft.Json;
+@model CaoQuocViet.Pages.MH_DonHangNhap_ThemModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+    string sInfoKho = string.Empty;
+    string sInfoDonNhap = string.Empty;
+    DonNhap import = new DonNhap();
+    Kho kho = new Kho();
+    Kho[] DSkho = new Kho[0];
+    string sKhoList = string.Empty;
+    int formId = 0;
+
+    if (Request.Method == "POST")
+    {
+        sKhoList = Request.Form["khos"];
+        XL_Kho.KiemTraHangHoaTonTai(sKhoList, ref DSkho);
+
+        if (int.TryParse(Request.Form["form"], out formId))
+        {
+            if (formId == 1)
+            {
+                string sMaSo = Request.Form["id"];
+                string sNgay = Request.Form["date"];
+                sInfoDonNhap = XL_DonNhap.Them(sMaSo, sNgay, DSkho, ref import);
+
+                if (string.IsNullOrEmpty(sInfoDonNhap))
+                {
+                    import = new DonNhap();
+                    kho = new Kho();
+                    DSkho = new Kho[0];
+                    sKhoList = string.Empty;
+                }
+            }
+            else if (formId == 2)
+            {
+                string sTenMatHang = Request.Form["pname"];
+                string sSoLuong = Request.Form["quantity"];
+                string sNgaySanXuat = Request.Form["mdate"];
+                string sHanDung = Request.Form["edate"];
+                sInfoKho = XL_Kho.XacMinhNhapKho(sTenMatHang, sSoLuong, sNgaySanXuat, sHanDung, ref kho);
+                if (string.IsNullOrEmpty(sInfoKho))
+                {
+                    sInfoKho = XL_Kho.ThemVaoDS(kho, ref DSkho);
+                    if (string.IsNullOrEmpty(sInfoKho))
+                    {
+                        sKhoList = XL_Kho.TaoDanhSachHangHoa(DSkho);
+                        kho = new Kho();
+                    }
+                }
+            }
+        }
+        XL_Kho.KiemTraHangHoaTonTai(sKhoList, ref DSkho);
+    }
+}
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="col-sm-6 text-start fw-bold">Thêm đơn:</p>
+        @if (!string.IsNullOrEmpty(sInfoDonNhap))
+        {
+            <p class="col-sm-6 text-end text-danger fw-bold">@sInfoDonNhap</p>
+        }
+        else if (formId == 1)
+        {
+            <p class="col-sm-6 text-end text-success fw-bold">Thêm đơn nhập mới thành công</p>
+        }
+    </div>
+    <form class="row g-3 mb-2" method="post">
+        <input type="hidden" id="form" name="form" value="1">
+        <input type="hidden" id="khos" name="khos" value="@sKhoList">
+        <div class="col-md-3">
+            <label for="id" class="form-label">Mã đơn nhập</label>
+            <input class="form-control" type="text" id="id" name="id" value="@import.MaSo" maxlength="30" required>
+        </div>
+        <div class="col-md-3">
+            <label for="date" class="form-label">Ngày nhập đơn</label>
+            <input class="form-control" type="date" id="date" name="date" value="@import.Ngay" required>
+        </div>
+        <div class="col-md-3 d-sm-flex align-items-end justify-content-end pb-1">
+            <input class="btn btn-sm btn-success text-light" type="submit" value="DonNhap">
+        </div>
+    </form>
+</div>
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="col-sm-6 text-start fw-bold">Dữ liệu ghi chú</p>
+        @if (!string.IsNullOrEmpty(sInfoKho))
+        {
+            <p class="col-sm-6 text-end text-danger fw-bold">@sInfoKho</p>
+        }
+        else if (formId == 2)
+        {
+            <p class="col-sm-6 text-end text-success fw-bold">Thêm bản ghi mới thành công</p>
+        }
+    </div>
+    <form class="row g-3 mb-2" method="post">
+        <input type="hidden" id="form" name="form" value="2">
+        <input type="hidden" id="khos" name="khos" value="@sKhoList">
+        <div class="col-md-3">
+            <label for="pname" class="form-label">Tên mặt hàng</label>
+            <input class="form-control" type="text" id="pname" name="pname" value="@kho.TenMatHang" maxlength="30" required>
+        </div>
+        <div class="col-md-3">
+            <label for="quantity" class="form-label">Số lượng</label>
+            <input class="form-control" type="number" id="quantity" name="quantity" value="@kho.SoLuong" min="1" required>
+        </div>
+        <div class="col-md-2">
+            <label for="mdate" class="form-label">Ngày sản xuất</label>
+            <input class="form-control" type="date" id="mdate" name="mdate" value="@kho.NgaySanXuat" required>
+        </div>
+        <div class="col-md-2">
+            <label for="edate" class "form-label">Ngày hết hạn</label>
+            <input class="form-control" type="date" id="edate" name="edate" value="@kho.HanDung" required>
+        </div>
+        <div class="col-md-2 d-sm-flex align-items-end justify-content-end pb-1">
+            <input class="btn btn-sm btn-info text-light" type="submit" value="Thêm Bản Ghi">
+        </div>
+    </form>
+</div>
+<div class="border border-secondary rounded px-3 mb-3">
+    <div class="row pt-2">
+        <p class="text-start fw-bold">Bảng Ghi Chú</p>
+    </div>
+    <div class="text-center table_section">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên mặt hàng</th>
+                    <th>Số Lượng</th>
+                    <th>Ngày sản xuất</th>
+                    <th>Ngày hết hạn</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (DSkho.Length > 0)
+                {
+                    int j = 1;
+                    for (int i = 0; i < DSkho.Length; i++)
+                    {
+                        <tr>
+                            <td>@j</td>
+                            <td>@DSkho[i].TenMatHang</td>
+                            <td>@DSkho[i].SoLuong</td>
+                            <td>@DSkho[i].NgaySanXuat</td>
+                            <td>@DSkho[i].HanDung</td>
+                            <td>
+                                <form method="post">
+                                    <input type="hidden" id="form" name="form" value="3">
+                                    <input type="hidden" id="khos" name="khos" value="@sKhoList">
+                                    <input type="hidden" id="khos" name="khos" value="@DSkho[i].TenMatHang">
+                                    <input type="hidden" id="khos" name="khos" value="@DSkho[i].SoLuong">
+                                    <input type="hidden" id="khos" name="khos" value="@DSkho[i].NgaySanXuat">
+                                    <input type="hidden" id="khos" name="khos" value="@DSkho[i].HanDung">
+                                </form>
+                            </td>
+                        </tr>
+                        j++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center fw-bold">Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

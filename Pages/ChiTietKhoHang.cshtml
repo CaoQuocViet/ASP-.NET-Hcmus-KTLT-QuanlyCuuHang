@@ -1,0 +1,110 @@
+﻿@page
+@using CaoQuocViet.Entities;
+@using CaoQuocViet.XuLyNghiepVu;
+@model _22810218.Pages.ChiTietKhoHangModel
+@{
+    ViewData["Title"] = "Kho";
+    const int itemPerPage = 10;
+    int pageIndex = 1;
+    int pageTotal = 1;
+    int noStart = 1;
+    int noEnd = 1;
+    int noTotal = 1;
+    string sKeyword = string.Empty;
+    int Filter = 1;
+
+    int.TryParse(Request.Query["page"], out pageIndex);
+    sKeyword = Request.Query["search"];
+
+    Kho[] DSkho = XL_Kho.DocDanhSach(sKeyword, Filter);
+
+    if (DSkho.Length > 0)
+    {
+        pageTotal = ((int)DSkho.Length - 1) / itemPerPage + 1;
+
+        if (pageIndex == 0 || pageIndex > pageTotal)
+        {
+            pageIndex = 1;
+        }
+
+        noStart = (pageIndex - 1) * itemPerPage + 1;
+        noEnd = noStart + itemPerPage - 1;
+        noTotal = (int)DSkho.Length;
+        if (pageIndex == pageTotal)
+        {
+            noEnd = noStart + ((int)DSkho.Length - 1) % itemPerPage;
+        }
+    }
+}
+<div>
+    <div class="row table_header mb-2">
+        <p class="col-sm-3 mb-2 text-start fw-bold">Thông tin kho hàng</p>
+        <div class="col-sm-9 mb-2 text-start text-sm-end d-inline-block">
+            <form method="get">
+                <div class="input-group mb-3">
+                    <label for="search" class="input-group-text"><i class="fa fa-search"></i></label>
+                    <input placeholder="Nhập từ khóa" type="text" id="search" name="search" value="@sKeyword" maxlength="30" class="form-control" />
+                    <button type="submit" value="Tìm kiếm" class="btn btn-sm btn-primary text-light">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center table_section">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên mặt hàng</th>
+                    <th>Số lượng</th>
+                    <th>Ngày sản xuất</th>
+                    <th>Hạn dùng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (DSkho.Length > 0)
+                {
+                    int j = noStart - 1;
+                    for (int i = noStart; i <= noEnd; i++)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@DSkho[j].TenMatHang</td>
+                            <td>@DSkho[j].SoLuong</td>
+                            <td>@DSkho[j].NgaySanXuat</td>
+                            <td>@DSkho[j].HanDung</td>
+                        </tr>
+                        j++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center fw-bold">Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row table_pagination">
+        @if (DSkho.Length > 0)
+        {
+            <div class="col-9">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        @for (int i = 1; i <= pageTotal; i++)
+                        {
+                            if (i == pageIndex)
+                            {
+                                <li class="page-item active"><a class="page-link" href="/ChiTietKhoHang?search=@sKeyword&page=@i">@i</a></li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" href="/ChiTietKhoHang?search=@sKeyword&page=@i">@i</a></li>
+                            }
+                        }
+                    </ul>
+                </nav>
+            </div>
+        }
+    </div>
+</div>

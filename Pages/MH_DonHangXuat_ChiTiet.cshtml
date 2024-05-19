@@ -1,0 +1,76 @@
+﻿@page
+@using CaoQuocViet.Entities;
+@using CaoQuocViet.XuLyNghiepVu;
+@model CaoQuocViet.Pages.MH_DonHangXuat_ChiTietModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+    string donxuatMaSo = Request.Query["id"];
+    DonXuat? donxuat = XL_DonXuat.ReadInfo(donxuatMaSo);
+}
+
+<div>
+    @if (donxuat.HasValue)
+    {
+        <div class="row table_header mb-2">
+            <p class="col-auto mb-2 text-start fw-bold">Hóa đơn xuất: MaSo = @donxuat.Value.MaSo</p>
+        </div>
+        <div class="text-center table_section mb-2">
+            <table class="table table-bordered table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>MaSo Đơn Xuất</th>
+                        <th>Ngày Đơn Xuất</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@donxuat.Value.MaSo</td>
+                        <td>@donxuat.Value.Ngay</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center table_section mb-2">
+            <table class="table table-bordered table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Số thứ tự</th>
+                        <th>Tên Mặt Hàng</th>
+                        <th>Số Lượng</th>
+                        <th>Ngày Sản Xuất</th>
+                        <th>Ngày Hết Hạn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (donxuat.Value.Kho.Length > 0)
+                    {
+                        int i = 1;
+                        for (int j = 0; j < donxuat.Value.Kho.Length; j++)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>@donxuat.Value.Kho[j].TenMatHang</td>
+                                <td>@donxuat.Value.Kho[j].SoLuong</td>
+                                <td>@donxuat.Value.Kho[j].NgaySanXuat</td>
+                                <td>@donxuat.Value.Kho[j].HanDung</td>
+                            </tr>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="5" class="text-center fw-bold">Không có dữ liệu</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <div class="row table_header mb-2">
+            <p class="col-auto mb-2 text-start text-danger fw-bold">Đơn Xuất với MaSo = "@donxuatMaSo" không được tìm thấy</p>
+        </div>
+    }
+</div>

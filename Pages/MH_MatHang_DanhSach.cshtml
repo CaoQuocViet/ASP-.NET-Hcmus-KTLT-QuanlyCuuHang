@@ -1,0 +1,116 @@
+﻿@page
+@using CaoQuocViet.Entities
+@using CaoQuocViet.XuLyNghiepVu
+@model CaoQuocViet.Pages.MH_MatHang_DanhSachModel
+@{
+    ViewData["Title"] = "Quản lý cửa hàng";
+    const int itemPerPage = 10;
+    int pageIndex = 1;
+    int pageTotal = 1;
+    int noStart = 1;
+    int noEnd = 1;
+    int noTotal = 1;
+    string sKeyword = string.Empty;
+
+    int.TryParse(Request.Query["page"], out pageIndex);
+    sKeyword = Request.Query["search"];
+    MatHang[] DSmathang = XL_MatHang.DocDanhSach(sKeyword);
+
+    if (DSmathang.Length > 0)
+    {
+        pageTotal = ((int)DSmathang.Length - 1) / itemPerPage + 1;
+        if (pageIndex == 0 || pageIndex > pageTotal)
+        {
+            pageIndex = 1;
+        }
+        noStart = (pageIndex - 1) * itemPerPage + 1;
+        noEnd = noStart + itemPerPage - 1;
+        noTotal = (int)DSmathang.Length;
+        if (pageIndex == pageTotal)
+        {
+            noEnd = noStart + ((int)DSmathang.Length - 1) % itemPerPage;
+        }
+    }
+}
+
+<div>
+    <div class="row table_header mb-2">
+        <p class="col-sm-3 mb-2 text-start fw-bold">Mặt hàng</p>
+        <div class="col-sm-6 mb-2 text-start text-sm-center d-inline-block">
+            <form method="get">
+                <div class="input-group mb-3">
+                    <input type="text" id="search" name="search" value="@sKeyword" maxlength="30" placeholder="Nhập từ khóa" class="form-control" />
+                    <button type="submit" value="Tìm kiếm" class="btn btn-sm btn-primary text-light">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-3 mb-2 text-start text-sm-end">
+            <a class="btn btn-sm btn-success text-light" href="/MH_MatHang_Them" role="button">Thêm</a>
+        </div>
+    </div>
+    <div class="text-center table_section">
+        <table class="table table-bordered table-striped table-hover align-middle">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Mã</th>
+                    <th>Tên</th>
+                    <th>Loại hàng</th>
+                    <th>Thương Hiệu</th>
+                    <th>Giá</th>
+                    <th>Quản lý</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (DSmathang.Length > 0)
+                {
+                    int j = noStart - 1;
+                    for (int i = noStart; i <= noEnd; i++)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@DSmathang[j].MaSo</td>
+                            <td>@DSmathang[j].Ten</td>
+                            <td>@DSmathang[j].LoaiHang</td>
+                            <td>@DSmathang[j].ThuongHieu</td>
+                            <td>@DSmathang[j].Gia</td>
+                            <td>
+                                <a class="btn btn-sm btn-warning text-light" href="/MH_MatHang_Sua?id=@DSmathang[j].MaSo" role="button">Sửa</a>
+                                <a class="btn btn-sm btn-danger text-light" href="/MH_MatHang_Xoa?id=@DSmathang[j].MaSo" role="button">Xóa</a>
+                            </td>
+                        </tr>
+                        j++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="7" class="text-center fw-bold">Không có dữ liệu</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="row table_pagination">
+        @if (DSmathang.Length > 0)
+        {
+            <div class="col-9">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        @for (int i = 1; i <= pageTotal; i++)
+                        {
+                            if (i == pageIndex)
+                            {
+                                <li class="page-item active"><a class="page-link" href="/MH_MatHang_DanhSach?search=@sKeyword&page=@i">@i</a></li>
+                            }
+                            else
+                            {
+                                <li class="page-item"><a class="page-link" href="/MH_MatHang_DanhSach?search=@sKeyword&page=@i">@i</a></li>
+                            }
+                        }
+                    </ul>
+                </nav>
+            </div>
+        }
+    </div>
+</div>
